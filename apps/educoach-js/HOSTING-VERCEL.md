@@ -27,23 +27,21 @@ Ensure the repo includes `apps/educoach-js` with this Postgres setup.
 1. [vercel.com](https://vercel.com) → **Add New → Project** → import your GitHub repo.
 2. **Root Directory:** `apps/educoach-js` (Edit → set path).
 3. Framework: **Next.js** (auto-detected).
-4. **Environment variables** (Production + Preview):
+4. **Environment variables** (Production + Preview) — required for build:
 
-| Variable | Value |
-|----------|--------|
-| `DATABASE_URL` | Neon **pooled** connection string |
-| `DIRECT_URL` | Neon **direct** connection string |
-| `AUTH_SECRET` | `openssl rand -base64 32` |
-| `EDUCOACH_API_FALLBACK` | `local` |
-| `EDUCOACH_API_URL` | optional Python API URL |
+| Variable | Value | Notes |
+|----------|--------|--------|
+| `DATABASE_URL` | Neon **pooled** URL (`…-pooler.….neon.tech`) | Runtime |
+| `DIRECT_URL` | Neon **direct** URL (no `-pooler`) | **Required** for migrations on build |
+| `AUTH_SECRET` | `openssl rand -base64 32` | Runtime |
+| `EDUCOACH_API_FALLBACK` | `local` | Optional |
+| `EDUCOACH_API_URL` | Python API URL | Optional |
+
+**If build fails:** you almost always need **`DIRECT_URL`** (Neon dashboard → Direct connection). Migrations fail on the pooler URL.
 
 5. **Deploy**.
 
-Build runs `vercel-build`:
-
-```bash
-prisma generate && prisma migrate deploy && tsx prisma/seed.ts && next build
-```
+Build runs `node scripts/vercel-migrate-and-build.mjs` (generate → migrate → seed → next build).
 
 Demo users are seeded automatically (`coach` / `coach123`, `student1…5` / `student123`).
 
@@ -94,8 +92,11 @@ Vercel hosts **only** the Next.js app. For RAG Tutor:
 
 | Issue | Fix |
 |-------|-----|
+| **`npm run vercel-build` exited with 1** | Open build logs — usually **migrate** or **seed**. Set **`DIRECT_URL`** (Neon direct, not pooler). |
 | Build fails on `migrate deploy` | Set `DIRECT_URL` to Neon **direct** (non-pooler) URL |
-| `Can't reach database` at runtime | Use **pooled** URL for `DATABASE_URL`; check `sslmode=require` |
+| `Can't reach database server` | Check Neon project is active; URLs include `?sslmode=require`; no typo in host |
+| `P1001` / connection timeout | Use **direct** URL for build; enable Neon IP allow if restricted |
+| `DATABASE_URL is missing` | Add env vars on Vercel for **Production** and **Preview** |
 | Login works locally, not on Vercel | `AUTH_SECRET` must be set on Vercel |
 | Build timeout | ~600 static pages — first build can take several minutes |
 

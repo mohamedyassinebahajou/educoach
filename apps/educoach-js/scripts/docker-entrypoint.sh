@@ -7,10 +7,11 @@ if [ -z "${DATABASE_URL:-}" ]; then
 fi
 
 echo "EduCoach JS — applying database migrations…"
-npx prisma migrate deploy
+MIGRATE_URL="${DIRECT_URL:-$DATABASE_URL}"
+DATABASE_URL="$MIGRATE_URL" npx prisma migrate deploy
 
 echo "EduCoach JS — ensuring demo users exist…"
-npx tsx prisma/seed.ts
+DATABASE_URL="$MIGRATE_URL" node scripts/seed-demo-users.mjs
 
 echo "EduCoach JS — starting on port ${PORT:-3000}…"
 exec "$@"
