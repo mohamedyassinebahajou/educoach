@@ -1,0 +1,192 @@
+---
+title: "for and while"
+summary: "Repeat with for and while; break and continue."
+day: 3
+---
+
+**The for loop**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBmb3IgbG9vcCByZXBlYXRzIGEgYmxvY2sgYSBrbm93biBudW1iZXIgb2YgdGltZXMgdXNpbmcgYW4gaW5pdGlhbGl6ZXIsIGEgY29uZGl0aW9uLCBhbmQgYW4gdXBkYXRlIHN0ZXAgaW4gb25lIGhlYWRlciBsaW5lLiBJdCBpcyBpZGVhbCB3aGVuIHlvdSBrbm93IGhvdyBtYW55IGl0ZXJhdGlvbnMgeW91IG5lZWQsIHN1Y2ggYXMgY291bnRpbmcgZnJvbSAwIHRvIDkuIiwiYW5hbG9neSI6IkEgZm9yIGxvb3AgaXMgbGlrZSBkb2luZyB0ZW4gcHVzaC11cHM6IHlvdSBzdGFydCBhdCBvbmUsIGtlZXAgZ29pbmcgd2hpbGUgeW91IGhhdmUgbm90IHJlYWNoZWQgdGVuLCBhbmQgYWRkIG9uZSBlYWNoIHRpbWUuIn0=" />
+
+A `for` loop has three parts: initialization, condition, and update. It's best when you know roughly how many times to repeat.
+```js
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**The while loop**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSB3aGlsZSBsb29wIHJlcGVhdHMgYSBibG9jayBhcyBsb25nIGFzIGl0cyBjb25kaXRpb24gc3RheXMgdHJ1ZSwgY2hlY2tpbmcgdGhlIGNvbmRpdGlvbiBiZWZvcmUgZWFjaCBpdGVyYXRpb24uIFVzZSBpdCB3aGVuIHRoZSBudW1iZXIgb2YgcmVwZXRpdGlvbnMgZGVwZW5kcyBvbiBydW50aW1lIGxvZ2ljIHJhdGhlciB0aGFuIGEgZml4ZWQgY291bnQuIiwiYW5hbG9neSI6IkEgd2hpbGUgbG9vcCBpcyBsaWtlIHN0aXJyaW5nIHNvdXAgdW50aWwgaXQgdGFzdGVzIHJpZ2h04oCUeW91IGtlZXAgZ29pbmcgd2hpbGUgdGhlIGZsYXZvciBpcyBub3QgdGhlcmUgeWV0LiJ9" />
+
+A `while` loop repeats as long as its condition is true. It's best when you don't know exactly how many repeats you'll need.
+```js
+let i = 0;
+while (i < 3) {
+  console.log("while:", i);
+  i++;
+}
+```
+
+**Avoiding infinite loops**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gaW5maW5pdGUgbG9vcCBuZXZlciBlbmRzIGJlY2F1c2UgdGhlIGNvbmRpdGlvbiBhbHdheXMgc3RheXMgdHJ1ZSBvciB0aGUgbG9vcCBuZXZlciB1cGRhdGVzIHRoZSB2YWx1ZXMgaXQgY2hlY2tzLiBBbHdheXMgZW5zdXJlIHNvbWV0aGluZyBpbnNpZGUgdGhlIGxvb3AgbW92ZXMgdGhlIHByb2dyYW0gdG93YXJkIG1ha2luZyB0aGUgY29uZGl0aW9uIGZhbHNlLiIsImFuYWxvZ3kiOiJBdm9pZGluZyBpbmZpbml0ZSBsb29wcyBpcyBsaWtlIHJlbWVtYmVyaW5nIHRvIHR1cm4gb2ZmIGEgdHJlYWRtaWxs4oCUeW91IG5lZWQgYSBzdG9wcGluZyBjb25kaXRpb24gb3IgeW91IHJ1biBmb3JldmVyLiJ9" />
+
+If you forget to update the condition variable inside a `while` loop, it will never stop. Always make sure something inside the loop moves it closer to becoming false.
+```js
+let count = 0;
+while (count < 3) {
+  console.log(count);
+  count++; // without this line, the loop never ends
+}
+```
+
+**Using break**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiYnJlYWsgaW1tZWRpYXRlbHkgZXhpdHMgdGhlIGlubmVybW9zdCBsb29wIG9yIHN3aXRjaCwgZXZlbiBpZiB0aGUgbG9vcCBjb25kaXRpb24gd291bGQgc3RpbGwgYmUgdHJ1ZS4gSXQgaXMgdXNlZnVsIHdoZW4geW91IGZpbmQgd2hhdCB5b3UgbmVlZCBlYXJseSBhbmQgd2FudCB0byBzdG9wIHNlYXJjaGluZy4iLCJhbmFsb2d5IjoiYnJlYWsgaXMgbGlrZSBsZWF2aW5nIGEgcGFydHkgdGhlIG1vbWVudCB5b3UgZmluZCB5b3VyIGxvc3Qga2V5c+KAlG5vIG5lZWQgdG8ga2VlcCBsb29raW5nIHJvb20gYnkgcm9vbS4ifQ==" />
+
+`break` immediately exits the loop entirely, useful once you've found what you needed.
+```js
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break;
+  console.log(i);
+}
+```
+
+**Using continue**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiY29udGludWUgc2tpcHMgdGhlIHJlc3Qgb2YgdGhlIGN1cnJlbnQgbG9vcCBpdGVyYXRpb24gYW5kIGp1bXBzIHRvIHRoZSBuZXh0IG9uZSB3aXRob3V0IGV4aXRpbmcgdGhlIGxvb3AgZW50aXJlbHkuIEl0IGxldHMgeW91IGlnbm9yZSBjYXNlcyB0aGF0IGRvIG5vdCBuZWVkIHByb2Nlc3Npbmcgd2hpbGUga2VlcGluZyB0aGUgbG9vcCBydW5uaW5nLiIsImFuYWxvZ3kiOiJjb250aW51ZSBpcyBsaWtlIHNraXBwaW5nIGEgYnVybnQgY29va2llIG9uIHRoZSB0cmF5IGFuZCBtb3ZpbmcgdG8gdGhlIG5leHQgb25lIHdpdGhvdXQgc3RvcHBpbmcgdGhlIHdob2xlIGJhdGNoLiJ9" />
+
+`continue` skips the rest of the current pass and jumps straight to the next one, without stopping the whole loop.
+```js
+for (let i = 0; i < 6; i++) {
+  if (i % 2 === 0) continue;
+  console.log(i); // only odd numbers print
+}
+```
+
+**Note:** Always update your loop variable inside a `while` loop, or it will run forever (an infinite loop).
+
+**More Examples:**
+```js
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+```js
+let i = 0;
+while (i < 3) {
+  console.log("while:", i);
+  i++;
+}
+```
+```js
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break;
+  if (i % 2 === 0) continue;
+  console.log(i);
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the loop to print numbers 1 to 5.
+```js
+for (let i = ___; i <= ___; i++) {
+  console.log(i);
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+for (let i = 1; i <= 5; i++) {
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a `while` loop that prints "Countdown: 3", "Countdown: 2", "Countdown: 1", then "Liftoff!".
+
+
+<LessonAnswer>
+
+
+
+```js
+let i = 3;
+while (i >= 1) {
+  console.log("Countdown:", i);
+  i--;
+}
+console.log("Liftoff!");
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What does this loop print?
+```js
+for (let i = 0; i < 6; i++) {
+  if (i === 3) break;
+  console.log(i);
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```
+0
+1
+2
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**4.** Fix this infinite loop.
+```js
+let i = 0;
+while (i < 5) {
+  console.log(i);
+}
+```
+
+
+<LessonAnswer>
+
+
+
+Add `i++;` inside the loop body:
+```js
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+
+</LessonAnswer>
+
+

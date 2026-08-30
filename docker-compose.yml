@@ -1,0 +1,92 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: educoach-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+
+  # Pull llama3.2:3b once Ollama is healthy (runs then exits)
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: educoach-ollama-init
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Pulling llama3.2:3b..."
+        ollama pull llama3.2:3b
+        echo "Model ready."
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: educoach-api
+    env_file:
+      - .env
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: llama3.2:3b
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      DATA_PROCESSED_PATH: data/processed/student_performance.csv
+      MODEL_PATH: models/random_forest.pkl
+      VECTOR_DB_PATH: vector_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./vector_db:/app/vector_db
+    depends_on:
+      ollama:
+        condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
+    command: >
+      uvicorn src.api.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: educoach-streamlit
+    env_file:
+      - .env
+    environment:
+      API_URL: http://api:8000
+      OLLAMA_HOST: http://ollama:11434
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./src:/app/src
+    depends_on:
+      - api
+    command: >
+      streamlit run src/ui/streamlit_app.py
+      --server.address 0.0.0.0
+      --server.port 8501
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

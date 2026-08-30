@@ -1,0 +1,142 @@
+---
+title: "Arrays — create, index, mutate"
+summary: "length, push/pop, add and remove elements."
+day: 6
+---
+
+**Creating an array**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gYXJyYXkgaXMgYW4gb3JkZXJlZCBsaXN0IG9mIHZhbHVlcyBjcmVhdGVkIHdpdGggc3F1YXJlIGJyYWNrZXRzLCBzdWNoIGFzIFsxLCAyLCAzXSBvciBbJ2EnLCAnYiddLiBJdGVtcyBjYW4gYmUgb2YgbWl4ZWQgdHlwZXMsIGFuZCB0aGUgYXJyYXkga2VlcHMgdGhlbSBpbiBhIGZpeGVkIHNlcXVlbmNlIGJ5IGluZGV4LiIsImFuYWxvZ3kiOiJDcmVhdGluZyBhbiBhcnJheSBpcyBsaWtlIG51bWJlcmluZyBzbG90cyBpbiBhIHBhcmtpbmcgbG904oCUZWFjaCBzcGFjZSBob2xkcyBvbmUgY2FyLCBhbmQgdGhlIG51bWJlcnMgdGVsbCB5b3UgdGhlIG9yZGVyLiJ9" />
+
+An array is an ordered list of values, written between square brackets: `[1, 2, 3]`.
+```js
+let fruits = ["apple", "banana", "cherry"];
+console.log(fruits);
+```
+
+**Accessing items by index**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQXJyYXkgZWxlbWVudHMgYXJlIGFjY2Vzc2VkIHdpdGggemVyby1iYXNlZCBpbmRleGVzIGluc2lkZSBicmFja2V0cywgbGlrZSBhcnJbMF0gZm9yIHRoZSBmaXJzdCBpdGVtLiBWYWxpZCBpbmRleGVzIHJ1biBmcm9tIDAgdGhyb3VnaCBhcnIubGVuZ3RoIC0gMS4iLCJhbmFsb2d5IjoiQXJyYXkgaW5kZXhlcyBhcmUgbGlrZSBsb2NrZXIgbnVtYmVyc+KAlG9wZW4gbG9ja2VyIDAgZmlyc3QsIHRoZW4gbG9ja2VyIDEsIGZvbGxvd2luZyB0aGUgbGFiZWxzIG9uIHRoZSByb3cuIn0=" />
+
+Arrays are indexed starting at `0`. The last item is at `arr.length - 1`.
+```js
+let fruits = ["apple", "banana", "cherry"];
+console.log(fruits[0]);                    // "apple"
+console.log(fruits[fruits.length - 1]);    // "cherry"
+```
+
+**Mutating an item**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiWW91IGNhbiBjaGFuZ2UgYW4gZXhpc3RpbmcgZWxlbWVudCBieSBhc3NpZ25pbmcgdG8gaXRzIGluZGV4LCBzdWNoIGFzIGFyclsyXSA9ICduZXcnLiBUaGlzIG1vZGlmaWVzIHRoZSBhcnJheSBpbiBwbGFjZSB3aXRob3V0IGNyZWF0aW5nIGEgbmV3IGFycmF5IG9iamVjdC4iLCJhbmFsb2d5IjoiTXV0YXRpbmcgYW4gaXRlbSBpcyBsaWtlIHN3YXBwaW5nIG9uZSBib29rIG9uIGEgc2hlbGbigJR5b3UgY2hhbmdlIHdoYXQgaXMgdGhlcmUgd2l0aG91dCByZWJ1aWxkaW5nIHRoZSB3aG9sZSBib29rY2FzZS4ifQ==" />
+
+Unlike strings, arrays are mutable: you can change an item directly by assigning to its index.
+```js
+let fruits = ["apple", "banana", "cherry"];
+fruits[1] = "mango";
+console.log(fruits); // ["apple", "mango", "cherry"]
+```
+
+**Adding and removing with push/pop**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoicHVzaCBhZGRzIG9uZSBvciBtb3JlIGVsZW1lbnRzIHRvIHRoZSBlbmQgb2YgYW4gYXJyYXksIHdoaWxlIHBvcCByZW1vdmVzIGFuZCByZXR1cm5zIHRoZSBsYXN0IGVsZW1lbnQuIEJvdGggbWV0aG9kcyBtdXRhdGUgdGhlIG9yaWdpbmFsIGFycmF5IGFuZCBhcmUgY29tbW9uIGZvciBzdGFjay1saWtlIGJlaGF2aW9yLiIsImFuYWxvZ3kiOiJwdXNoIGFuZCBwb3AgYXJlIGxpa2Ugc3RhY2tpbmcgcGxhdGVz4oCUeW91IGFkZCBvbiB0b3AgYW5kIHRha2UgZnJvbSB0aGUgdG9wIHdoZW4geW91IGFyZSBkb25lLiJ9" />
+
+`.push(value)` adds an item to the end. `.pop()` removes and returns the last item. Both change the array in place.
+```js
+let numbers = [1, 2, 3];
+numbers.push(4);
+console.log(numbers); // [1, 2, 3, 4]
+let last = numbers.pop();
+console.log(last, numbers); // 4  [1, 2, 3]
+```
+
+**const arrays can still change**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRGVjbGFyaW5nIGFuIGFycmF5IHdpdGggY29uc3QgcHJldmVudHMgcmVhc3NpZ25pbmcgdGhlIHZhcmlhYmxlIHRvIGEgZGlmZmVyZW50IGFycmF5LCBidXQgdGhlIGNvbnRlbnRzIGNhbiBzdGlsbCBiZSBtb2RpZmllZCB3aXRoIG1ldGhvZHMgbGlrZSBwdXNoIG9yIGJ5IGluZGV4IGFzc2lnbm1lbnQuIGNvbnN0IGxvY2tzIHRoZSBiaW5kaW5nLCBub3QgdGhlIGFycmF54oCZcyBpbnRlcm5hbCBlbGVtZW50cy4iLCJhbmFsb2d5IjoiQSBjb25zdCBhcnJheSBpcyBsaWtlIGEgbGFiZWxlZCB0cmF5IHRoYXQgYWx3YXlzIHN0YXlzIHRoZSBzYW1lIHRyYXnigJR5b3UgY2FuIHN0aWxsIGNoYW5nZSB3aGF0IGlzIG9uIGl0LCBidXQgeW91IGNhbm5vdCBzd2FwIHRoZSB0cmF5IGZvciBhIGRpZmZlcmVudCBvbmUuIn0=" />
+
+Declaring an array with `const` only prevents reassigning the variable to a new array — you can still `.push()`, `.pop()`, or change items by index.
+```js
+const scores = [10, 20, 30];
+scores.push(40); // allowed
+console.log(scores); // [10, 20, 30, 40]
+```
+
+**Note:** A `const` array can still have its contents changed — `const` only blocks reassigning the variable to a whole new array.
+
+**More Examples:**
+```js
+let fruits = ["apple", "banana"];
+fruits.push("cherry");
+console.log(fruits); // ["apple", "banana", "cherry"]
+```
+```js
+let numbers = [1, 2, 3];
+numbers[1] = 20;
+console.log(numbers); // [1, 20, 3]
+```
+```js
+const scores = [10, 20];
+scores.push(30);
+console.log(scores); // [10, 20, 30]
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the code to remove the last item and print it.
+```js
+let nums = [1, 2, 3];
+let last = nums.___();
+console.log(last); // 3
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+let last = nums.pop();
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Create an array of your 3 favorite colors, print the first one, then add a 4th color with `.push()`.
+
+
+<LessonAnswer>
+
+
+
+```js
+let colors = ["blue", "green", "red"];
+console.log(colors[0]);
+colors.push("yellow");
+console.log(colors);
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What does `fruits[10]` print if `fruits` only has 3 items?
+
+
+<LessonAnswer>
+
+
+
+`undefined` — accessing an index that doesn't exist doesn't cause an error, it just returns `undefined`.
+
+
+</LessonAnswer>
+
+

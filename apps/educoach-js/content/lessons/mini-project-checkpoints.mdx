@@ -1,0 +1,90 @@
+---
+title: "Project checkpoints"
+summary: "Break work into testable milestones."
+day: 9
+---
+
+**Checkpoint 1: data ready**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hlY2twb2ludCAxIGNvbmZpcm1zIHlvdSBoYXZlIGEgc3RydWN0dXJlZCBhcnJheSBvZiBvYmplY3RzIGxvYWRlZCBpbiB5b3VyIHByb2plY3QsIHdpdGggZW5vdWdoIHJlY29yZHMgYW5kIGNvbnNpc3RlbnQgcHJvcGVydHkgbmFtZXMgdG8gYnVpbGQgb24uIFdpdGhvdXQgc29saWQgZGF0YSwgbGF0ZXIgZnVuY3Rpb25zIGhhdmUgbm90aGluZyBtZWFuaW5nZnVsIHRvIHByb2Nlc3MuIiwiYW5hbG9neSI6IkNoZWNrcG9pbnQgMSBpcyBsaWtlIGhhdmluZyBpbmdyZWRpZW50cyBvbiB0aGUgY291bnRlciBiZWZvcmUgY29va2luZ+KAlG5vIHJlY2lwZSBzdGFydHMgd2l0aG91dCBzb21ldGhpbmcgaW4gdGhlIGJvd2wuIn0=" />
+
+Define your sample array of objects and confirm it looks correct by printing it before writing any logic.
+```js
+console.log("Sample data:", products);
+```
+
+**Checkpoint 2: read functions**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hlY2twb2ludCAyIHZlcmlmaWVzIHlvdSBjYW4gZGlzcGxheSBvciBpbnNwZWN0IHlvdXIgZGF0YSB3aXRoIGhlbHBlciBmdW5jdGlvbnMgdGhhdCBwcmludCByZWNvcmRzIG9yIGZpZWxkcyBjbGVhcmx5LiBSZWFkYWJsZSBvdXRwdXQgcHJvdmVzIHlvdXIgZGF0YSBtb2RlbCB3b3JrcyBiZWZvcmUgeW91IGFkZCBzZWFyY2ggYW5kIHNvcnQgbG9naWMuIiwiYW5hbG9neSI6IkNoZWNrcG9pbnQgMiBpcyBsaWtlIHRlc3QtZHJpdmluZyBhIGNhciBhcm91bmQgdGhlIGJsb2Nr4oCUeW91IGNvbmZpcm0gaXQgcnVucyBiZWZvcmUgdGFraW5nIGEgbG9uZyB0cmlwLiJ9" />
+
+Implement and individually test functions that read data without changing it, like search or statistics.
+```js
+console.log(findProduct(products, "Pen"));   // should return the Pen object
+console.log(findProduct(products, "Chair")); // should return null
+```
+
+**Checkpoint 3: search & sort**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hlY2twb2ludCAzIG1lYW5zIHlvdXIgc2VhcmNoIGFuZCBzb3J0aW5nIGZlYXR1cmVzIHdvcmsgb24gdGhlIGRhdGFzZXQgYW5kIHByb2R1Y2UgY29ycmVjdCByZXN1bHRzIHlvdSBjYW4gc2hvdy4gVGhpcyBpcyB0aGUgY29yZSBhbGdvcml0aG1pYyBtaWxlc3RvbmUgb2YgdGhlIG1pbmktcHJvamVjdC4iLCJhbmFsb2d5IjoiQ2hlY2twb2ludCAzIGlzIGxpa2UgaW5zdGFsbGluZyBib3RoIGEgc2VhcmNobGlnaHQgYW5kIHNoZWx2ZXMgaW4gYSB3YXJlaG91c2XigJR5b3UgY2FuIGZpbmQgaXRlbXMgYW5kIGFycmFuZ2UgdGhlbSBpbiBvcmRlci4ifQ==" />
+
+Add at least one search function and one sort function (bubble or selection), and confirm the order is correct by printing it.
+```js
+let sorted = [...products].sort((a, b) => a.price - b.price); // or your own sort function
+console.log(sorted);
+```
+
+**Checkpoint 4: demo script**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hlY2twb2ludCA0IGlzIGEgc2hvcnQgc2NyaXB0IG9yIG1lbnUgdGhhdCBydW5zIHlvdXIgbWFpbiBmZWF0dXJlcyBpbiBzZXF1ZW5jZSBzbyBhIHZpZXdlciBjYW4gc2VlIHRoZSBwcm9qZWN0IHdvcmsgd2l0aG91dCByZWFkaW5nIGFsbCB0aGUgY29kZS4gSXQgdHVybnMgc2VwYXJhdGUgZnVuY3Rpb25zIGludG8gYSBjb2hlcmVudCBkZW1vbnN0cmF0aW9uLiIsImFuYWxvZ3kiOiJBIGRlbW8gc2NyaXB0IGlzIGxpa2UgYSB0b3VyIGd1aWRl4oCZcyByb3V0ZeKAlGl0IHdhbGtzIHZpc2l0b3JzIHBhc3QgZWFjaCBoaWdobGlnaHQgaW4gYSBwbGFubmVkIG9yZGVyLiJ9" />
+
+Write a clean section at the bottom of your file that calls every function in a logical order, with labeled output.
+```js
+console.log("=== DEMO ===");
+console.log("All data:", products);
+console.log("Total:", totalPrice(products));
+```
+
+**Checkpoint 5: Git history**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hlY2twb2ludCA1IGNvbmZpcm1zIHlvdXIgcHJvamVjdCBpcyBjb21taXR0ZWQgYW5kIHB1c2hlZCB3aXRoIGEgY2xlYXIgaGlzdG9yeSBvZiBtZWFuaW5nZnVsIGNvbW1pdHMgb24gR2l0SHViLiBHb29kIGhpc3Rvcnkgc2hvd3MgaG93IHlvdSBidWlsdCB0aGUgcHJvamVjdCBzdGVwIGJ5IHN0ZXAgYW5kIGJhY2tzIHVwIHlvdXIgd29yay4iLCJhbmFsb2d5IjoiR2l0IGhpc3RvcnkgaXMgbGlrZSBhIGNvbnN0cnVjdGlvbiBwaG90byBhbGJ1beKAlGVhY2ggY29tbWl0IGlzIGEgcGljdHVyZSBwcm92aW5nIHByb2dyZXNzIHdhcyBtYWRlIG92ZXIgdGltZS4ifQ==" />
+
+Confirm you have several small, clearly labeled commits pushed to GitHub — not just one giant commit at the end.
+```
+git add .
+git commit -m "checkpoint 2: read functions working"
+git push
+```
+
+**Note:** Commit after each checkpoint works, so you always have a "known-good" version to return to.
+
+**More Examples:**
+```js
+console.log("=== DEMO ===");
+console.log("All data:", products);
+console.log("Total:", totalPrice(products));
+```
+```
+git add .
+git commit -m "checkpoint 2: read functions working"
+git push
+```
+```js
+console.log("Search 'Pen':", findProduct(products, "Pen"));
+console.log("Search 'Chair':", findProduct(products, "Chair")); // should be null
+```
+
+**Exercises:**
+
+
+
+**1.** List your own 4 checkpoints for your project.
+
+
+**2.** Commit your current progress with a clear message, e.g. `git commit -m "checkpoint 1: data ready"`.
+
+
+**3.** Write a demo script section that calls at least 3 of your functions with labeled `console.log` output.
+
+---
+
+## Day 10 — Defense prep & review

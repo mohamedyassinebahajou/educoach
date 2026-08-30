@@ -1,0 +1,29 @@
+# Gemini-only overlay (no Ollama dependency).
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.gemini.yml up --build api streamlit
+#
+# Requires in .env:
+#   LLM_PROVIDER=gemini
+#   GOOGLE_API_KEY=...
+#   GEMINI_MODEL=gemini-3.5-flash-lite
+
+services:
+  api:
+    environment:
+      LLM_PROVIDER: gemini
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      DATA_PROCESSED_PATH: data/processed/student_performance.csv
+      MODEL_PATH: models/random_forest.pkl
+      VECTOR_DB_PATH: vector_db
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./vector_db:/app/vector_db
+      - ./src:/app/src
+
+  streamlit:
+    environment:
+      API_URL: http://api:8000
+    depends_on:
+      - api

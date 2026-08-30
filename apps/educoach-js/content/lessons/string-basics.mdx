@@ -1,0 +1,149 @@
+---
+title: "Strings — length, index, traversal"
+summary: "Walk characters; count and inspect text."
+day: 5
+---
+
+**What is a string?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBzdHJpbmcgaXMgYSBzZXF1ZW5jZSBvZiBjaGFyYWN0ZXJzIHVzZWQgdG8gcmVwcmVzZW50IHRleHQsIHdyaXR0ZW4gaW4gSmF2YVNjcmlwdCBiZXR3ZWVuIHNpbmdsZSBxdW90ZXMsIGRvdWJsZSBxdW90ZXMsIG9yIGJhY2t0aWNrcy4gU3RyaW5ncyBjYW4gaG9sZCBsZXR0ZXJzLCBkaWdpdHMsIHNwYWNlcywgc3ltYm9scywgYW5kIGVtb2ppLiIsImFuYWxvZ3kiOiJBIHN0cmluZyBpcyBsaWtlIGEgYmVhZCBuZWNrbGFjZeKAlGVhY2ggY2hhcmFjdGVyIGlzIG9uZSBiZWFkLCBhbmQgdGhlIG9yZGVyIG9mIGJlYWRzIHNwZWxscyBvdXQgYSB3b3JkIG9yIHNlbnRlbmNlLiJ9" />
+
+A string is text, written between quotes: `'...'`, `"..."`, or backticks `` `...` ``.
+```js
+let word = "JavaScript";
+console.log(word);
+```
+
+**The length property**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRXZlcnkgc3RyaW5nIGhhcyBhIGxlbmd0aCBwcm9wZXJ0eSB0aGF0IHJldHVybnMgaG93IG1hbnkgY2hhcmFjdGVycyBpdCBjb250YWlucywgYWNjZXNzaWJsZSB3aXRoIHN0ci5sZW5ndGguIEl0IGNvdW50cyBlYWNoIGNoYXJhY3RlciwgaW5jbHVkaW5nIHNwYWNlcyBhbmQgcHVuY3R1YXRpb24uIiwiYW5hbG9neSI6Imxlbmd0aCBpcyBsaWtlIGNvdW50aW5nIGhvdyBtYW55IGxldHRlcnMgYXJlIGluIGEgU2NyYWJibGUgcmFja+KAlGl0IHRlbGxzIHlvdSBob3cgbWFueSB0aWxlcyB5b3UgYXJlIGhvbGRpbmcuIn0=" />
+
+Every string has a `.length` property telling you how many characters it contains, including spaces and punctuation.
+```js
+console.log("Code".length); // 4
+```
+
+**Indexing a string**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiWW91IGFjY2VzcyBhIHNpbmdsZSBjaGFyYWN0ZXIgaW4gYSBzdHJpbmcgd2l0aCBicmFja2V0IG5vdGF0aW9uIGFuZCBhIHplcm8tYmFzZWQgaW5kZXgsIHN1Y2ggYXMgc3RyWzBdIGZvciB0aGUgZmlyc3QgY2hhcmFjdGVyLiBJbmRpY2VzIHN0YXJ0IGF0IDAgYW5kIGdvIHVwIHRvIGxlbmd0aCBtaW51cyBvbmUuIiwiYW5hbG9neSI6IkluZGV4aW5nIGEgc3RyaW5nIGlzIGxpa2UgYXBhcnRtZW50IG51bWJlcnMgaW4gYSBoYWxsd2F54oCUbnVtYmVyIDAgaXMgdGhlIGZpcnN0IGRvb3IsIG51bWJlciAxIGlzIHRoZSBuZXh0LCBhbmQgc28gb24uIn0=" />
+
+You access one character using square brackets and its index. Indexes start at `0`, so the last character is at `length - 1`.
+```js
+let word = "Code";
+console.log(word[0]);                // "C"
+console.log(word[word.length - 1]);  // "e"
+```
+
+**Strings are immutable**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU3RyaW5ncyBjYW5ub3QgYmUgY2hhbmdlZCBpbiBwbGFjZTsgb3BlcmF0aW9ucyB0aGF0IGFwcGVhciB0byBtb2RpZnkgYSBzdHJpbmcgYWN0dWFsbHkgY3JlYXRlIGEgbmV3IHN0cmluZy4gQXNzaWduaW5nIHRvIHN0cltpXSBkb2VzIG5vdCBhbHRlciB0aGUgb3JpZ2luYWwgc3RyaW5nIHZhbHVlIGluIEphdmFTY3JpcHQuIiwiYW5hbG9neSI6IkltbXV0YWJsZSBzdHJpbmdzIGFyZSBsaWtlIHdvcmRzIHByaW50ZWQgaW4gYSBib29r4oCUeW91IGNhbm5vdCBlcmFzZSBvbmUgbGV0dGVyOyB5b3UgbXVzdCBwcmludCBhIG5ldyBwYWdlIHdpdGggdGhlIGNvcnJlY3RlZCB3b3JkLiJ9" />
+
+You cannot change a single character in place. Instead, you build an entirely new string from parts.
+```js
+let text = "cat";
+// text[0] = "b"; // does nothing, strings can't be changed like this
+console.log(text); // still "cat"
+```
+
+**Template literals**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVGVtcGxhdGUgbGl0ZXJhbHMgYXJlIHN0cmluZ3Mgd3JpdHRlbiB3aXRoIGJhY2t0aWNrcyAoYCkgdGhhdCBjYW4gc3BhbiBtdWx0aXBsZSBsaW5lcyBhbmQgZW1iZWQgZXhwcmVzc2lvbnMgaW5zaWRlICR7IH0uIFRoZXkgbWFrZSBidWlsZGluZyBkeW5hbWljIHRleHQgY2xlYW5lciB0aGFuIGNvbmNhdGVuYXRpbmcgd2l0aCArLiIsImFuYWxvZ3kiOiJUZW1wbGF0ZSBsaXRlcmFscyBhcmUgbGlrZSBtYWQtbGlicyB3aXRoIGJsYW5rcyBmaWxsZWQgYXV0b21hdGljYWxseeKAlCR7bmFtZX0gc2xvdHMgaW4gdGhlIHZhbHVlIHdoaWxlIHlvdSB3cml0ZSB0aGUgc2VudGVuY2Ugb25jZS4ifQ==" />
+
+Backtick strings let you insert variables directly into text using `${}`, which is more readable than joining with `+`.
+```js
+let name = "Amine";
+let age = 20;
+console.log(`My name is ${name} and I am ${age} years old.`);
+```
+
+**Traversing a string**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVHJhdmVyc2luZyBhIHN0cmluZyBtZWFucyB2aXNpdGluZyBlYWNoIGNoYXJhY3RlciBpbiBvcmRlciwgdXN1YWxseSB3aXRoIGEgbG9vcCBmcm9tIGluZGV4IDAgdG8gbGVuZ3RoIC0gMS4gSXQgaXMgdGhlIHN0YW5kYXJkIHBhdHRlcm4gZm9yIGNvdW50aW5nLCBzZWFyY2hpbmcsIG9yIHRyYW5zZm9ybWluZyB0ZXh0IGNoYXJhY3RlciBieSBjaGFyYWN0ZXIuIiwiYW5hbG9neSI6IlRyYXZlcnNpbmcgYSBzdHJpbmcgaXMgbGlrZSByZWFkaW5nIGEgc2VudGVuY2UgYWxvdWQgb25lIGxldHRlciBhdCBhIHRpbWUgZnJvbSBzdGFydCB0byBmaW5pc2guIn0=" />
+
+Because a string behaves like an indexed sequence, you can loop through every character with a `for` loop.
+```js
+let text = "hi";
+for (let i = 0; i < text.length; i++) {
+  console.log(text[i]);
+}
+```
+
+**Note:** Template literals use backticks: `` `Hello, ${name}!` `` lets you insert variables directly into text.
+
+**More Examples:**
+```js
+let word = "Code";
+console.log(word.length);   // 4
+console.log(word[0]);       // "C"
+```
+```js
+let name = "Amine";
+let age = 20;
+console.log(`My name is ${name} and I am ${age}.`);
+```
+```js
+let text = "hi";
+for (let i = 0; i < text.length; i++) {
+  console.log(text[i]);
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Print the last character of `"Bootcamp"` without counting manually.
+```js
+let word = "Bootcamp";
+console.log(word[___]);
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log(word[word.length - 1]); // "p"
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a template literal that prints: `"I have 3 apples and 2 bananas."` using variables `apples = 3` and `bananas = 2`.
+
+
+<LessonAnswer>
+
+
+
+```js
+let apples = 3;
+let bananas = 2;
+console.log(`I have ${apples} apples and ${bananas} bananas.`);
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** True or False: `"cat"[0] = "b"` will change the string to `"bat"`.
+
+
+<LessonAnswer>
+
+
+
+False — strings are immutable, so this line does nothing.
+
+
+</LessonAnswer>
+
+

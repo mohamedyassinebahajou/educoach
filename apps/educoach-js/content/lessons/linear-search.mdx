@@ -1,0 +1,160 @@
+---
+title: "Linear search (& binary idea)"
+summary: "Find a value by scanning; know what binary search needs."
+day: 8
+---
+
+**How linear search works**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTGluZWFyIHNlYXJjaCBjaGVja3MgZWFjaCBlbGVtZW50IGZyb20gc3RhcnQgdG8gZW5kIHVudGlsIGl0IGZpbmRzIHRoZSB0YXJnZXQgb3IgZXhoYXVzdHMgdGhlIGxpc3QuIEl0IHdvcmtzIG9uIGFueSBhcnJheSByZWdhcmRsZXNzIG9mIG9yZGVyIGFuZCBoYXMgYSBzaW1wbGUgbG9vcCBzdHJ1Y3R1cmUuIiwiYW5hbG9neSI6IkxpbmVhciBzZWFyY2ggaXMgbGlrZSBsb29raW5nIGZvciBhIGZyaWVuZCBpbiBhIGxpbmUgb2YgcGVvcGxl4oCUeW91IGFzayBlYWNoIHBlcnNvbiBpbiBvcmRlciB1bnRpbCB5b3UgZmluZCB0aGVtLiJ9" />
+
+Start at index `0` and check every element one by one until you find a match or reach the end.
+```js
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+}
+console.log(linearSearch([4, 8, 15], 8)); // 1
+```
+
+**Works on unsorted data**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTGluZWFyIHNlYXJjaCBkb2VzIG5vdCByZXF1aXJlIHNvcnRlZCBkYXRhIGJlY2F1c2UgaXQgZXhhbWluZXMgZXZlcnkgaXRlbSBzZXF1ZW50aWFsbHkgd2l0aG91dCBhc3N1bWluZyBhbnkgb3JkZXIuIFRoYXQgbWFrZXMgaXQgc3VpdGFibGUgd2hlbiB0aGUgbGlzdCBpcyBzbWFsbCBvciBhcnJhbmdpbmcgZGF0YSBmaXJzdCBpcyBub3Qgd29ydGggdGhlIGNvc3QuIiwiYW5hbG9neSI6IkxpbmVhciBzZWFyY2ggb24gdW5zb3J0ZWQgZGF0YSBpcyBsaWtlIGZpbmRpbmcgYSBzb2NrIGluIGEgbWVzc3kgZHJhd2Vy4oCUeW91IHBpY2sgdGhyb3VnaCBpdGVtcyBvbmUgYnkgb25lIHdpdGhvdXQgYW55IHNvcnRpbmcgc3lzdGVtLiJ9" />
+
+Because it checks every item regardless of order, linear search works correctly whether the array is sorted or not.
+```js
+console.log(linearSearch([23, 4, 16, 8], 16)); // 2, unsorted array
+```
+
+**The idea behind binary search**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQmluYXJ5IHNlYXJjaCByZXBlYXRlZGx5IGRpdmlkZXMgYSBzb3J0ZWQgbGlzdCBpbiBoYWxmLCBjb21wYXJpbmcgdGhlIHRhcmdldCB0byB0aGUgbWlkZGxlIGVsZW1lbnQgYW5kIGRpc2NhcmRpbmcgdGhlIGhhbGYgdGhhdCBjYW5ub3QgY29udGFpbiBpdC4gRWFjaCBzdGVwIGVsaW1pbmF0ZXMgYWJvdXQgaGFsZiB0aGUgcmVtYWluaW5nIGl0ZW1zLiIsImFuYWxvZ3kiOiJCaW5hcnkgc2VhcmNoIGlzIGxpa2UgZ3Vlc3NpbmcgYSBudW1iZXIgYmV0d2VlbiAxIGFuZCAxMDAgYnkgYWx3YXlzIGFza2luZyAnaGlnaGVyIG9yIGxvd2VyPyfigJRlYWNoIGFuc3dlciBjdXRzIHRoZSBwb3NzaWJpbGl0aWVzIGluIGhhbGYuIn0=" />
+
+Binary search repeatedly checks the middle of a sorted array, discarding half the remaining range depending on whether the target is smaller or larger.
+```js
+function binarySearch(sortedArr, target) {
+  let low = 0, high = sortedArr.length - 1;
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2);
+    if (sortedArr[mid] === target) return mid;
+    else if (sortedArr[mid] < target) low = mid + 1;
+    else high = mid - 1;
+  }
+  return -1;
+}
+console.log(binarySearch([2, 4, 8, 15, 16], 15)); // 3
+```
+
+**Why binary search needs sorted data**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQmluYXJ5IHNlYXJjaCByZWxpZXMgb24gb3JkZXIgdG8ga25vdyB3aGljaCBoYWxmIHRvIGRpc2NhcmQ7IGlmIGRhdGEgaXMgdW5zb3J0ZWQsIHRoZSBtaWRkbGUgY29tcGFyaXNvbiBjYW5ub3Qgc2FmZWx5IGVsaW1pbmF0ZSBoYWxmIHRoZSBsaXN0LiBTb3J0aW5nIGZpcnN0IGNyZWF0ZXMgdGhlIG9yZGVyaW5nIGJpbmFyeSBzZWFyY2ggZGVwZW5kcyBvbi4iLCJhbmFsb2d5IjoiQmluYXJ5IHNlYXJjaCBuZWVkcyBzb3J0ZWQgZGF0YSBsaWtlIGEgZGljdGlvbmFyeSBuZWVkcyBhbHBoYWJldGljYWwgb3JkZXLigJR3aXRob3V0IG9yZGVyLCBqdW1waW5nIHRvIHRoZSBtaWRkbGUgcGFnZSB3b3VsZCBub3QgdGVsbCB5b3Ugd2hpY2ggZGlyZWN0aW9uIHRvIGdvLiJ9" />
+
+Binary search decides which half to keep by comparing the target to the middle value — this logic only works if the array is in order.
+```js
+// Unsorted input can give a WRONG result with binary search:
+console.log(binarySearch([23, 4, 16, 8], 8)); // unreliable, don't do this
+```
+
+**Comparing the two approaches**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTGluZWFyIHNlYXJjaCBpcyBzaW1wbGVyIGFuZCBmaW5lIGZvciBzbWFsbCBvciB1bnNvcnRlZCBsaXN0czsgYmluYXJ5IHNlYXJjaCBpcyBmYXN0ZXIgb24gbGFyZ2Ugc29ydGVkIGRhdGEgYnV0IHJlcXVpcmVzIHNvcnRpbmcgZmlyc3QuIENob29zZSBiYXNlZCBvbiBsaXN0IHNpemUsIHdoZXRoZXIgZGF0YSBpcyBhbHJlYWR5IHNvcnRlZCwgYW5kIGhvdyBvZnRlbiB5b3Ugc2VhcmNoLiIsImFuYWxvZ3kiOiJDaG9vc2luZyBiZXR3ZWVuIHRoZW0gaXMgbGlrZSB3YWxraW5nIGV2ZXJ5IGFpc2xlIGluIGEgc3RvcmUgdmVyc3VzIHVzaW5nIGEgc29ydGVkIG1hcOKAlHF1aWNrIGJyb3dzZSBmb3IgYSBmZXcgaXRlbXMsIG1hcCB3aGVuIHRoZSBzdG9yZSBpcyBodWdlIGFuZCB3ZWxsIG9yZ2FuaXplZC4ifQ==" />
+
+Linear search is simple and flexible but slower on large data. Binary search is much faster but only works on sorted data.
+```js
+let sorted = [1, 3, 5, 7, 9, 11];
+console.log(linearSearch(sorted, 9));  // works, checks one by one
+console.log(binarySearch(sorted, 9));  // works, and faster on large arrays
+```
+
+**Note:** Binary search is faster but only works correctly on a **sorted** array.
+
+**More Examples:**
+```js
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+}
+console.log(linearSearch([4, 8, 15], 8)); // 1
+```
+```js
+console.log(linearSearch([23, 4, 16, 8], 16)); // 2
+```
+```js
+function binarySearch(sortedArr, target) {
+  let low = 0, high = sortedArr.length - 1;
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2);
+    if (sortedArr[mid] === target) return mid;
+    else if (sortedArr[mid] < target) low = mid + 1;
+    else high = mid - 1;
+  }
+  return -1;
+}
+console.log(binarySearch([2, 4, 8, 15, 16], 15)); // 3
+```
+
+**Exercises:**
+
+
+
+**1.** What does this return?
+```js
+console.log(linearSearch([1, 2, 3], 9));
+```
+
+
+<LessonAnswer>
+
+
+
+`-1` (not found)
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Why might `binarySearch([23, 4, 16, 8], 8)` give a wrong answer?
+
+
+<LessonAnswer>
+
+
+
+Because the array `[23, 4, 16, 8]` is not sorted, and binary search assumes the array is sorted in order to decide which half to discard.
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Write a function `linearSearchCount(arr, target)` that counts how many times `target` appears in `arr`, instead of stopping at the first match.
+
+
+<LessonAnswer>
+
+
+
+```js
+function linearSearchCount(arr, target) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) count++;
+  }
+  return count;
+}
+console.log(linearSearchCount([1, 2, 2, 3, 2], 2)); // 3
+```
+
+
+</LessonAnswer>
+
+

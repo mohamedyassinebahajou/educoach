@@ -1,0 +1,148 @@
+---
+title: "Essential string methods"
+summary: "slice, includes, toLowerCase, toUpperCase, trim."
+day: 5
+---
+
+**The .slice() method**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoic2xpY2Uoc3RhcnQsIGVuZCkgcmV0dXJucyBhIHBvcnRpb24gb2YgYSBzdHJpbmcgZnJvbSBzdGFydCB1cCB0byBidXQgbm90IGluY2x1ZGluZyBlbmQsIHdpdGhvdXQgY2hhbmdpbmcgdGhlIG9yaWdpbmFsLiBOZWdhdGl2ZSBpbmRleGVzIGNvdW50IGZyb20gdGhlIGVuZCBvZiB0aGUgc3RyaW5nLiIsImFuYWxvZ3kiOiJzbGljZSBpcyBsaWtlIGN1dHRpbmcgYSBzZWdtZW50IGZyb20gYSBmaWxtIHJlZWzigJR5b3UgY29weSB0aGF0IGNsaXAgd2hpbGUgdGhlIGZ1bGwgcmVlbCBzdGF5cyB1bnRvdWNoZWQuIn0=" />
+
+`.slice(start, end)` extracts part of a string, from `start` up to (but not including) `end`. Omitting `end` slices to the end of the string.
+```js
+console.log("JavaScript".slice(0, 4)); // "Java"
+console.log("JavaScript".slice(4));    // "Script"
+```
+
+**The .includes() method**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiaW5jbHVkZXMoc2VhcmNoU3RyaW5nKSByZXR1cm5zIHRydWUgaWYgdGhlIHN0cmluZyBjb250YWlucyB0aGUgZ2l2ZW4gc3Vic3RyaW5nIGFueXdoZXJlLCBhbmQgZmFsc2Ugb3RoZXJ3aXNlLiBJdCBpcyBhIHNpbXBsZSB3YXkgdG8gdGVzdCBmb3IgdGhlIHByZXNlbmNlIG9mIHRleHQgd2l0aG91dCBmaW5kaW5nIGl0cyBwb3NpdGlvbi4iLCJhbmFsb2d5IjoiaW5jbHVkZXMgaXMgbGlrZSBjaGVja2luZyB3aGV0aGVyIGEgd29yZCBhcHBlYXJzIGFueXdoZXJlIGluIGEgcGFyYWdyYXBo4oCUeW91IG9ubHkgbmVlZCBhIHllcyBvciBubywgbm90IHRoZSBwYWdlIG51bWJlci4ifQ==" />
+
+`.includes(substring)` returns `true` or `false` depending on whether the substring appears anywhere inside the string.
+```js
+console.log("hello world".includes("world")); // true
+console.log("hello world".includes("bye"));   // false
+```
+
+**Changing case**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTWV0aG9kcyBzdWNoIGFzIHRvTG93ZXJDYXNlKCkgYW5kIHRvVXBwZXJDYXNlKCkgcmV0dXJuIG5ldyBzdHJpbmdzIHdpdGggYWxsIGxldHRlcnMgY29udmVydGVkIHRvIHRoZSBjaG9zZW4gY2FzZS4gVGhleSBhcmUgb2Z0ZW4gdXNlZCB0byBjb21wYXJlIG9yIHNvcnQgdGV4dCB3aXRob3V0IHdvcnJ5aW5nIGFib3V0IGNhcGl0YWxpemF0aW9uIGRpZmZlcmVuY2VzLiIsImFuYWxvZ3kiOiJDaGFuZ2luZyBjYXNlIGlzIGxpa2UgdHlwaW5nIGFuIGVtYWlsIGluIGFsbCBjYXBzIG9yIGFsbCBsb3dlcmNhc2XigJR0aGUgbWVhbmluZyBzdGF5cyB0aGUgc2FtZSwgYnV0IHRoZSBhcHBlYXJhbmNlIGNoYW5nZXMuIn0=" />
+
+`.toUpperCase()` and `.toLowerCase()` return a new string with all letters converted — useful for case-insensitive comparisons.
+```js
+console.log("Hello".toUpperCase()); // "HELLO"
+console.log("Hello".toLowerCase()); // "hello"
+```
+
+**Cleaning whitespace with .trim()**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoidHJpbSgpIHJlbW92ZXMgd2hpdGVzcGFjZSBjaGFyYWN0ZXJzIGZyb20gdGhlIGJlZ2lubmluZyBhbmQgZW5kIG9mIGEgc3RyaW5nIGFuZCByZXR1cm5zIGEgbmV3IHRyaW1tZWQgc3RyaW5nLiBJdCBpcyB1c2VmdWwgZm9yIGNsZWFuaW5nIHVzZXIgaW5wdXQgdGhhdCBtYXkgaGF2ZSBhY2NpZGVudGFsIHNwYWNlcy4iLCJhbmFsb2d5IjoidHJpbSBpcyBsaWtlIHNoYXZpbmcgdGhlIGNydXN0IG9mZiBhIHNhbmR3aWNoIHNsaWNl4oCUeW91IGtlZXAgdGhlIGdvb2QgcGFydCBhbmQgZGlzY2FyZCB0aGUgZXh0cmEgZWRnZXMuIn0=" />
+
+`.trim()` removes whitespace from the start and end of a string, useful for cleaning up messy input.
+```js
+let messy = "   hi there   ";
+console.log(`"${messy.trim()}"`); // "hi there"
+```
+
+**Finding a position with .indexOf()**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiaW5kZXhPZihzZWFyY2hTdHJpbmcpIHJldHVybnMgdGhlIHplcm8tYmFzZWQgaW5kZXggd2hlcmUgYSBzdWJzdHJpbmcgZmlyc3QgYXBwZWFycywgb3IgLTEgaWYgaXQgaXMgbm90IGZvdW5kLiBZb3UgY2FuIHVzZSBpdCB0byBsb2NhdGUgdGV4dCBiZWZvcmUgc2xpY2luZyBvciByZXBsYWNpbmcuIiwiYW5hbG9neSI6ImluZGV4T2YgaXMgbGlrZSBmaW5kaW5nIHdoaWNoIHNoZWxmIGEgYm9vayBpcyBvbiBpbiBhIGxpYnJhcnnigJR5b3UgZ2V0IHRoZSBsb2NhdGlvbiBvciBsZWFybiBpdCBpcyBub3QgdGhlcmUgKC0xKS4ifQ==" />
+
+`.indexOf(substring)` returns the position where a substring first appears, or `-1` if it isn't found.
+```js
+console.log("hello world".indexOf("world")); // 6
+console.log("hello world".indexOf("bye"));   // -1
+```
+
+**Splitting text with .split()**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoic3BsaXQoc2VwYXJhdG9yKSBicmVha3MgYSBzdHJpbmcgaW50byBhbiBhcnJheSBvZiBzdWJzdHJpbmdzIHdoZXJldmVyIHRoZSBzZXBhcmF0b3IgYXBwZWFycy4gRm9yIGV4YW1wbGUsIHNwbGl0dGluZyBvbiBhIGNvbW1hIHR1cm5zICdhLGIsYycgaW50byBbJ2EnLCAnYicsICdjJ10uIiwiYW5hbG9neSI6InNwbGl0IGlzIGxpa2UgY3V0dGluZyBhIGJhZ3VldHRlIGF0IGVhY2ggc2NvcmUgbWFya+KAlHlvdSBlbmQgdXAgd2l0aCBzZXBhcmF0ZSBwaWVjZXMgYXJyYW5nZWQgaW4gb3JkZXIuIn0=" />
+
+`.split(separator)` breaks a string into an array of pieces based on a separator, such as splitting a sentence into words.
+```js
+let sentence = "core javascript rocks";
+console.log(sentence.split(" ")); // ["core", "javascript", "rocks"]
+```
+
+**Chaining methods**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTWV0aG9kIGNoYWluaW5nIGNhbGxzIHNldmVyYWwgc3RyaW5nIG1ldGhvZHMgaW4gYSByb3cgb24gdGhlIHNhbWUgdmFsdWUsIHN1Y2ggYXMgc3RyLnRyaW0oKS50b0xvd2VyQ2FzZSgpLiBFYWNoIG1ldGhvZCByZXR1cm5zIGEgbmV3IHN0cmluZyB0aGF0IHRoZSBuZXh0IG1ldGhvZCBvcGVyYXRlcyBvbi4iLCJhbmFsb2d5IjoiQ2hhaW5pbmcgbWV0aG9kcyBpcyBsaWtlIGFuIGFzc2VtYmx5IGxpbmXigJRlYWNoIHN0YXRpb24gcmVmaW5lcyB0aGUgcHJvZHVjdCBiZWZvcmUgcGFzc2luZyBpdCB0byB0aGUgbmV4dC4ifQ==" />
+
+You can call methods one after another, since each one returns a new string. `text.trim().toLowerCase()` cleans and lowercases in one line.
+```js
+console.log("  Hello World  ".trim().toLowerCase()); // "hello world"
+```
+
+**Note:** `.slice(start, end)` excludes the `end` index — `"hello".slice(0, 3)` is `"hel"`.
+
+**More Examples:**
+```js
+console.log("hello world".includes("world")); // true
+console.log("  hi  ".trim());                 // "hi"
+```
+```js
+console.log("JavaScript".slice(0, 4)); // "Java"
+console.log("JavaScript".slice(4));    // "Script"
+```
+```js
+let sentence = "core javascript rocks";
+let words = sentence.split(" ");
+console.log(words); // ["core", "javascript", "rocks"]
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the code to print `"JS"` in uppercase.
+```js
+console.log("js".___());
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log("js".toUpperCase()); // "JS"
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Given `"  Hello World  "`, write code to print it trimmed AND in lowercase, using method chaining.
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log("  Hello World  ".trim().toLowerCase()); // "hello world"
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What does `"banana".indexOf("na")` return? What about `"banana".indexOf("z")`?
+
+
+<LessonAnswer>
+
+
+
+`1` (first occurrence of "na") and `-1` (not found).
+
+
+</LessonAnswer>
+
+

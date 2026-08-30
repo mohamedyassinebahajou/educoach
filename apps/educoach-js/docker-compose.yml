@@ -1,0 +1,41 @@
+# Run from apps/educoach-js:
+#   cp .env.production.example .env
+#   docker compose up -d --build
+#
+# Includes local Postgres. App: http://localhost:3000
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: educoach-postgres
+    environment:
+      POSTGRES_USER: educoach
+      POSTGRES_PASSWORD: educoach
+      POSTGRES_DB: educoach
+    volumes:
+      - educoach_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U educoach -d educoach"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  web:
+    build: .
+    container_name: educoach-js
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://educoach:educoach@db:5432/educoach
+      AUTH_SECRET: ${AUTH_SECRET:?Set AUTH_SECRET in .env}
+      EDUCOACH_API_URL: ${EDUCOACH_API_URL:-http://host.docker.internal:8000}
+      EDUCOACH_API_FALLBACK: ${EDUCOACH_API_FALLBACK:-local}
+    restart: unless-stopped
+
+volumes:
+  educoach_pg:

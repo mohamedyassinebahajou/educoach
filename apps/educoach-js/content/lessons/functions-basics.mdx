@@ -1,0 +1,165 @@
+---
+title: "Functions"
+summary: "Parameters, arguments, return, and refactoring."
+day: 4
+---
+
+**Defining a function**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBmdW5jdGlvbiBpcyBhIHJldXNhYmxlIGJsb2NrIG9mIGNvZGUgd2l0aCBhIG5hbWUgdGhhdCB5b3UgZGVmaW5lIG9uY2UgYW5kIGNhbGwgd2hlbmV2ZXIgeW91IG5lZWQgdGhhdCBiZWhhdmlvci4gRnVuY3Rpb25zIGhlbHAgb3JnYW5pemUgcHJvZ3JhbXMgYnkgZ3JvdXBpbmcgcmVsYXRlZCBzdGVwcyB1bmRlciBvbmUgbGFiZWwuIiwiYW5hbG9neSI6IkRlZmluaW5nIGEgZnVuY3Rpb24gaXMgbGlrZSBzYXZpbmcgYSBjb250YWN0IGluIHlvdXIgcGhvbmXigJR5b3Ugd3JpdGUgdGhlIG51bWJlciBvbmNlIGFuZCBkaWFsIHRoZSBuYW1lIHdoZW5ldmVyIHlvdSBuZWVkIGl0LiJ9" />
+
+A function is a named, reusable block of code. You define it once with the `function` keyword, and it doesn't run until you call it.
+```js
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+```
+
+**Parameters vs arguments**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUGFyYW1ldGVycyBhcmUgdGhlIHBsYWNlaG9sZGVyIG5hbWVzIGxpc3RlZCBpbiBhIGZ1bmN0aW9uIGRlZmluaXRpb247IGFyZ3VtZW50cyBhcmUgdGhlIGFjdHVhbCB2YWx1ZXMgeW91IHBhc3Mgd2hlbiBjYWxsaW5nIHRoZSBmdW5jdGlvbi4gVGhlIGFyZ3VtZW50cyBnZXQgYXNzaWduZWQgdG8gdGhlIHBhcmFtZXRlcnMgZm9yIHRoYXQgc2luZ2xlIGludm9jYXRpb24uIiwiYW5hbG9neSI6IlBhcmFtZXRlcnMgYXJlIGxpa2UgZW1wdHkgc2xvdHMgb24gYSBmb3JtOyBhcmd1bWVudHMgYXJlIHRoZSBhbnN3ZXJzIHlvdSB3cml0ZSBpbiB3aGVuIHlvdSBzdWJtaXQgaXQuIn0=" />
+
+Parameters are the placeholder names in the function's definition. Arguments are the real values you pass in when calling the function.
+```js
+function add(a, b) { // a and b are parameters
+  return a + b;
+}
+console.log(add(2, 3)); // 2 and 3 are arguments
+```
+
+**Returning a value**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoicmV0dXJuIHNlbmRzIGEgdmFsdWUgYmFjayB0byB3aG9ldmVyIGNhbGxlZCB0aGUgZnVuY3Rpb24gYW5kIGVuZHMgdGhlIGZ1bmN0aW9uIGltbWVkaWF0ZWx5LiBDYWxsZXJzIGNhbiBzdG9yZSB0aGF0IHZhbHVlIGluIGEgdmFyaWFibGUgb3IgdXNlIGl0IGluIGFuIGV4cHJlc3Npb24uIiwiYW5hbG9neSI6IlJldHVybmluZyBhIHZhbHVlIGlzIGxpa2UgYSB2ZW5kaW5nIG1hY2hpbmUgZ2l2aW5nIHlvdSBjaGFuZ2XigJR0aGUgbWFjaGluZSBmaW5pc2hlcyBpdHMgam9iIGFuZCBoYW5kcyB5b3Ugc29tZXRoaW5nIHVzZWZ1bC4ifQ==" />
+
+`return` sends a value back to wherever the function was called, and immediately stops the function. Without `return`, a function produces `undefined`.
+```js
+function square(n) {
+  return n * n; // stops here and sends back n*n
+}
+console.log(square(5)); // 25
+```
+
+**Default parameters**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRGVmYXVsdCBwYXJhbWV0ZXJzIHN1cHBseSBhIGZhbGxiYWNrIHZhbHVlIHdoZW4gdGhlIGNhbGxlciBvbWl0cyBhbiBhcmd1bWVudCBvciBwYXNzZXMgdW5kZWZpbmVkLiBUaGV5IG1ha2UgZnVuY3Rpb25zIGVhc2llciB0byB1c2UgYnkgY292ZXJpbmcgY29tbW9uIGNhc2VzIHdpdGhvdXQgZXh0cmEgY2hlY2tzIGluc2lkZSB0aGUgYm9keS4iLCJhbmFsb2d5IjoiRGVmYXVsdCBwYXJhbWV0ZXJzIGFyZSBsaWtlIGEgY2Fmw6kgYXNzdW1pbmcgJ3JlZ3VsYXInIG1pbGsgdW5sZXNzIHlvdSBzYXkgb3RoZXJ3aXNl4oCUeW91IHN0aWxsIGdldCBhIGRyaW5rIHdpdGhvdXQgc3BlY2lmeWluZyBldmVyeSBkZXRhaWwuIn0=" />
+
+You can give a parameter a default value, used automatically if no argument is provided for it.
+```js
+function greetWithDefault(name = "friend") {
+  return "Hi, " + name;
+}
+console.log(greetWithDefault());       // "Hi, friend"
+console.log(greetWithDefault("Omar")); // "Hi, Omar"
+```
+
+**Functions calling other functions**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiT25lIGZ1bmN0aW9uIGNhbiBpbnZva2UgYW5vdGhlciB0byBicmVhayBhIGxhcmdlIHRhc2sgaW50byBzbWFsbGVyLCB0ZXN0YWJsZSBwaWVjZXMuIEVhY2ggZnVuY3Rpb24gaGFuZGxlcyBvbmUgam9iIGFuZCBwYXNzZXMgcmVzdWx0cyBhbG9uZywgYnVpbGRpbmcgY29tcGxleCBiZWhhdmlvciBmcm9tIHNpbXBsZSBidWlsZGluZyBibG9ja3MuIiwiYW5hbG9neSI6IkZ1bmN0aW9ucyBjYWxsaW5nIGZ1bmN0aW9ucyBpcyBsaWtlIGEgcmVsYXkgcmFjZeKAlGVhY2ggcnVubmVyIGRvZXMgb25lIGxlZyBhbmQgaGFuZHMgdGhlIGJhdG9uIHRvIHRoZSBuZXh0LiJ9" />
+
+A function can call another function inside its own body, letting you build bigger logic out of small, tested pieces.
+```js
+function square(n) { return n * n; }
+function sumOfSquares(a, b) {
+  return square(a) + square(b);
+}
+console.log(sumOfSquares(2, 3)); // 13
+```
+
+**Note:** A function with no `return` produces `undefined`.
+
+**More Examples:**
+```js
+function add(a, b) {
+  return a + b;
+}
+console.log(add(2, 3)); // 5
+```
+```js
+function greet(name = "friend") {
+  return "Hello, " + name;
+}
+console.log(greet());        // "Hello, friend"
+console.log(greet("Nadia")); // "Hello, Nadia"
+```
+```js
+function square(n) {
+  return n * n;
+}
+function sumOfSquares(a, b) {
+  return square(a) + square(b);
+}
+console.log(sumOfSquares(2, 3)); // 13
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the function so it returns `true` if `n` is even.
+```js
+function isEven(n) {
+  return ___;
+}
+console.log(isEven(4)); // true
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+return n % 2 === 0;
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a function `maxOfTwo(a, b)` that returns the larger of two numbers, without using `Math.max`.
+
+
+<LessonAnswer>
+
+
+
+```js
+function maxOfTwo(a, b) {
+  if (a > b) return a;
+  return b;
+}
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What does this print, and why?
+```js
+function sayHi() {
+  console.log("Hi");
+}
+console.log(sayHi());
+```
+
+
+<LessonAnswer>
+
+
+
+```
+Hi
+undefined
+```
+`"Hi"` is printed by the function itself; the function returns nothing, so `console.log(sayHi())` prints `undefined`.
+
+
+</LessonAnswer>
+
+

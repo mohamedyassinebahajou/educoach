@@ -1,0 +1,147 @@
+---
+title: "Core JS review"
+summary: "Map of SAS Week 1–2 language skills."
+day: 10
+---
+
+**Data building blocks**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRGF0YSBidWlsZGluZyBibG9ja3MgaW5jbHVkZSBwcmltaXRpdmVzLCBzdHJpbmdzLCBhcnJheXMsIGFuZCBvYmplY3Rz4oCUdGhlIHN0cnVjdHVyZXMgeW91IHVzZSB0byBzdG9yZSBhbmQgb3JnYW5pemUgaW5mb3JtYXRpb24gaW4gSmF2YVNjcmlwdC4gRmx1ZW5jeSB3aXRoIHRoZXNlIHR5cGVzIGxldHMgeW91IG1vZGVsIG1vc3QgYmVnaW5uZXIgcHJvYmxlbXMgY2xlYXJseS4iLCJhbmFsb2d5IjoiRGF0YSBidWlsZGluZyBibG9ja3MgYXJlIGxpa2UgTEVHTyBiYXNlIHBsYXRlcyBhbmQgYnJpY2tz4oCUeW91IGNvbWJpbmUgc2ltcGxlIHBpZWNlcyBpbnRvIGxhcmdlciBzdHJ1Y3R1cmVzLiJ9" />
+
+Review the "shapes" of data: primitives (numbers, strings, booleans), strings (indexed text), arrays (ordered lists), and objects (named fields).
+```js
+console.log(typeof 5, typeof "text", Array.isArray([1,2]), typeof {a:1});
+```
+
+**Control flow building blocks**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ29udHJvbCBmbG93IGJ1aWxkaW5nIGJsb2NrcyBhcmUgaWYvZWxzZSwgbG9vcHMsIGJyZWFrLCBjb250aW51ZSwgYW5kIHN3aXRjaOKAlHRoZSB0b29scyB0aGF0IGRlY2lkZSB3aGljaCBjb2RlIHJ1bnMgYW5kIGhvdyBtYW55IHRpbWVzLiBUaGV5IHR1cm4gbGluZWFyIHNjcmlwdHMgaW50byBwcm9ncmFtcyB0aGF0IHJlYWN0IGFuZCByZXBlYXQuIiwiYW5hbG9neSI6IkNvbnRyb2wgZmxvdyBpcyBsaWtlIHRyYWZmaWMgbGlnaHRzIGFuZCByb3VuZGFib3V0c+KAlHRoZXkgZGlyZWN0IHdoaWNoIHBhdGggY29kZSB0YWtlcyBhbmQgd2hlbiBpdCBzdG9wcyBvciBrZWVwcyBnb2luZy4ifQ==" />
+
+Review conditions (`if`/`else`/`switch`) for decisions, and loops (`for`/`while`) for repetition.
+```js
+for (let i = 0; i < 3; i++) {
+  if (i === 1) console.log("middle");
+}
+```
+
+**Functions and scope**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRnVuY3Rpb25zIHBhY2thZ2UgcmV1c2FibGUgbG9naWMgd2l0aCBwYXJhbWV0ZXJzIGFuZCByZXR1cm4gdmFsdWVzOyBzY29wZSBydWxlcyBkZXRlcm1pbmUgd2hlcmUgbGV0LCBjb25zdCwgYW5kIHZhciBiaW5kaW5ncyBhcmUgdmlzaWJsZS4gVG9nZXRoZXIgdGhleSBrZWVwIHByb2dyYW1zIG1vZHVsYXIgYW5kIGF2b2lkIG5hbWUgY29sbGlzaW9ucy4iLCJhbmFsb2d5IjoiRnVuY3Rpb25zIGFuZCBzY29wZSBhcmUgbGlrZSByb29tcyBpbiBhIGhvdXNlIHdpdGggbGFiZWxlZCBkb29yc+KAlGVhY2ggcm9vbSBoYXMgaXRzIG93biB0b29scywgYW5kIGhhbGx3YXlzIGRlZmluZSB3aGF0IHlvdSBjYW4gcmVhY2ggZnJvbSB3aGVyZS4ifQ==" />
+
+Review how functions package logic with parameters and `return`, and how `let`/`const` are limited to their block or function.
+```js
+const isEven = (n) => n % 2 === 0;
+console.log(isEven(4));
+```
+
+**Searching and sorting**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU2VhcmNoaW5nIGZpbmRzIGl0ZW1zIGluIGRhdGE7IHNvcnRpbmcgYXJyYW5nZXMgZGF0YSBpbiBvcmRlciBzbyBodW1hbnMgYW5kIGFsZ29yaXRobXMgY2FuIHVzZSBpdCBlZmZpY2llbnRseS4gTGluZWFyIHNlYXJjaCwgYmluYXJ5IHNlYXJjaCwgYW5kIGJhc2ljIHNvcnRzIGNvbm5lY3QgdGhlIGRhdGEgc3RydWN0dXJlcyB5b3UgbGVhcm5lZCB0byBwcmFjdGljYWwgcHJvYmxlbXMuIiwiYW5hbG9neSI6IlNlYXJjaGluZyBhbmQgc29ydGluZyBhcmUgbGlrZSBvcmdhbml6aW5nIGEgdG9vbGJveOKAlHNlYXJjaCBmaW5kcyB0aGUgd3JlbmNoOyBzb3J0aW5nIGxpbmVzIGV2ZXJ5IHRvb2wgYnkgc2l6ZSBzbyB0aGUgbmV4dCBqb2IgaXMgZmFzdGVyLiJ9" />
+
+Review linear search (scan one by one) and bubble/selection sort (nested loops with swaps) as algorithmic thinking tools.
+```js
+function bubbleSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a.length - 1 - i; j++) {
+      if (a[j] > a[j + 1]) {
+        let t = a[j]; a[j] = a[j + 1]; a[j + 1] = t;
+      }
+    }
+  }
+  return a;
+}
+console.log(bubbleSort([9, 3, 7, 1]));
+```
+
+**Putting it all together**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUHV0dGluZyBpdCBhbGwgdG9nZXRoZXIgbWVhbnMgY29tYmluaW5nIHZhcmlhYmxlcywgY29udHJvbCBmbG93LCBmdW5jdGlvbnMsIGFycmF5cywgb2JqZWN0cywgc2VhcmNoLCBhbmQgc29ydCBpbnRvIG9uZSBjb2hlcmVudCBtaW5pLXByb2plY3QuIFRoZSBnb2FsIGlzIG5vdCBpc29sYXRlZCBleGVyY2lzZXMgYnV0IGEgc21hbGwgcHJvZ3JhbSB0aGF0IGRlbW9uc3RyYXRlcyBlbmQtdG8tZW5kIHRoaW5raW5nLiIsImFuYWxvZ3kiOiJQdXR0aW5nIGl0IGFsbCB0b2dldGhlciBpcyBsaWtlIGNvb2tpbmcgYSBmdWxsIG1lYWzigJR5b3UgdXNlIGV2ZXJ5IHNraWxsIGZyb20gY2hvcHBpbmcgdG8gcGxhdGluZywgbm90IGp1c3Qgb25lIHRlY2huaXF1ZSBhbG9uZS4ifQ==" />
+
+Real programs combine all these pieces: arrays of objects, searched and filtered with functions, using loops and conditions.
+```js
+const users = [
+  { name: "Sara", active: true },
+  { name: "Omar", active: false }
+];
+function findActive(list) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].active) return list[i];
+  }
+  return null;
+}
+console.log(findActive(users));
+```
+
+**Note:** Try rewriting small examples from memory, without looking at your notes — that's the real test of understanding.
+
+**More Examples:**
+```js
+const nums = [5, 2, 8];
+const isEven = (n) => n % 2 === 0;
+console.log(isEven(4));
+```
+```js
+const users = [
+  { name: "Sara", active: true },
+  { name: "Omar", active: false }
+];
+function findActive(list) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].active) return list[i];
+  }
+  return null;
+}
+console.log(findActive(users));
+```
+```js
+function bubbleSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a.length - 1 - i; j++) {
+      if (a[j] > a[j + 1]) {
+        let t = a[j]; a[j] = a[j + 1]; a[j + 1] = t;
+      }
+    }
+  }
+  return a;
+}
+console.log(bubbleSort([9, 3, 7, 1]));
+```
+
+**Exercises:**
+
+
+
+**1.** Without looking at your notes, write one small example for: a loop, a function, and an object.
+
+
+**2.** Name the two sorting algorithms covered in this SAS training, and describe each in one sentence.
+
+
+<LessonAnswer>
+
+
+
+Bubble sort: repeatedly swaps neighboring out-of-order pairs. Selection sort: finds the minimum remaining value and places it directly into position.
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What is the difference between linear search and binary search?
+
+
+<LessonAnswer>
+
+
+
+Linear search checks every item one by one and works on any array; binary search repeatedly halves the search range but requires a sorted array.
+
+
+</LessonAnswer>
+
+

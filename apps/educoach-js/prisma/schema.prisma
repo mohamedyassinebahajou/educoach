@@ -1,0 +1,52 @@
+// Prisma schema — EduCoach JS
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  learner
+  coach
+}
+
+model User {
+  id           String         @id @default(cuid())
+  username     String         @unique
+  passwordHash String
+  role         Role
+  displayName  String
+  createdAt    DateTime       @default(now())
+  attempts     Attempt[]
+  lessonViews  LessonProgress[]
+}
+
+model Attempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exerciseId  String
+  code        String
+  passed      Boolean
+  passedCount Int
+  totalCount  Int
+  createdAt   DateTime @default(now())
+
+  @@index([userId, exerciseId])
+}
+
+model LessonProgress {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonSlug String
+  completed Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonSlug])
+}

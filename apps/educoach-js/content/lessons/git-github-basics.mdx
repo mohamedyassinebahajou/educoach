@@ -1,0 +1,130 @@
+---
+title: "Git & GitHub basics"
+summary: "Commit and push mindset for the Day-1 challenge (classroom workshop)."
+day: 1
+---
+
+**What is Git?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiR2l0IGlzIGEgdmVyc2lvbiBjb250cm9sIHN5c3RlbSB0aGF0IHJlY29yZHMgc25hcHNob3RzIG9mIHlvdXIgcHJvamVjdCBvdmVyIHRpbWUgc28geW91IGNhbiB0cmFjayBjaGFuZ2VzIGFuZCBnbyBiYWNrIHRvIGVhcmxpZXIgdmVyc2lvbnMuIEl0IHJ1bnMgb24geW91ciBjb21wdXRlciBhbmQgaGVscHMgeW91IHdvcmsgc2FmZWx5IGV2ZW4gd2hlbiBmaWxlcyBjaGFuZ2Ugb2Z0ZW4uIiwiYW5hbG9neSI6IkdpdCBpcyBsaWtlIGEgdGltZSBtYWNoaW5lIGZvciB5b3VyIHByb2plY3QgZm9sZGVyOiBlYWNoIHNhdmUgY3JlYXRlcyBhIG1vbWVudCB5b3UgY2FuIHJldmlzaXQgaWYgc29tZXRoaW5nIGJyZWFrcy4ifQ==" />
+
+Git is a tool that saves snapshots of your project over time, called commits. Every commit is a save point you can return to later.
+```
+git init
+```
+
+**What is GitHub?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiR2l0SHViIGlzIGFuIG9ubGluZSBwbGF0Zm9ybSB0aGF0IGhvc3RzIEdpdCByZXBvc2l0b3JpZXMgc28geW91IGNhbiBzdG9yZSwgc2hhcmUsIGFuZCBjb2xsYWJvcmF0ZSBvbiBjb2RlIGluIHRoZSBjbG91ZC4gSXQgY29ubmVjdHMgdG8gR2l0IG9uIHlvdXIgbWFjaGluZSB0aHJvdWdoIGNvbW1hbmRzIGxpa2UgcHVzaCBhbmQgcHVsbC4iLCJhbmFsb2d5IjoiR2l0SHViIGlzIGxpa2UgY2xvdWQgc3RvcmFnZSBmb3IgeW91ciByZWNpcGUgYm9va+KAlHlvdSBrZWVwIGEgY29weSBhdCBob21lIChHaXQpIGFuZCBhIGJhY2t1cCBvbmxpbmUgdGhhdCBvdGhlcnMgY2FuIHNlZSBvciBjb250cmlidXRlIHRvLiJ9" />
+
+GitHub is a website that hosts your Git projects online, so you can back them up and share them with instructors or teammates.
+```
+git remote add origin https://github.com/your-username/your-repo.git
+```
+
+**Staging with git add**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiZ2l0IGFkZCBzZWxlY3RzIHNwZWNpZmljIGNoYW5nZWQgZmlsZXMgYW5kIHByZXBhcmVzIHRoZW0gZm9yIHRoZSBuZXh0IGNvbW1pdCB3aXRob3V0IHNhdmluZyB0aGUgc25hcHNob3QgeWV0LiBTdGFnaW5nIGxldHMgeW91IGNob29zZSBleGFjdGx5IHdoaWNoIGNoYW5nZXMgYmVsb25nIHRvZ2V0aGVyIGluIG9uZSByZWNvcmRlZCB2ZXJzaW9uLiIsImFuYWxvZ3kiOiJnaXQgYWRkIGlzIGxpa2UgcGxhY2luZyBpdGVtcyBvbiBhIGNoZWNrb3V0IGNvdW50ZXLigJR5b3UgZGVjaWRlIHdoYXQgZ29lcyBpbnRvIHRoaXMgcHVyY2hhc2UgYmVmb3JlIHlvdSBwYXkuIn0=" />
+
+Before saving a snapshot, you tell Git which files to include using `git add`. This is called "staging".
+```
+git add hello.js
+```
+
+**Saving a snapshot with git commit**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiZ2l0IGNvbW1pdCByZWNvcmRzIGEgcGVybWFuZW50IHNuYXBzaG90IG9mIGV2ZXJ5dGhpbmcgeW91IHN0YWdlZCwgYWxvbmcgd2l0aCBhIG1lc3NhZ2UgZGVzY3JpYmluZyB0aGUgY2hhbmdlLiBFYWNoIGNvbW1pdCBnZXRzIGEgdW5pcXVlIGlkZW50aWZpZXIgc28geW91IGNhbiByZWZlcmVuY2Ugb3IgcmVzdG9yZSB0aGF0IGV4YWN0IHN0YXRlIGxhdGVyLiIsImFuYWxvZ3kiOiJBIGNvbW1pdCBpcyBsaWtlIHRha2luZyBhIGRhdGVkIHBob3RvIG9mIHlvdXIgcm9vbeKAlHlvdSBjYXB0dXJlIGhvdyBpdCBsb29rZWQgYXQgdGhhdCBtb21lbnQgYW5kIGNhbiBjb21wYXJlIGl0IHRvIHBob3RvcyBmcm9tIG90aGVyIGRheXMuIn0=" />
+
+`git commit -m "message"` saves a snapshot of everything staged, along with a short message describing what changed.
+```
+git commit -m "add hello.js with first script"
+```
+
+**Uploading with git push**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiZ2l0IHB1c2ggc2VuZHMgeW91ciBsb2NhbCBjb21taXRzIHRvIGEgcmVtb3RlIHJlcG9zaXRvcnkgc3VjaCBhcyBHaXRIdWIgc28gb3RoZXJzIGNhbiBhY2Nlc3MgeW91ciBsYXRlc3Qgd29yay4gSXQgdXBkYXRlcyB0aGUgb25saW5lIGNvcHkgdG8gbWF0Y2ggdGhlIGhpc3RvcnkgeW91IGJ1aWx0IG9uIHlvdXIgbWFjaGluZS4iLCJhbmFsb2d5IjoiZ2l0IHB1c2ggaXMgbGlrZSBtYWlsaW5nIHlvdXIgZmluaXNoZWQgaG9tZXdvcmsgdG8gdGhlIHRlYWNoZXLigJR0aGUgd29yayBsZWF2ZXMgeW91ciBkZXNrIGFuZCBhcnJpdmVzIHdoZXJlIGl0IGNhbiBiZSBncmFkZWQgb3Igc2hhcmVkLiJ9" />
+
+`git push` sends your commits from your computer up to GitHub, so they're backed up and visible online.
+```
+git push -u origin main
+```
+
+**Note:** Commit often, with small, clear messages — this makes it easy to see your progress over time.
+
+**More Examples:**
+```
+git add .
+git commit -m "first commit"
+git push
+```
+```
+git status
+git log --oneline
+```
+```
+git clone https://github.com/username/repo.git
+cd repo
+```
+
+**Exercises:**
+
+
+
+**1.** Put these commands in the correct order to save and upload your work.
+```
+git push
+git commit -m "add hello.js"
+git add .
+```
+
+
+<LessonAnswer>
+
+
+
+```
+git add .
+git commit -m "add hello.js"
+git push
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** What does `git status` do?
+
+
+<LessonAnswer>
+
+
+
+It shows which files have changed, which are staged, and which are untracked — a quick summary of your repo's current state.
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** You changed 3 files but only want to save 2 of them in this commit. Which command lets you choose files individually instead of using `git add .`?
+
+
+<LessonAnswer>
+
+
+
+`git add filename1 filename2` — you can list specific file names instead of using `.` (which stages everything).
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 2 — Variables, operators & conditions

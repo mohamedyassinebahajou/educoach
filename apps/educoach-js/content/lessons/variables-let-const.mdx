@@ -1,0 +1,162 @@
+---
+title: "Variables and constants"
+summary: "let, const, naming, primitive types, typeof."
+day: 2
+---
+
+
+
+**What is a variable?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSB2YXJpYWJsZSBpcyBhIG5hbWVkIHBsYWNlIGluIHlvdXIgcHJvZ3JhbSB3aGVyZSB5b3Ugc3RvcmUgYSB2YWx1ZSBzbyB5b3UgY2FuIHJlYWQgb3IgY2hhbmdlIGl0IGxhdGVyLiBJbnN0ZWFkIG9mIHJlcGVhdGluZyB0aGUgc2FtZSBudW1iZXIgb3IgdGV4dCBldmVyeXdoZXJlLCB5b3UgZ2l2ZSB0aGUgdmFsdWUgb25lIGNsZWFyIG5hbWUgYW5kIHVzZSB0aGF0IG5hbWUgd2hlbmV2ZXIgeW91IG5lZWQgaXQuIiwiYW5hbG9neSI6IkEgdmFyaWFibGUgaXMgbGlrZSBhIGxhYmVsZWQgbG9ja2VyOiB5b3UgcHV0IHlvdXIgYmFnIGluc2lkZSBvbmNlLCB3cml0ZSB0aGUgbG9ja2VyIG51bWJlciBvbiBhIHNsaXAgb2YgcGFwZXIsIGFuZCBsYXRlciB5b3UgZmluZCB0aGUgYmFnIGJ5IHJlYWRpbmcgdGhlIG51bWJlciBpbnN0ZWFkIG9mIHNlYXJjaGluZyBldmVyeSBsb2NrZXIgYnkgaGFuZC4ifQ==" />
+
+**Declaring with let**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiV2hlbiBhIHZhbHVlIG1heSBjaGFuZ2Ugd2hpbGUgdGhlIHByb2dyYW0gcnVucywgeW91IG5lZWQgYSBjaGFuZ2VhYmxlIHZhcmlhYmxl4oCUYSBuYW1lIHlvdSBhcmUgYWxsb3dlZCB0byB1cGRhdGUgYWZ0ZXIgeW91IGZpcnN0IHN0b3JlIHNvbWV0aGluZyBpbiBpdC4iLCJhbmFsb2d5IjoiQSBjaGFuZ2VhYmxlIHZhcmlhYmxlIGlzIGxpa2UgYSByZXVzYWJsZSBuYW1lIHRhZyB5b3UgY2FuIHBlZWwgb2ZmIGFuZCB3cml0ZSBvbiBhZ2FpbiB3aGVuIHNvbWVvbmUncyByb2xlIGNoYW5nZXMgYXQgYW4gZXZlbnQuIn0=" />
+
+`let` creates a variable that can be reassigned later. Use it whenever a value needs to change over time.
+```js
+let score = 0;
+score = 10;
+console.log(score); // 10
+```
+
+**Declaring with const**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiV2hlbiBhIHZhbHVlIHNob3VsZCBzdGF5IHRoZSBzYW1lIGZvciB0aGUgd2hvbGUgcHJvZ3JhbSwgeW91IHVzZSBhIGNvbnN0YW504oCUYSBuYW1lIHRoYXQga2VlcHMgb25lIGZpeGVkIHZhbHVlIGFuZCBtdXN0IG5vdCBiZSByZXBsYWNlZCB3aXRoIGEgZGlmZmVyZW50IG9uZS4iLCJhbmFsb2d5IjoiQSBjb25zdGFudCBpcyBsaWtlIGVuZ3JhdmluZyB5b3VyIGhvdXNlIG51bWJlciBvbiBhIHBsYXF1ZeKAlGl0IHN0YXlzIGZpeGVkIGV2ZW4gaWYgeW91IHJlcGFpbnQgdGhlIGRvb3IuIn0=" />
+
+`const` creates a variable that cannot be reassigned. Use it by default, for values that stay the same.
+```js
+const schoolName = "YouCode SAS";
+console.log(schoolName);
+```
+
+**Naming rules**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiSmF2YVNjcmlwdCB2YXJpYWJsZSBuYW1lcyBtdXN0IHN0YXJ0IHdpdGggYSBsZXR0ZXIsIHVuZGVyc2NvcmUsIG9yIGRvbGxhciBzaWduLCBhbmQgY2FuIGNvbnRhaW4gbGV0dGVycywgZGlnaXRzLCB1bmRlcnNjb3JlcywgYW5kIGRvbGxhciBzaWducyBhZnRlciB0aGUgZmlyc3QgY2hhcmFjdGVyLiBOYW1lcyBhcmUgY2FzZS1zZW5zaXRpdmUsIGFuZCByZXNlcnZlZCB3b3JkcyBjYW5ub3QgYmUgdXNlZCBhcyBpZGVudGlmaWVycy4iLCJhbmFsb2d5IjoiTmFtaW5nIHJ1bGVzIGFyZSBsaWtlIHN0cmVldC1hZGRyZXNzIHJ1bGVzOiB5b3UgbmVlZCBhIHZhbGlkIGZvcm1hdCBzbyB0aGUgbWFpbCBzeXN0ZW0ga25vd3Mgd2hlcmUgdG8gZGVsaXZlciwgYW5kICdNYWluIFN0JyBpcyBub3QgdGhlIHNhbWUgYXMgJ21haW4gc3QnLiJ9" />
+
+Variable names can use letters, digits, `_`, and `$`, but can't start with a digit. JavaScript is case-sensitive, and the convention is camelCase, like `firstName`.
+```js
+let firstName = "Sara";
+let _privateValue = 42;
+console.log(firstName, _privateValue);
+```
+
+**Primitive types**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUHJpbWl0aXZlIHR5cGVzIGFyZSB0aGUgYmFzaWMgc2luZ2xlIHZhbHVlcyBpbiBKYXZhU2NyaXB0OiBzdHJpbmcsIG51bWJlciwgYm9vbGVhbiwgdW5kZWZpbmVkLCBudWxsLCBiaWdpbnQsIGFuZCBzeW1ib2wuIFRoZXkgYXJlIHN0b3JlZCBhcyBzaW1wbGUgdmFsdWVzIHJhdGhlciB0aGFuIGNvbGxlY3Rpb25zIG9mIHByb3BlcnRpZXMuIiwiYW5hbG9neSI6IlByaW1pdGl2ZSB0eXBlcyBhcmUgbGlrZSBpbmRpdmlkdWFsIExFR08gYnJpY2tz4oCUZWFjaCBpcyBvbmUgc2ltcGxlIHBpZWNlLCBub3QgYSB3aG9sZSBidWlsdCBtb2RlbC4ifQ==" />
+
+JavaScript has a few basic (primitive) types: `number`, `string`, `boolean`, `undefined`, and `null`. You check a value's type with `typeof`.
+```js
+console.log(typeof 10, typeof "hi", typeof true);
+```
+
+**undefined vs a value**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoidW5kZWZpbmVkIG1lYW5zIGEgdmFyaWFibGUgaGFzIGJlZW4gZGVjbGFyZWQgYnV0IG5vdCB5ZXQgYXNzaWduZWQgYSB2YWx1ZSwgb3IgYSBmdW5jdGlvbiByZXR1cm5lZCBub3RoaW5nIGV4cGxpY2l0bHkuIEEgdmFsdWUgaXMgYW55IGNvbmNyZXRlIGRhdGHigJRzdWNoIGFzIDAsIFwiaGVsbG9cIiwgb3IgZmFsc2XigJR0aGF0IHRoZSB2YXJpYWJsZSBvciBleHByZXNzaW9uIGhvbGRzLiIsImFuYWxvZ3kiOiJ1bmRlZmluZWQgaXMgYW4gZW1wdHkgZ2xhc3Mgd2FpdGluZyB0byBiZSBmaWxsZWQ7IGEgdmFsdWUgaXMgdGhlIGRyaW5rIGFjdHVhbGx5IHBvdXJlZCBpbnRvIGl0LiJ9" />
+
+A variable declared without a value automatically holds `undefined` until you assign something to it.
+```js
+let city;
+console.log(city); // undefined
+city = "Marrakesh";
+console.log(city); // "Marrakesh"
+```
+
+**Note:** Prefer `const` by default, and switch to `let` only when you know a value must be reassigned later.
+
+**More Examples:**
+```js
+let age = 17;
+const name = "Sara";
+console.log(typeof age, typeof name);
+```
+```js
+let score = 0;
+score = score + 10;
+console.log(score); // 10
+```
+```js
+let city; // declared, no value yet
+console.log(city);       // undefined
+console.log(typeof city); // "undefined"
+```
+
+**Exercises:**
+
+
+
+**1.** Fix the bug in this code.
+```js
+const score = 10;
+score = 20;
+console.log(score);
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+let score = 10;
+score = 20;
+console.log(score); // 20
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** What does `typeof true` return?
+
+
+<LessonAnswer>
+
+
+
+`"boolean"`
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Declare a `const` called `pi` with value `3.14`, and a `let` called `radius` with value `5`. Print both.
+
+
+<LessonAnswer>
+
+
+
+```js
+const pi = 3.14;
+let radius = 5;
+console.log(pi, radius);
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**4.** True or False: you can change the value of a `const` variable but not redeclare it.
+
+
+<LessonAnswer>
+
+
+
+False — you can neither change nor redeclare a `const` variable once it's set.
+
+
+</LessonAnswer>
+
+

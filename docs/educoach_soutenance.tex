@@ -1,0 +1,837 @@
+% EduCoach AI --- implementation deep-dive (detailed slides + full pitch notes)
+% Compile: pdflatex educoach_soutenance.tex (twice)
+% Notes = full pitch from PRESENTATION_SPEAKER_NOTES.md
+
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\newif\ifshownotes
+\shownotestrue
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+\ifshownotes
+  \usepackage{pgfpages}
+  \setbeameroption{show notes on second screen=right}
+  % Clearer note fonts (avoid tiny)
+  \newcommand{\noteFontSize}{\footnotesize}
+  \setbeamerfont{note page}{size=\footnotesize}
+  \setbeamercolor{note page}{bg=white,fg=black}
+  \setbeamerfont{itemize/enumerate body}{size=\footnotesize,series=\mdseries}
+  \setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+  \addtobeamertemplate{note page}{}{%
+    \setbeamerfont{itemize/enumerate body}{size=\footnotesize,series=\mdseries}%
+  }
+\else
+  \setbeameroption{hide notes}
+  \newcommand{\noteFontSize}{\small}
+\fi
+
+\tikzset{
+  ecbox/.style={draw, rounded corners=2pt, align=center, font=\scriptsize,
+    inner sep=3.5pt, minimum height=0.68cm, thick},
+  ecarr/.style={-{Latex}, thick},
+  ecarrg/.style={-{Latex}, thick, gray!70},
+  ml/.style={ecbox, fill=blue!12},
+  llm/.style={ecbox, fill=green!12},
+  risk/.style={ecbox, fill=orange!18},
+  ok/.style={ecbox, fill=green!18},
+  bad/.style={ecbox, fill=red!15},
+  neut/.style={ecbox, fill=gray!12},
+  store/.style={ecbox, fill=purple!12},
+  code/.style={ecbox, fill=yellow!12, font=\ttfamily\tiny},
+}
+
+\title{EduCoach AI}
+\subtitle{Hybrid ML + Multi-Agent Tutoring --- Implementation Deep Dive}
+\author{Mohamed Yassine BAHAJOU}
+\institute{Final Project --- Hybrid ML \& Multi-Agent Systems}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  \vspace{-0.4em}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.3cm and 0.35cm, font=\tiny]
+    \node[ml] (d) {Data};
+    \node[ml, right=of d] (m) {RF};
+    \node[store, right=of m] (r) {RAG};
+    \node[llm, right=of r] (a) {LangGraph};
+    \node[neut, right=of a] (p) {API+UI};
+    \draw[ecarr] (d)--(m)--(r)--(a)--(p);
+  \end{tikzpicture}\\[0.2em]
+  \footnotesize Implementation deep dive $\cdot$ 24$\times$11 $\cdot$ \texttt{src/ml} \texttt{rag} \texttt{agents} \texttt{api} \texttt{ui}
+  \end{center}
+
+\note{
+\noteFontSize
+Bonjour, et merci d'être là. Aujourd'hui je veux vous montrer EduCoach~AI --- pas seulement l'idée, mais comment on l'a vraiment construit.
+
+C'est un outil de coaching pour une classe de vingt-quatre débutants, sur un programme Python de onze jours.
+
+Je vais suivre la bande en bas, de gauche à droite : data, machine learning, retrieval, agents, puis l'API et l'interface --- et je finirai avec une démo live.
+
+À la fin, vous saurez ce que fait chaque partie, et comment elles s'emboîtent.
+}
+\end{frame}
+
+\begin{frame}{Context --- a SAS day}
+  \begin{center}
+  \begin{tikzpicture}[box/.style={ecbox, minimum width=1.85cm, minimum height=1.05cm}, node distance=0.25cm]
+    \node[box, fill=cyan!15] (m) {\textbf{1. Lecture}};
+    \node[box, fill=yellow!20, right=of m] (a) {\textbf{2. Challenges}};
+    \node[box, fill=green!15, right=of a] (f) {\textbf{3. 1:1}};
+    \node[box, fill=orange!20, right=of f] (e) {\textbf{4. Eval}/20};
+    \draw[ecarr] (m)--(a)--(f)--(e);
+    \node[above=0.08cm of e, font=\tiny, text=red!70!black] {at-risk $<10$};
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.25em}
+  \begin{itemize}\setlength{\itemsep}{0.25em}
+    \item Cohort: \textbf{24} beginners $\cdot$ \textbf{11}-day Python SAS
+    \item Need: early at-risk + weak-point detection for same-day tutoring
+    \item Impact: less dropout; less accumulated concept gap (\emph{d\'ecalage})
+  \end{itemize}
+
+\note{
+\noteFontSize
+D'abord, le quotidien. Une journée a quatre moments : un cours, des challenges, un suivi one-to-one, et une évaluation du soir sur vingt.
+
+Le problème, c'est l'échelle. Avec vingt-quatre débutants, un coach ne peut pas tout vérifier avant le test du soir. Quelqu'un décroche en silence, et on le voit seulement quand les notes arrivent --- trop tard pour aider le même jour.
+
+Donc il faut une détection précoce : signaler qui est at-risk, et sur quels topics, à temps pour aider le même jour. Et ça compte vraiment, parce que dans un programme intensif, un petit trou le jour trois grossit le jour quatre et cinq. Ce décalage, c'est ce qui fait abandonner les débutants.
+}
+\end{frame}
+
+\begin{frame}{Problem $\rightarrow$ hybrid solution}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.4cm and 0.9cm]
+    \node[ml, minimum width=3.6cm, minimum height=2.15cm, align=left] (ml) {
+      \textbf{Numbers brain}\\[2pt]
+      \texttt{src/ml/predict.py}\\
+      RF $\rightarrow$ score + at-risk\\
+      {\tiny for the coach}
+    };
+    \node[llm, minimum width=3.6cm, minimum height=2.15cm, align=left, right=of ml] (ll) {
+      \textbf{Language brain}\\[2pt]
+      \texttt{src/rag/} + \texttt{agents/}\\
+      Tutor (RAG) + Helper\\
+      {\tiny for the learner}
+    };
+    \coordinate (mid) at ($(ml.south)!0.5!(ll.south)$);
+    \node[neut, below=0.5cm of mid, minimum width=5.2cm] (p) {
+      Rule: \texttt{reply} $\neq$ \texttt{coach\_alert}
+    };
+    \draw[ecarr] (ml.south)--(p); \draw[ecarr] (ll.south)--(p);
+  \end{tikzpicture}
+  \end{center}
+
+\note{
+\noteFontSize
+L'idée forte de cette slide : on a construit \emph{deux cerveaux}, pas un seul gros prompt qui fait tout.
+
+Le premier, c'est le numbers brain. Il regarde l'activité de l'apprenant --- exercises attempted, solved, hints used --- et un Random Forest en fait un predicted score et un flag at-risk pour le coach. Ça vit dans \texttt{src/ml/predict.py}.
+
+Le second, c'est le language brain. Il répond aux questions de l'apprenant --- théorie ou code cassé --- en allant chercher la bonne leçon, puis en laissant des agents spécialistes répondre. Ça, c'est \texttt{src/rag/} et \texttt{src/agents/}.
+
+Et une règle les lie : l'apprenant ne voit que \texttt{reply} ; le coach voit \texttt{coach\_alert}. Le signal de risque ne touche jamais la réponse de l'apprenant. Gardez cette règle --- elle revient à chaque couche.
+}
+\end{frame}
+
+\begin{frame}{Implementation map (phases $\rightarrow$ code)}
+  \begin{table}
+  \centering
+  \scriptsize
+  \begin{tabular}{llp{6.2cm}}
+    \toprule
+    Phase & Module & Key entrypoints \\
+    \midrule
+    0 Data & \texttt{generate\_data.py} & CSV panel 24$\times$11 \\
+    1 EDA & \texttt{01\_EDA\_and\_Data\_Gen.ipynb} & quality, distributions, correlations \\
+    2 ML & \texttt{src/ml/predict.py} & \texttt{predict\_student}, \texttt{.pkl} \\
+    3 RAG & \texttt{ingest.py}/\texttt{retrieval.py} & Chroma \texttt{educoach\_lessons} \\
+    4 Agents & \texttt{orchestrator.py} & \texttt{chat()} LangGraph \\
+    5 Product & \texttt{api/} + \texttt{ui/} & FastAPI + Streamlit wrappers \\
+    \bottomrule
+  \end{tabular}
+  \end{table}
+  \vspace{0.25em}
+  \footnotesize Phase 5 does \textbf{not} reimplement ML/RAG/agents --- it only exposes them.
+
+\note{
+\noteFontSize
+Cette slide, c'est la carte du talk --- chaque phase et où elle vit dans le code.
+
+Ça commence par la data : \texttt{generate\_data.py} écrit le dataset, et le notebook EDA l'explore --- qualité, distributions, balance, et un check de leakage avant de modéliser.
+
+Ensuite le machine learning : l'entraînement sauve \texttt{random\_forest.pkl}, et \texttt{predict\_student} le sert. Puis le retrieval : \texttt{ingest} construit le vector store, et \texttt{retrieve\_context} nourrit le Tutor.
+
+La phase quatre, c'est l'orchestration, et voici le point clé : l'API n'appelle jamais les agents directement --- elle a un seul entry point, \texttt{orchestrator.chat}. Et la phase cinq, la couche produit, est volontairement fine --- juste des wrappers autour de tout ce qu'il y a en dessous.
+
+Donc on commence là où naissent les chiffres --- le generator.
+}
+\end{frame}
+
+\begin{frame}{Data --- generator design}
+  \begin{itemize}\setlength{\itemsep}{0.3em}
+    \item File: \texttt{data/synthetic/generate\_data.py} $\rightarrow$ \texttt{student\_performance.csv}
+    \item Nested loops: students $\times$ days; \texttt{RANDOM\_SEED} for reproducibility
+    \item Score: previous + success rate + noise; penalty if low solves + high hints; clip $[0,20]$
+    \item Derive \texttt{at\_risk=(score<10)}; chain \texttt{previous\_eval\_score} from yesterday
+  \end{itemize}
+
+\note{
+\noteFontSize
+Pourquoi générer nos propres data ? La transparence. Nos hypothèses sur ce qui fait qu'un apprenant galère sont dans le code, pas cachées dans des logs sales --- et tout le monde peut reproduire, sans souci de privacy.
+
+Ce sont deux boucles imbriquées : vingt-quatre students sur onze days, donc deux cent soixante-quatre rows. Un seed fixe donne toujours les mêmes data.
+
+Chaque row reçoit le topic du jour et une activité simulée --- attempts, solves, hints, time. Le score est réaliste : previous score plus success rate, un peu de noise, une pénalité si peu de solves avec beaucoup de hints, puis clip entre zéro et vingt.
+
+Deux détails comptent plus tard. At-risk, ça veut juste dire score en dessous de dix. Et le previous-day score n'est pas aléatoire --- c'est littéralement le score d'hier pour le même apprenant. C'est ça qui en fait de vraies data jour après jour.
+}
+\end{frame}
+
+\begin{frame}{Data --- schema \& anti-leakage}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \textbf{\texttt{FEATURE\_COLUMNS} (in $X$)}
+      \begin{itemize}\scriptsize\setlength{\itemsep}{0.15em}
+        \item day, topic
+        \item exercises\_attempted / solved
+        \item hints\_used, time\_spent\_minutes
+        \item previous\_eval\_score
+      \end{itemize}
+      \textbf{Forbidden in $X$}
+      \begin{itemize}\scriptsize
+        \item \texttt{student\_id}, \texttt{today\_eval\_score}, \texttt{at\_risk}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \begin{tikzpicture}[node distance=0.35cm]
+        \node[ok] (y) {yesterday score};
+        \node[ml, below=of y] (p) {previous today};
+        \node[bad, below=1.0cm of p, minimum width=3.1cm] (l) {no label leakage};
+        \draw[ecarr] (y)--(p);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+
+\note{
+\noteFontSize
+Cette slide, c'est de la discipline. Le moyen le plus simple de gâcher un projet ML, c'est de donner au modèle une info qu'il n'aurait pas en vrai.
+
+Notre contrat, c'est une constante, \texttt{FEATURE\_COLUMNS} dans \texttt{predict.py}. Elle liste les sept inputs que le modèle peut voir : day, topic, exercises attempted et solved, hints, time, et le score d'hier. La même liste sert pour le training et la prediction, pour qu'elles ne divergent pas.
+
+Remarquez ce qui n'y est \emph{pas}. Le student id est dans les data et l'UI, mais jamais dans le modèle --- on veut qu'il apprenne le comportement, pas qu'il mémorise les personnes.
+
+Et la règle qu'on ne casse jamais : le score d'aujourd'hui, et le label at-risk qui en découle, sont des outputs --- jamais des inputs. S'ils rentraient dedans, le modèle lirait la réponse, et les metrics auraient l'air super sans rien vouloir dire. Le risk board du coach suit la même règle et appelle le même \texttt{predict\_student}.
+}
+\end{frame}
+
+\begin{frame}{EDA --- what changed the build}
+  \begin{itemize}\setlength{\itemsep}{0.3em}
+    \item Keep previous + activity; One-Hot \texttt{topic} (nominal)
+    \item Do not over-trust \texttt{day} (redundant with topic)
+    \item Coach metric: \textbf{at-risk recall} (misses cost more)
+    \item Interactions hints$\times$solves $\Rightarrow$ choose Random Forest
+  \end{itemize}
+
+\note{
+\noteFontSize
+Les choix de modeling n'étaient pas au hasard --- ils viennent directement de l'exploration des data. Voici ce qu'on a vu.
+
+Quatre choses ressortent. Le score d'hier suit fortement celui d'aujourd'hui. Hints en hausse plus solves en baisse, ça veut dire risque en hausse --- un vrai red flag. Topic est juste une catégorie sans ordre. Et day, seul, est un faible prédicteur, car chaque day correspond déjà à un topic.
+
+Ça a donné trois décisions : one-hot encode sur topic plutôt qu'un faux ordre ; prioriser le recall at-risk plutôt que le dernier dixième de point ; et choisir un Random Forest, parce que le vrai signal, c'est l'\emph{interaction} entre hints et solves --- ce qu'un modèle linéaire rate.
+
+C'est exactement ce qui mène à l'implémentation ML suivante.
+}
+\end{frame}
+
+\begin{frame}{ML --- task \& threshold}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.35cm and 0.5cm]
+    \node[ml] (x) {\texttt{FEATURE\_COLUMNS}};
+    \node[ml, right=of x] (r) {RF score /20};
+    \node[risk, right=of r] (t) {\texttt{AT\_RISK\_THRESHOLD}};
+    \node[bad, below left=0.65cm and 0cm of t] (a) {at-risk};
+    \node[ok, below right=0.65cm and 0cm of t] (o) {ok};
+    \draw[ecarr] (x)--(r)--(t); \draw[ecarr] (t)--(a); \draw[ecarr] (t)--(o);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.3em}
+  Default threshold 10.0 in \texttt{predict\_student} --- ranking + binary flag for the board.
+
+\note{
+\noteFontSize
+Voici un choix qui surprend : même si le coach veut un oui/non sur le risque, on prédit d'abord un score \emph{continuous}, puis on convertit.
+
+Pourquoi ? Parce qu'un chiffre sur vingt permet de ranker la classe. Savoir l'ordre de ceux qui galèrent, c'est bien plus utile qu'une liste plate de noms.
+
+La conversion est dans \texttt{predict\_student} : un threshold, dix par défaut, et at-risk veut dire score en dessous.
+
+Et ce ranking, c'est exactement pourquoi on n'a pas juste fait un classifier. Un predicted three et un predicted eight sont tous les deux at-risk, mais pas aussi urgents --- le coach doit d'abord aller vers le three. Un simple oui/non jette ça à la poubelle.
+}
+\end{frame}
+
+\begin{frame}{ML --- Pipeline implementation}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.28cm and 0.25cm]
+    \node[neut] (raw) {row};
+    \node[ml, right=of raw] (ct) {Column\\Transformer};
+    \node[neut, above right=0.02cm and 0.3cm of ct] (n) {numeric};
+    \node[neut, below right=0.02cm and 0.3cm of ct] (o) {OHE};
+    \node[ml, right=1.9cm of ct] (rf) {RF};
+    \node[code, right=of rf] (pkl) {.pkl};
+    \node[ok, below=0.55cm of rf] (pred) {\texttt{predict\_student()}};
+    \draw[ecarr] (raw)--(ct)--(rf)--(pkl);
+    \draw[ecarrg] (ct)--(n); \draw[ecarrg] (ct)--(o);
+    \draw[ecarr] (rf)--(pred);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.25em}
+  \begin{itemize}\scriptsize\setlength{\itemsep}{0.2em}
+    \item Artifacts: \texttt{models/random\_forest.pkl}, \texttt{model\_metrics.json}
+    \item Same function used by Analyzer and \texttt{POST /predict\_today}
+  \end{itemize}
+
+\note{
+\noteFontSize
+Voici comment le modèle est vraiment assemblé. On n'a pas juste donné les data brutes à un Random Forest --- on a tout enveloppé dans un seul pipeline scikit-learn.
+
+Dedans, un \texttt{ColumnTransformer} traite les deux types de features différemment : les numerics passent, topic passe en one-hot. Ça nourrit un \texttt{RandomForestRegressor} dont la depth, les leaves et le nombre de trees viennent d'un grid search, pas d'un guess. Preprocessing et modèle sont sauvés ensemble dans \texttt{random\_forest.pkl}, avec un fichier metrics à côté.
+
+Le sauver comme un seul objet, c'est ce qui rend le serving sûr. Au runtime, \texttt{predict\_student} construit une frame d'une row dans le bon ordre de colonnes, prédit, applique le threshold, et renvoie le score, le flag, et le threshold. Comme le preprocessing est dans l'artifact, prediction et training ne peuvent pas diverger en silence.
+
+Un point de plus : l'Analyzer et l'endpoint \texttt{/predict\_today} appellent la même fonction. Une seule source of truth --- donc le dashboard et les agents ne peuvent jamais se contredire.
+}
+\end{frame}
+
+\begin{frame}{ML --- metrics we ship}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{tabular}{lcc}
+        \toprule
+        Metric & LR & RF \\
+        \midrule
+        RMSE & 2.73 & \textbf{2.65} \\
+        $R^2$ & 0.80 & \textbf{0.81} \\
+        Recall & 0.96 & \textbf{1.00} \\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.3em}
+      \footnotesize Soft RMSE $<2.5$ slightly missed --- recall-first.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{tikzpicture}[x=0.85cm,y=1.45cm]
+        \fill[blue!35] (0.3,0) rectangle (1.0,0.96);
+        \fill[blue!70] (1.6,0) rectangle (2.3,1.0);
+        \node[font=\tiny] at (0.65,-0.18) {LR}; \node[font=\tiny] at (1.95,-0.18) {RF};
+        \draw[dashed] (0,0.75)--(2.8,0.75) node[right,font=\tiny] {CDC};
+        \node[font=\scriptsize\bfseries] at (1.4,1.18) {Recall};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+
+\note{
+\noteFontSize
+Maintenant les chiffres, honnêtement --- y compris là où on a un peu raté. On compare toujours à un linear baseline, pour juger si le forest mérite sa complexité.
+
+Sur le test split, le Random Forest a environ deux virgule six cinq d'erreur, un R-squared autour de zéro virgule huit un, et --- le plus important --- un recall at-risk de un point zéro, donc zéro struggler manqué. Il bat le baseline partout.
+
+Un point honnête : la cible soft, c'était une erreur sous deux virgule cinq, et on est un peu au-dessus à deux virgule six cinq. On ne le cache pas. Le recall passe d'abord, parce que rater un apprenant qui galère coûte bien plus qu'un score un peu bruité --- on préfère une fausse alerte à un miss.
+
+Les importances nous rassurent aussi : solves et previous score dominent, day est faible --- juste comme l'EDA l'avait prédit.
+
+Voilà le numbers brain, pour le coach. Mais l'apprenant a encore besoin de réponses --- depuis \emph{nos} leçons, pas l'imagination du modèle. C'est le retrieval, juste après.
+}
+\end{frame}
+
+\begin{frame}{RAG --- why + formula}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.35cm and 0.45cm]
+    \node[store] (r) {\textbf{R}etrieve};
+    \node[ml, right=of r] (a) {\textbf{A}ugment};
+    \node[llm, right=of a] (g) {\textbf{G}enerate};
+    \draw[ecarr] (r)--(a)--(g);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.35em}
+  \begin{itemize}\setlength{\itemsep}{0.25em}
+    \item Offline: \texttt{src/rag/ingest.py} $\rightarrow$ \texttt{vector\_db/}
+    \item Online: \texttt{retrieval.py} $\rightarrow$ Top-$K$ context string
+    \item Generate: \texttt{concept\_tutor.py} + \texttt{get\_llm()}
+  \end{itemize}
+
+\note{
+\noteFontSize
+Voici le problème que le retrieval résout. Si on demande à un language model tout seul, il répond depuis son training général --- fluide, mais il peut inventer en silence une syntaxe qui contredit ce qu'on a enseigné. Pour un outil pédagogique, non.
+
+Le RAG règle ça en trois étapes qui forment le nom : \emph{Retrieve} les bons chunks de leçon, \emph{Augment} le prompt avec, puis \emph{Generate} --- donc le modèle répond avec nos leçons ouvertes devant lui.
+
+Dans le code, ce sont deux horloges plus la génération. \texttt{ingest.py} prépare la knowledge une fois, offline. \texttt{retrieval.py} va chercher les chunks à chaque question, online. Et \texttt{concept\_tutor.py} génère la réponse avec le modèle que renvoie \texttt{get\_llm()}. Je prends les deux côtés l'un après l'autre.
+}
+\end{frame}
+
+\begin{frame}{RAG --- offline ingest (implementation)}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.25cm and 0.18cm]
+    \node[neut] (md) {day*.md};
+    \node[neut, right=of md] (meta) {meta};
+    \node[ml, right=of meta] (ch) {500/50};
+    \node[ml, right=of ch] (emb) {MiniLM};
+    \node[store, right=of emb] (db) {Chroma};
+    \draw[ecarr] (md)--(meta)--(ch)--(emb)--(db);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.3em}
+  \begin{itemize}\scriptsize\setlength{\itemsep}{0.2em}
+    \item Filename regex \texttt{dayNN\_topic.md} $\rightarrow$ metadata
+    \item \texttt{RecursiveCharacterTextSplitter}; collection \texttt{educoach\_lessons}
+    \item $\sim$131 chunks; rebuild: \texttt{python -m src.rag.ingest --rebuild}
+  \end{itemize}
+
+\note{
+\noteFontSize
+D'abord l'ingest offline --- le pipeline qui transforme nos leçons Markdown en quelque chose de searchable. Il tourne une fois, quand les leçons changent.
+
+Ça commence avec \texttt{load\_lesson\_documents} : il lit chaque fichier nommé \texttt{dayNN\_topic}, tire day et topic du filename comme metadata, et saute le README.
+
+Puis le chunking. Les leçons sont trop longues pour embedder d'un coup, donc un splitter les coupe en morceaux d'environ cinq cents caractères, avec un overlap de cinquante. L'overlap compte --- ça évite de couper un exemple de code en deux. Chaque chunk reçoit ses metadata et un id.
+
+Ensuite chaque chunk est embeddé avec MiniLM sur CPU et stocké dans Chroma, collection \texttt{educoach\_lessons} --- environ cent trente chunks après enrichissement des leçons.
+
+Une note pratique : un changement de version Chroma a cassé un ancien index, donc \texttt{--rebuild} l'efface et le recrée proprement. Petit détail, mais ça nous a sauvés.
+}
+\end{frame}
+
+\begin{frame}{RAG --- online retrieval (implementation)}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.3cm and 0.35cm]
+    \node[llm] (q) {question};
+    \node[ml, right=of q] (e) {same MiniLM};
+    \node[store, right=of e] (db) {Chroma};
+    \node[ok, right=of db] (k) {Top-$K{=}3$};
+    \node[code, below=0.55cm of k] (f) {format\_context};
+    \draw[ecarr] (q)--(e)--(db)--(k)--(f);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.25em}
+  \begin{itemize}\scriptsize\setlength{\itemsep}{0.2em}
+    \item \texttt{retrieve\_context(question)} uses \texttt{RAG\_TOP\_K}
+    \item Context labels Day/topic/source for citations
+    \item Enriched lessons: code + step-by-step + Output
+  \end{itemize}
+
+\note{
+\noteFontSize
+Maintenant le côté online, qui tourne à chaque question d'apprenant. La fonction, c'est \texttt{retrieve\_context}, et elle fait l'inverse de l'ingest.
+
+Elle embedde la question avec le \emph{même} modèle MiniLM et cherche dans Chroma les chunks les plus proches --- top trois par défaut, assez pour répondre sans noyer le prompt.
+
+Puis \texttt{format\_context} les dispose avec un petit header --- day, topic, source --- puis le texte. C'est ce que le Tutor lit et cite, d'où les réponses du type « ça vient du day four ».
+
+Une règle non négociable : le modèle d'embedding au query time doit matcher celui de l'ingest. Sinon, les vectors vivent dans des espaces différents et la search renvoie du nonsense en silence --- pas d'erreur, juste de mauvais résultats. Invisible, et dangereux.
+
+Et une leçon apprise à la dure : au début le Tutor disait souvent « I'm not sure ». Le modèle allait bien --- nos leçons étaient trop maigres. Une fois qu'on a ajouté de vrais exemples et l'output attendu, les réponses sont devenues solides. Le retrieval n'est jamais meilleur que la knowledge derrière.
+}
+\end{frame}
+
+\begin{frame}{RAG --- grounding \& vs fine-tuning}
+  \begin{itemize}\setlength{\itemsep}{0.25em}
+    \item Tutor prompt: ONLY from context; cite Day $X$; include code/Output
+    \item If context weak $\rightarrow$ say unsure (no invention)
+    \item Update path: edit MD + re-ingest (not retrain an LLM)
+  \end{itemize}
+  \vspace{0.3em}
+  \begin{tabular}{lll}
+    \toprule
+     & RAG (ours) & Fine-tune \\
+    \midrule
+    Update & re-ingest & retrain \\
+    Citations & metadata & harder \\
+    Cost & light & heavy \\
+    \bottomrule
+  \end{tabular}
+
+\note{
+\noteFontSize
+Récupérer les bons chunks, ce n'est que la moitié --- il faut aussi forcer le modèle à rester dedans. C'est le system prompt du Tutor.
+
+Il est strict : répondre seulement depuis le context donné, citer le day, inclure le code et l'output s'ils sont là, ne jamais inventer, et admettre quand le context ne suffit pas plutôt que bluffer. Cette honnêteté, c'est une feature.
+
+On nous demande souvent pourquoi on n'a pas juste fait du fine-tuning sur les leçons. La praticité. Le fine-tuning met les leçons dans les weights --- lent, cher à mettre à jour, et faible sur les citations. Avec le RAG, mettre à jour est trivial : éditer le Markdown, re-ingest, terminé. Pour un curriculum qui bouge, cette flexibilité gagne.
+
+Mais retrieval et un bon prompt, ce n'est encore qu'une capability, pas un produit. Quelque chose doit décider \emph{quand} utiliser le Tutor et garder le tout safe. C'est l'orchestration --- juste après.
+}
+\end{frame}
+
+\begin{frame}{Agents --- chatbot / tool / agent}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.35cm and 0.45cm]
+    \node[neut, minimum width=2.5cm] (c) {Chatbot};
+    \node[ml, minimum width=2.5cm, right=of c] (t) {Tool};
+    \node[llm, minimum width=2.5cm, right=of t] (a) {Agent};
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.35em}
+  \begin{itemize}\setlength{\itemsep}{0.25em}
+    \item Tools here: \texttt{retrieve\_context}, \texttt{predict\_student}
+    \item PoC: prompt + one tool inside LangGraph (not a huge ReAct loop)
+  \end{itemize}
+
+\note{
+\noteFontSize
+Le mot « agent » est flou partout, donc je le fixe en trois niveaux.
+
+Un chatbot, c'est juste un prompt qui parle --- pas de tools, pas de spécialisation. Un tool, c'est une capability sans conversation ; les nôtres sont \texttt{retrieve\_context} pour les leçons et \texttt{predict\_student} pour le risque. Un agent est au-dessus : un \emph{role} défini, éventuellement son propre modèle, plus l'accès à ces tools.
+
+Et je serai honnête sur le style qu'on a bâti : structuré, pas un swarm libre. Chaque spécialiste est fin --- un prompt ciblé plus un tool --- dans un graph fixe. C'était volontaire : ça garde le système explainable et testable, ce que veulent un jury et un maintainer.
+}
+\end{frame}
+
+\begin{frame}{Agents --- files \& contracts}
+  \scriptsize
+  \begin{tabular}{llll}
+    \toprule
+    Agent & Speaks? & Tool & File \\
+    \midrule
+    Supervisor & No & regex & \texttt{orchestrator.py} \\
+    Concept Tutor & Yes & RAG+LLM & \texttt{concept\_tutor.py} \\
+    Code Helper & Yes & LLM hints & \texttt{code\_helper.py} \\
+    Analyzer & No & RF & \texttt{performance\_analyzer.py} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.4em}
+  \begin{itemize}\scriptsize
+    \item Shared: \texttt{llm.py} (\texttt{LLM\_PROVIDER}), \texttt{state.py} (\texttt{AgentState})
+  \end{itemize}
+
+\note{
+\noteFontSize
+Cette table, c'est le casting --- et la colonne clé, c'est qui parle à l'apprenant ou qui travaille en silence.
+
+L'orchestrator tient le graph, l'entrée publique \texttt{chat}, et le supervisor qui route. Le Concept Tutor parle, pour la théorie --- retrieval plus une réponse grounded. Le Code Helper parle aussi, pour le debugging, mais seulement en hints. L'Analyzer ne dit jamais un mot à l'apprenant --- il lance le Random Forest pour le coach.
+
+En dessous, deux pièces partagées. \texttt{llm.py} est une petite factory qui renvoie Gemini, Ollama, Groq ou OpenAI. On tourne Gemini Flash-Lite --- et il y a une histoire : on a d'abord essayé un modèle Ollama local et ça a freezé la machine, donc cette factory nous a laissé changer de provider sans toucher un seul agent. Et \texttt{state.py} définit \texttt{AgentState}, les data partagées --- slide suivante.
+}
+\end{frame}
+
+\begin{frame}{Agents --- AgentState (shared bag)}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \ttfamily\scriptsize
+      student\_id, message,\\
+      route, history\_text, reply,\\
+      blocked, block\_reason,\\
+      features,\\
+      predicted\_score, at\_risk,\\
+      coach\_alert
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{itemize}\scriptsize\setlength{\itemsep}{0.2em}
+        \item Nodes return \textbf{partial} updates
+        \item LangGraph merges into state
+        \item Tutor sets \texttt{reply} only
+        \item Analyzer never touches \texttt{reply}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+\note{
+\noteFontSize
+Si les agents sont le casting, \texttt{AgentState} est le script partagé qu'ils lisent et écrivent pendant qu'une request traverse le graph. Ça compte parce que c'est ainsi que la règle produit est appliquée.
+
+Trois groupes de fields. Les inputs qui démarrent le run --- student id, message, features optionnelles. Les fields de contrôle qui orientent --- la route, si c'était blocked et pourquoi, l'history récente. Et les outputs --- le reply de l'apprenant, le predicted score, le flag at-risk, et le coach alert séparé.
+
+Le truc qui rend ça sûr : chaque node renvoie seulement une update \emph{partial}, et LangGraph merge. Le Tutor renvoie juste un reply ; l'Analyzer renvoie seulement les fields de risque. Comme l'Analyzer ne renvoie jamais le field reply, c'est structurellement \emph{impossible} que la logique de risque écrase ce que voit l'apprenant. La règle two-channel, ce n'est pas de bonnes intentions --- c'est la forme des data.
+}
+\end{frame}
+
+\begin{frame}{Agents --- LangGraph workflow}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.3cm and 0.35cm]
+    \node[risk] (g) {guardrails};
+    \node[neut, right=of g] (s) {supervisor};
+    \node[llm, below left=0.7cm and 0cm of s] (t) {tutor};
+    \node[llm, below right=0.7cm and 0cm of s] (h) {helper};
+    \node[ml, below=1.55cm of s] (a) {analyzer};
+    \node[ok, below=of a] (f) {finalize};
+    \draw[ecarr] (g)--(s); \draw[ecarr] (s)--(t); \draw[ecarr] (s)--(h);
+    \draw[ecarr] (t)--(a); \draw[ecarr] (h)--(a); \draw[ecarr] (a)--(f);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.2em}
+  \footnotesize Entry: \texttt{orchestrator.chat(student\_id, message, features?)} $\rightarrow$ FastAPI
+
+\note{
+\noteFontSize
+Ce diagramme, c'est le cœur du système, donc je trace une request dedans. C'est un state graph sur \texttt{AgentState}, avec six nodes : guardrails, supervisor, tutor, helper, analyzer, finalize.
+
+Ça se lit de haut en bas. Chaque request passe d'abord par les guardrails, pour la safety. Puis le supervisor décide : Tutor, Helper, ou --- si c'était blocked --- directement la fin. Quel que soit le spécialiste qui répond, les deux chemins se rejoignent à l'Analyzer, puis finalize.
+
+Pourquoi un graph et pas juste une suite d'appels de fonctions ? Parce que le graph rend le flow \emph{explicit} et drawable --- cette image, c'est littéralement le code --- et ajouter un spécialiste, c'est juste un node et un edge.
+
+Et de l'extérieur, tout se replie en une fonction : \texttt{chat}, avec student id, message, et features optionnelles. Elle lance le graph et renvoie du JSON propre. C'est la seule chose que l'API appelle jamais.
+}
+\end{frame}
+
+\begin{frame}{Agents --- routing, tutor, helper (impl.)}
+  \begin{itemize}\setlength{\itemsep}{0.28em}
+    \item \textbf{Routing:} \texttt{THEORY\_HINTS} $\rightarrow$ tutor; \texttt{CODE\_HINTS} $\rightarrow$ helper; else tutor
+    \item Fixed ``for loop'' false-positive (theory-first unless debug words)
+    \item \textbf{Tutor:} retrieve $\rightarrow$ format $\rightarrow$ System+history+context+Q $\rightarrow$ LLM
+    \item \textbf{Helper:} same \texttt{get\_llm()}, stricter prompt --- never full solution
+  \end{itemize}
+
+\note{
+\noteFontSize
+Deux décisions façonnent l'expérience de l'apprenant : comment le supervisor route, et comment chaque spécialiste répond.
+
+Le supervisor utilise du keyword matching. Une phraséologie de concept --- « what is », « explain » --- va au Tutor ; des mots de code --- error, bug, traceback --- vont au Helper ; le flou va par défaut au Tutor. Choix pragmatique : rapide, gratuit, explainable, et facile à upgrader plus tard vers un model router.
+
+Un petit bug instructif : « for » ressemble à du code, donc « What is a for loop ? » allait d'abord au Helper. Le fix, c'est le routing theory-first --- rester au Tutor sauf s'il y a de vrais mots d'erreur. Le routing doit respecter l'intent, pas juste repérer des keywords.
+
+Côté réponse : le path Tutor, c'est le flow retrieval --- fetch, format, construire le prompt avec history et question, appeler le modèle. Le Helper utilise le même modèle mais des règles plus strictes : hints seulement, jamais la full solution, même si on la demande. Cette retenue, c'est le but --- on veut qu'ils apprennent, pas qu'ils copient.
+}
+\end{frame}
+
+\begin{frame}{Agents --- analyzer, memory, guardrails}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Analyzer + alerts}
+      \begin{itemize}\scriptsize\setlength{\itemsep}{0.15em}
+        \item no features $\rightarrow$ skip
+        \item else \texttt{predict\_student}
+        \item at-risk $\rightarrow$ \texttt{coach\_alert}
+        \item API \texttt{append\_alert}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Memory + safety}
+      \begin{itemize}\scriptsize\setlength{\itemsep}{0.15em}
+        \item last 5 turns (\texttt{short\_term.py})
+        \item \texttt{input\_validator}
+        \item \texttt{prompt\_injection}
+        \item defense in depth
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+\note{
+\noteFontSize
+Trois pièces autour des spécialistes : l'analyzer, la memory, et la safety.
+
+L'Analyzer, c'est le pont vers le coach. Pas de features ? Il ne fait rien. Features présentes ? Il appelle le même \texttt{predict\_student}, et si l'apprenant est at-risk il écrit un coach-alert. L'endpoint chat sauve ça sur le dashboard coach --- sans que l'apprenant le voie jamais.
+
+La memory est légère exprès : les cinq derniers turns par apprenant. Les guardrails chargent cette history pour que le Tutor ait du context, et finalize réécrit le nouveau turn. Assez pour une vraie conversation --- et oui, ça reset au restart. La memory persistante, c'est un souci production, pas PoC.
+
+La safety tourne en premier. Un check attrape les inputs dangereux, un autre le prompt injection --- « ignore your instructions », ou la demande de full solution. Si l'un des deux tire, on renvoie un reply sûr et on saute les spécialistes, donc rien de suspect n'atteint le modèle. Defense in depth --- plusieurs couches, pas un seul mur.
+}
+\end{frame}
+
+\begin{frame}{Two channels (product rule)}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.45cm and 0.9cm]
+    \node[llm] (c) {\texttt{/chat} JSON};
+    \node[ok, below left=0.85cm and 0.15cm of c] (r) {\texttt{reply}\\learner UI};
+    \node[risk, below right=0.85cm and 0.15cm of c] (a) {\texttt{coach\_alert}\\coach UI};
+    \draw[ecarr] (c)--(r); \draw[ecarr] (c)--(a);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.35em}
+  \centering\footnotesize Implemented in \texttt{AgentState} + Streamlit role views
+
+\note{
+\noteFontSize
+Je reviens souvent sur cette règle parce que c'est le cœur éthique et produit --- et elle est appliquée partout, pas seulement racontée.
+
+Elle court de bout en bout : deux fields séparés dans le state, deux fields dans le JSON de l'API, deux vues dans l'interface. La réponse de l'apprenant et l'alert du coach ne sont jamais le même objet.
+
+Concrètement, la bulle de l'apprenant est liée seulement à reply ; la liste d'alerts du coach est liée à coach-alert via son propre endpoint. L'apprenant n'a tout simplement aucun canal pour recevoir le signal de risque.
+
+Pourquoi tant tenir ? Parce que dire à un débutant « you're at risk » dans son chat, c'est décourageant et ça peut devenir self-fulfilling. C'est le coach qui doit agir, doucement et en personne. Avec ça posé, je montre la couche produit fine --- la couche HTTP.
+}
+\end{frame}
+
+\begin{frame}{API --- why + routes}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.35cm and 0.6cm]
+    \node[neut] (ui) {Streamlit};
+    \node[neut, below=of ui] (sw) {Swagger};
+    \coordinate (m) at ($(ui.east)!0.5!(sw.east)$);
+    \node[ml, right=1.0cm of m] (api) {FastAPI};
+    \node[llm, right=of api] (br) {chat / predict};
+    \draw[ecarr] (ui.east)--(api.west); \draw[ecarr] (sw.east)--(api.west);
+    \draw[ecarr] (api)--(br);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.25em}
+  \scriptsize
+  \texttt{POST /chat} $\cdot$ \texttt{POST /predict\_today} $\cdot$ \texttt{GET /coach/risk\_board} $\cdot$ \texttt{GET /coach/alerts}\\
+  Pydantic schemas validate; routes are thin wrappers over existing Python
+
+\note{
+\noteFontSize
+La couche API est volontairement \emph{boring} --- et c'est un compliment. Elle n'ajoute aucune intelligence ; elle expose juste les cerveaux qu'on a construits via du HTTP propre et validé.
+
+Chaque request et response a un schema Pydantic, donc le contrat est documenté et validé --- les mauvaises data sont rejetées tôt avec une erreur claire, pas un crash au fond.
+
+Les routes sont de fins wrappers. Chat appelle \texttt{orchestrator.chat}, sauve un coach alert s'il y en a un, et renvoie le reply plus route et score. Predict est essentiellement un alias de \texttt{predict\_student}. Et le risk board boucle sur les vingt-quatre learners et trie les plus at-risk en premier --- encore une fois, activity features seulement, pas de leakage.
+
+Un bonus sympa : un produit API-first donne une page Swagger gratuitement. On l'a utilisée pour smoke-tester chaque endpoint sans ouvrir l'UI --- et si la démo live bugue, c'est mon backup.
+}
+\end{frame}
+
+\begin{frame}{UI --- role dashboards}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.4cm]
+    \node[neut] (l) {\texttt{auth.py} login};
+    \node[risk, below left=0.7cm and 0.1cm of l] (c) {Coach: board + alerts};
+    \node[ok, below right=0.7cm and 0.1cm of l] (s) {Learner: reply only};
+    \draw[ecarr] (l)--(c); \draw[ecarr] (l)--(s);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.3em}
+  \centering\footnotesize \texttt{streamlit\_app.py} --- httpx $\rightarrow$ \texttt{API\_URL} (:8000)
+
+\note{
+\noteFontSize
+L'interface, c'est là où la règle two-channel devient visible --- le login existe pour donner la bonne vue à la bonne personne.
+
+L'auth vit dans \texttt{auth.py} avec des passwords hashés, et deux roles : un compte coach, et des comptes learner, student un à vingt-quatre.
+
+En coach, on a la vue d'ensemble : le risk board, le stream d'alerts, et les metrics --- tout pour décider qui aider en premier.
+
+En learner, c'est un autre monde : l'id est verrouillé, les features peuvent être préremplies depuis le board, et les messages partent vers chat. Surtout, cette vue n'affiche que le field reply --- il n'y a aucun widget capable d'afficher un coach alert. Voilà la règle two-channel, concrète là où l'utilisateur touche.
+}
+\end{frame}
+
+\begin{frame}{Demo agenda}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.28cm and 0.3cm]
+    \node[risk] (1) {1 Board};
+    \node[ok, right=of 1] (2) {2 RAG Q};
+    \node[risk, right=of 2] (3) {3 Alert};
+    \node[bad, right=of 3] (4) {4 Block};
+    \draw[ecarr] (1)--(2)--(3)--(4);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.4em}
+  \begin{itemize}\scriptsize\setlength{\itemsep}{0.2em}
+    \item Watch route, Day citation, channel split, guardrails
+    \item API :8000 + UI :8501 must both run
+  \end{itemize}
+
+\note{
+\noteFontSize
+Je vous dis quoi regarder, pour que les quatre beats soient des démos volontaires, pas du clic au hasard.
+
+Beat un : je me connecte en coach et je rafraîchis un day --- le Random Forest ranke toute la classe et compte qui est at-risk. Le numbers brain.
+
+Beat deux : je passe en learner et je pose une question de théorie. Regardez le routing vers le Tutor et la réponse qui cite un day précis. C'est le retrieval qui ancre la réponse dans nos leçons.
+
+Beat trois : j'attache des activity features faibles. Regardez le split --- l'étudiant reçoit encore une réponse normale et encourageante, pendant que le coach reçoit tranquillement une alert. Un message, deux canaux.
+
+Beat quatre : j'envoie une string de prompt-injection et les guardrails la bloquent avant le modèle. Risque, retrieval, le split, et la safety --- tout le système en miniature.
+}
+\end{frame}
+
+\begin{frame}{Live demonstration}
+  \begin{center}
+    \vspace{1.1cm}
+    \Large\textbf{Live demo}\\[0.5em]
+    \normalsize Narrate implementations: RAG $\rightarrow$ graph $\rightarrow$ RF alert
+  \end{center}
+
+\note{
+\noteFontSize
+Moment de passer au système qui tourne --- l'API sur le port huit mille, l'UI sur huit cinq zéro un. En cliquant les quatre beats, je nommerai le fichier qui travaille à chaque étape, pour lier l'écran au code.
+
+Note à moi-même si ça foire : rester calme et retomber sur la page Swagger. Je peux rejouer les mêmes quatre beats là et montrer de vrais résultats. La démo rend l'architecture tangible --- ce n'est pas l'argument lui-même, donc un hiccup ne casse pas le travail.
+}
+\end{frame}
+
+\begin{frame}{Results checklist}
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    Piece & Outcome \\
+    \midrule
+    RF recall / RMSE & 1.0 / $\approx$2.65 \\
+    RAG grounded & $\sim$131 chunks, Top-3 \\
+    LangGraph + channels & OK \\
+    API + role UI & OK \\
+    Pytest core paths & Green \\
+    \bottomrule
+  \end{tabular}
+
+\note{
+\noteFontSize
+Petit récap de ce qu'on a livré. Le Random Forest est en place, recall-first, donc le coach ne rate pas les strugglers. Le retrieval est grounded dans nos leçons, avec citations. L'orchestrator tourne avec les deux canaux bien séparés. FastAPI donne des contrats validés, l'UI force les deux roles, et les tests core passent.
+
+Et un point exprès, parce que l'intégrité compte : la cible soft d'erreur a été un peu manquée, et on le dit ouvertement. C'était un trade volontaire --- recall parfait sur les at-risk contre une erreur de score un peu plus haute --- et pour un outil de coaching, c'est le bon call.
+}
+\end{frame}
+
+\begin{frame}{Difficulties \& next (engineering)}
+  \begin{itemize}\setlength{\itemsep}{0.28em}
+    \item Ollama freeze $\rightarrow$ pluggable \texttt{get\_llm()} / Gemini
+    \item Chroma version $\rightarrow$ ingest rebuild
+    \item Thin lessons $\rightarrow$ enrich code/Output
+    \item Supervisor ``for'' bug $\rightarrow$ theory-first routing
+    \item Next: Real data mapping, real auth, durable memory
+  \end{itemize}
+
+\note{
+\noteFontSize
+Je ferme la partie technique honnêtement --- une soutenance est plus forte quand on nomme ce qui a foiré.
+
+Premier blocker : l'inference locale. Un modèle à trois milliards de paramètres via Ollama a freezé la machine. Le fix, ce n'était pas d'abandonner l'architecture, mais de rendre le provider pluggable via \texttt{get\_llm()}, pour passer à Gemini sans toucher un agent.
+
+Deuxième, opérationnel : un changement de version Chroma a cassé un ancien index. On a appris à traiter un rebuild comme routine, pas comme panique.
+
+Troisième, un souci de qualité, pas un bug : les premières leçons étaient trop maigres, donc le Tutor hésitait. Les enrichir avec du vrai code et de l'output a plus fixé le retrieval que n'importe quel prompt tweak.
+
+Quatrième, le routing : « for » ressemblait à du code, donc « What is a for loop ? » allait au Helper. Le routing theory-first a fixé ça.
+
+Next steps : mapper un vrai dataset genre OULAD dans notre schema, vraie authentication, memory durable, et un jour un supervisor basé modèle.
+}
+\end{frame}
+
+\begin{frame}{Thank you}
+  \begin{center}
+    \Large EduCoach AI --- implementation deep dive
+    \vspace{0.5em}
+    \begin{tikzpicture}[node distance=0.3cm and 0.35cm]
+      \node[ml] (a) {Data+RF};
+      \node[store, right=of a] (b) {RAG};
+      \node[llm, right=of b] (c) {Agents};
+      \node[neut, right=of c] (d) {API+UI};
+      \draw[ecarr] (a)--(b)--(c)--(d);
+    \end{tikzpicture}
+    \vspace{0.7em}
+    \textbf{Questions?}
+  \end{center}
+
+\note{
+\noteFontSize
+Voilà EduCoach tel qu'on l'a construit : il prédit le risque tôt pour le coach, tutorise les apprenants depuis nos propres leçons, et garde les alerts du coach hors du chat de l'étudiant --- appliqué dans le state, l'API, et l'UI.
+
+Merci --- je suis prêt pour vos questions.
+}
+\end{frame}
+\end{document}

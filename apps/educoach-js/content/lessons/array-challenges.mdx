@@ -1,0 +1,176 @@
+---
+title: "Array challenges"
+summary: "Search, counting, and inversion."
+day: 6
+---
+
+**Manual search**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTWFudWFsIHNlYXJjaCB3YWxrcyB0aHJvdWdoIGFuIGFycmF5IGVsZW1lbnQgYnkgZWxlbWVudCB1bnRpbCBpdCBmaW5kcyBhIHRhcmdldCB2YWx1ZSBvciByZWFjaGVzIHRoZSBlbmQuIEl0IHJldHVybnMgdGhlIGluZGV4IGlmIGZvdW5kIG9yIGEgc2lnbmFsIHN1Y2ggYXMgLTEgaWYgdGhlIGl0ZW0gaXMgYWJzZW50LiIsImFuYWxvZ3kiOiJNYW51YWwgc2VhcmNoIGlzIGxpa2UgbG9va2luZyBmb3IgeW91ciBrZXlzIGJ5IGNoZWNraW5nIGVhY2ggcG9ja2V0IG9uZSBhdCBhIHRpbWUgdW50aWwgeW91IGZlZWwgdGhlbS4ifQ==" />
+
+Loop through the array, comparing each item to a target, and return its index if found. Return `-1` if the loop finishes without a match.
+```js
+function findIndex(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+}
+console.log(findIndex([5, 8, 2], 8)); // 1
+```
+
+**Counting matches**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ291bnRpbmcgbWF0Y2hlcyBpbmNyZW1lbnRzIGEgY291bnRlciBlYWNoIHRpbWUgYW4gYXJyYXkgZWxlbWVudCBzYXRpc2ZpZXMgYSBjb25kaXRpb24sIHN1Y2ggYXMgZXF1YWxpbmcgYSB0YXJnZXQgb3IgYmVpbmcgZ3JlYXRlciB0aGFuIGEgdGhyZXNob2xkLiBUaGUgZmluYWwgY291bnQgdGVsbHMgeW91IGhvdyBtYW55IGl0ZW1zIG1hdGNoZWQuIiwiYW5hbG9neSI6IkNvdW50aW5nIG1hdGNoZXMgaXMgbGlrZSB0YWxseWluZyBob3cgbWFueSByZWQgTSZNcyBhcmUgaW4gYSBib3ds4oCUeW91IGluc3BlY3QgZWFjaCBwaWVjZSBhbmQgYWRkIHRvIHRoZSBwaWxlIHdoZW4gaXQgcXVhbGlmaWVzLiJ9" />
+
+Loop through and increment a counter each time an item passes a test, such as being even.
+```js
+function countEven(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) count++;
+  }
+  return count;
+}
+console.log(countEven([1, 2, 3, 4])); // 2
+```
+
+**Reversing an array**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUmV2ZXJzaW5nIGFuIGFycmF5IHByb2R1Y2VzIGEgbmV3IG9yZGVyIHdoZXJlIHRoZSBmaXJzdCBpdGVtIGJlY29tZXMgbGFzdCBhbmQgdGhlIGxhc3QgYmVjb21lcyBmaXJzdC4gWW91IGNhbiBidWlsZCBhIG5ldyBhcnJheSwgc3dhcCBpbiBwbGFjZSB3aXRoIHR3byBwb2ludGVycywgb3IgdXNlIG1ldGhvZHMgZGVwZW5kaW5nIG9uIHJlcXVpcmVtZW50cy4iLCJhbmFsb2d5IjoiUmV2ZXJzaW5nIGFuIGFycmF5IGlzIGxpa2UgZmxpcHBpbmcgYSByb3cgb2YgZG9taW5vZXMgc28gdGhlIGxhc3Qgb25lIGxlYWRzIGFuZCB0aGUgZmlyc3Qgb25lIGZvbGxvd3MuIn0=" />
+
+Create a new empty array, then loop from the last index to the first, pushing each item into the new array.
+```js
+function reverseArray(arr) {
+  let reversed = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    reversed.push(arr[i]);
+  }
+  return reversed;
+}
+console.log(reverseArray([1, 2, 3])); // [3, 2, 1]
+```
+
+**Manual filtering**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTWFudWFsIGZpbHRlcmluZyBjcmVhdGVzIGEgbmV3IGFycmF5IGNvbnRhaW5pbmcgb25seSBlbGVtZW50cyB0aGF0IHBhc3MgYSB0ZXN0IHlvdSB3cml0ZSBpbiBhIGxvb3AuIFdoZW4gYW4gaXRlbSBzYXRpc2ZpZXMgdGhlIGNvbmRpdGlvbiwgcHVzaCBpdCBpbnRvIHRoZSByZXN1bHQgYXJyYXkuIiwiYW5hbG9neSI6Ik1hbnVhbCBmaWx0ZXJpbmcgaXMgbGlrZSBzb3J0aW5nIGxhdW5kcnnigJR5b3UgcHVsbCBvdXQgb25seSB0aGUgc2hpcnRzIHRoYXQgbWF0Y2ggdG9kYXkncyBvdXRmaXQgcnVsZXMgYW5kIGxlYXZlIHRoZSByZXN0IGluIHRoZSBiYXNrZXQuIn0=" />
+
+Build a new array containing only the items that pass a condition, by looping and pushing matches into a result array.
+```js
+function greaterThan(arr, limit) {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > limit) result.push(arr[i]);
+  }
+  return result;
+}
+console.log(greaterThan([4, 15, 8, 23], 10)); // [15, 23]
+```
+
+**Note:** By convention, a search function returns `-1` when nothing is found, not `false`.
+
+**More Examples:**
+```js
+function findIndex(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
+}
+console.log(findIndex([5, 8, 2], 8)); // 1
+```
+```js
+function countEven(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) count++;
+  }
+  return count;
+}
+console.log(countEven([1, 2, 3, 4])); // 2
+```
+```js
+function reverseArray(arr) {
+  let reversed = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    reversed.push(arr[i]);
+  }
+  return reversed;
+}
+console.log(reverseArray([1, 2, 3])); // [3, 2, 1]
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the function to count even numbers.
+```js
+function countEven(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (___) count++;
+  }
+  return count;
+}
+console.log(countEven([1, 2, 3, 4])); // 2
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+if (arr[i] % 2 === 0) count++;
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a function `greaterThan(arr, limit)` that returns a new array with only the values greater than `limit`.
+
+
+<LessonAnswer>
+
+
+
+```js
+function greaterThan(arr, limit) {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > limit) result.push(arr[i]);
+  }
+  return result;
+}
+console.log(greaterThan([4, 15, 8, 23], 10)); // [15, 23]
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What does `findIndex([1, 2, 3], 9)` return, and why?
+
+
+<LessonAnswer>
+
+
+
+`-1` — the loop never finds `9`, so it falls through to the `return -1;` line after the loop.
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 7 — Objects & arrays of objects

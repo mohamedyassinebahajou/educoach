@@ -1,0 +1,158 @@
+---
+title: "Scope & arrow functions"
+summary: "Block scope, classic functions, and arrows."
+day: 4
+---
+
+**What is an arrow function?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gYXJyb3cgZnVuY3Rpb24gaXMgYSBzaG9ydGVyIHN5bnRheCBmb3Igd3JpdGluZyBmdW5jdGlvbnMgdXNpbmcgPT4gaW5zdGVhZCBvZiB0aGUgZnVuY3Rpb24ga2V5d29yZC4gSXQgaXMgY29tbW9ubHkgdXNlZCBmb3IgY2FsbGJhY2tzIGFuZCBzbWFsbCBvcGVyYXRpb25zIHdoZXJlIGJyZXZpdHkgaW1wcm92ZXMgcmVhZGFiaWxpdHkuIiwiYW5hbG9neSI6IkFuIGFycm93IGZ1bmN0aW9uIGlzIGxpa2UgYSBzaG9ydGhhbmQgbm90ZSBvbiBhIHN0aWNreSBwYWTigJRxdWljayB0byB3cml0ZSB3aGVuIHRoZSBpZGVhIGlzIHNtYWxsIGFuZCBjbGVhci4ifQ==" />
+
+An arrow function is a shorter way to write a function, using `=>` instead of the `function` keyword.
+```js
+const square = function(n) { return n * n; }; // classic
+const squareArrow = (n) => n * n;             // arrow, same behavior
+console.log(square(4), squareArrow(4));
+```
+
+**Implicit return**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiV2hlbiBhbiBhcnJvdyBmdW5jdGlvbiBib2R5IGlzIGEgc2luZ2xlIGV4cHJlc3Npb24gd2l0aG91dCBjdXJseSBicmFjZXMsIEphdmFTY3JpcHQgYXV0b21hdGljYWxseSByZXR1cm5zIHRoYXQgZXhwcmVzc2lvbuKAmXMgdmFsdWUuIFRoaXMgcmVtb3ZlcyB0aGUgbmVlZCBmb3IgYW4gZXhwbGljaXQgcmV0dXJuIHN0YXRlbWVudCBpbiBvbmUtbGluZXJzLiIsImFuYWxvZ3kiOiJJbXBsaWNpdCByZXR1cm4gaXMgbGlrZSBhIHZlbmRpbmcgbWFjaGluZSB0aGF0IGRyb3BzIHRoZSBzbmFjayBhcyBzb29uIGFzIHlvdSBwYXnigJRubyBleHRyYSBidXR0b24gcHJlc3MgbmVlZGVkLiJ9" />
+
+If the function body is a single expression, you can drop the curly braces and `return` — the value is returned automatically.
+```js
+const double = (n) => n * 2;
+console.log(double(5)); // 10
+```
+
+**Arrow functions with multiple statements**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiSWYgYW4gYXJyb3cgZnVuY3Rpb24gbmVlZHMgbW9yZSB0aGFuIG9uZSBzdGF0ZW1lbnQsIHdyYXAgdGhlIGJvZHkgaW4gY3VybHkgYnJhY2VzIGFuZCB1c2UgcmV0dXJuIGV4cGxpY2l0bHkgd2hlbiB5b3UgbmVlZCB0byBzZW5kIGEgdmFsdWUgYmFjay4gVGhlIGNvbmNpc2UgaW1wbGljaXQtcmV0dXJuIGZvcm0gbm8gbG9uZ2VyIGFwcGxpZXMgaW4gdGhhdCBjYXNlLiIsImFuYWxvZ3kiOiJNdWx0aXBsZSBzdGF0ZW1lbnRzIGluIGFuIGFycm93IGZ1bmN0aW9uIGFyZSBsaWtlIGEgcmVjaXBlIHdpdGggc2V2ZXJhbCBzdGVwc+KAlHlvdSBuZWVkIGEgZnVsbCBjaGVja2xpc3QsIG5vdCBhIG9uZS1saW5lIHN1bW1hcnkuIn0=" />
+
+If you need more than one statement, you must add curly braces and an explicit `return`.
+```js
+const describe = (n) => {
+  let type = n % 2 === 0 ? "even" : "odd";
+  return n + " is " + type;
+};
+console.log(describe(7));
+```
+
+**Block scope**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVmFyaWFibGVzIGRlY2xhcmVkIHdpdGggbGV0IG9yIGNvbnN0IGluc2lkZSBjdXJseSBicmFjZXMgeyB9IGJlbG9uZyB0byB0aGF0IGJsb2NrIGFuZCBhcmUgbm90IHZpc2libGUgb3V0c2lkZSBpdC4gQmxvY2sgc2NvcGUga2VlcHMgdGVtcG9yYXJ5IG5hbWVzIGZyb20gbGVha2luZyBpbnRvIHRoZSByZXN0IG9mIHRoZSBwcm9ncmFtLiIsImFuYWxvZ3kiOiJCbG9jayBzY29wZSBpcyBsaWtlIGl0ZW1zIGluIGEgbG9ja2Vy4oCUdGhleSBzdGF5IGluc2lkZSB1bnRpbCB0aGUgYmxvY2sgZW5kcywgdGhlbiB5b3UgY2Fubm90IHJlYWNoIHRoZW0gZnJvbSB0aGUgaGFsbHdheS4ifQ==" />
+
+A variable declared with `let` or `const` inside a block `{ }` (like an `if` or loop) only exists inside that block.
+```js
+if (true) {
+  let secret = "hidden";
+  console.log(secret); // works here
+}
+// console.log(secret); // error: secret is not defined out here
+```
+
+**Function scope**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiSW4gYSB0cmFkaXRpb25hbCBmdW5jdGlvbiBkZWNsYXJhdGlvbiwgdmFyLWNyZWF0ZWQgdmFyaWFibGVzIGFyZSB2aXNpYmxlIHRocm91Z2hvdXQgdGhlIGVudGlyZSBmdW5jdGlvbiwgbm90IGp1c3QgdGhlIGJsb2NrIHdoZXJlIHRoZXkgd2VyZSBkZWNsYXJlZC4gRnVuY3Rpb25zIHRoZXJlZm9yZSBmb3JtIGEgc2NvcGUgYm91bmRhcnkgZm9yIHZhciwgd2hpbGUgbGV0IGFuZCBjb25zdCBmb2xsb3cgYmxvY2sgcnVsZXMuIiwiYW5hbG9neSI6IkZ1bmN0aW9uIHNjb3BlIGlzIGxpa2UgYSBvZmZpY2UgZmxvb3IgcGFzc+KAlHZhciBsZXRzIHlvdSByb2FtIHRoZSB3aG9sZSBmbG9vciwgd2hpbGUgbGV0IGFuZCBjb25zdCBvbmx5IG9wZW4gY2VydGFpbiByb29tcy4ifQ==" />
+
+A variable declared inside a function cannot be accessed from outside that function — it's private to the function.
+```js
+function makeMessage() {
+  let message = "hello from inside";
+  return message;
+}
+console.log(makeMessage());
+// console.log(message); // error: message is not defined
+```
+
+**Note:** If an arrow function needs more than one statement, you need curly braces AND an explicit `return`.
+
+**More Examples:**
+```js
+const square = (n) => n * n;
+console.log(square(4)); // 16
+```
+```js
+const describe = (n) => {
+  let type = n % 2 === 0 ? "even" : "odd";
+  return n + " is " + type;
+};
+console.log(describe(7));
+```
+```js
+if (true) {
+  let secret = "hidden";
+  console.log(secret);
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Rewrite this function as an arrow function.
+```js
+function double(n) {
+  return n * 2;
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+const double = (n) => n * 2;
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** What error would this code cause, and why?
+```js
+function makeMessage() {
+  let message = "hi";
+  return message;
+}
+console.log(makeMessage());
+console.log(message);
+```
+
+
+<LessonAnswer>
+
+
+
+`message is not defined` — `message` is scoped inside `makeMessage`, so it doesn't exist outside the function.
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Write an arrow function `isAdult(age)` that returns `true` if age is 18 or more, using implicit return (no curly braces).
+
+
+<LessonAnswer>
+
+
+
+```js
+const isAdult = (age) => age >= 18;
+```
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 5 — Strings

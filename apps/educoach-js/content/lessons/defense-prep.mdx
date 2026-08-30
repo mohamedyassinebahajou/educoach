@@ -1,0 +1,99 @@
+---
+title: "Soutenance prep"
+summary: "Present, demo, and answer questions."
+day: 10
+---
+
+**Preparing your introduction**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiWW91ciBpbnRyb2R1Y3Rpb24gYnJpZWZseSBzdGF0ZXMgd2hvIHlvdSBhcmUsIHdoYXQgeW91ciBtaW5pLXByb2plY3QgZG9lcywgYW5kIHdoeSB5b3UgY2hvc2UgaXTigJR1c3VhbGx5IGluIHVuZGVyIGEgbWludXRlLiBBIGNsZWFyIG9wZW5pbmcgc2V0cyBjb250ZXh0IGJlZm9yZSB5b3Ugc2hvdyBjb2RlIG9yIHJ1biBhIGRlbW8uIiwiYW5hbG9neSI6IkEgcHJvamVjdCBpbnRyb2R1Y3Rpb24gaXMgbGlrZSBhIG1vdmllIHRyYWlsZXLigJRpdCB0ZWxscyB0aGUgYXVkaWVuY2Ugd2hhdCB0byBleHBlY3QgYmVmb3JlIHRoZSBtYWluIGZlYXR1cmUgc3RhcnRzLiJ9" />
+
+Before touching any code, prepare a one- or two-sentence spoken summary of what your project does.
+```js
+// Spoken intro example (not code, but practice saying this out loud):
+// "My project is a small inventory manager that can search, total, and sort products."
+```
+
+**Explaining your data structure**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRXhwbGFpbmluZyB5b3VyIGRhdGEgc3RydWN0dXJlIG1lYW5zIGRlc2NyaWJpbmcgd2hhdCBlYWNoIG9iamVjdCByZXByZXNlbnRzLCB3aGljaCBwcm9wZXJ0aWVzIGl0IGhhcywgYW5kIHdoeSB0aGF0IHNoYXBlIGZpdHMgdGhlIHByb2JsZW0uIFJldmlld2VycyBzaG91bGQgdW5kZXJzdGFuZCB5b3VyIHJlY29yZHMgd2l0aG91dCByZWFkaW5nIGV2ZXJ5IGxpbmUgb2YgY29kZS4iLCJhbmFsb2d5IjoiRXhwbGFpbmluZyB5b3VyIGRhdGEgc3RydWN0dXJlIGlzIGxpa2Ugc2hvd2luZyBhIGZvcm0gdGVtcGxhdGXigJRlYWNoIGZpZWxkIGhhcyBhIHB1cnBvc2UgZXZlcnlvbmUgY2FuIHJlYWQgYXQgYSBnbGFuY2UuIn0=" />
+
+Walk through why you chose your object's fields before explaining any function — this gives context to everything that follows.
+```js
+const products = [{ name: "Pen", price: 3, quantity: 150 }];
+console.log("Each product has: name, price, and quantity.");
+```
+
+**Running a live demo**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBsaXZlIGRlbW8gZXhlY3V0ZXMgeW91ciBwcm9qZWN0IGluIGZyb250IG9mIHJldmlld2Vycywgc2hvd2luZyBzZWFyY2gsIGZpbHRlciwgc3RhdHMsIG9yIG90aGVyIGZlYXR1cmVzIHdpdGggcmVhbCBpbnB1dC4gUHJhY3RpY2UgdGhlIGRlbW8gcGF0aCBzbyBpdCBydW5zIHNtb290aGx5IGFuZCBoaWdobGlnaHRzIHlvdXIgYmVzdCB3b3JrLiIsImFuYWxvZ3kiOiJBIGxpdmUgZGVtbyBpcyBsaWtlIGEgY29va2luZyBzaG93IHNlZ21lbnTigJR5b3UgcGVyZm9ybSB0aGUgc3RlcHMgbGl2ZSBzbyB0aGUgYXVkaWVuY2UgdGFzdGVzIHRoZSByZXN1bHQsIG5vdCBqdXN0IHRoZSByZWNpcGUuIn0=" />
+
+Always run your code live rather than only showing it — this proves it actually works and is more engaging.
+```js
+console.log("=== PROJECT DEMO ===");
+console.log("Data:", products);
+console.log("Search result:", findProduct(products, "Pen"));
+```
+
+**Preparing for questions**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUHJlcGFyaW5nIGZvciBxdWVzdGlvbnMgbWVhbnMgYW50aWNpcGF0aW5nIHdoYXQgcmV2aWV3ZXJzIG1pZ2h0IGFzayBhYm91dCB5b3VyIGRlc2lnbiwgYWxnb3JpdGhtcywgZWRnZSBjYXNlcywgYW5kIEdpdCB3b3JrZmxvd+KAlGFuZCByZWhlYXJzaW5nIGNsZWFyIGFuc3dlcnMuIEhvbmVzdCBleHBsYW5hdGlvbnMgb2YgdHJhZGUtb2ZmcyBzaG93IGRlZXBlciB1bmRlcnN0YW5kaW5nIHRoYW4gbWVtb3JpemVkIGphcmdvbi4iLCJhbmFsb2d5IjoiUHJlcGFyaW5nIGZvciBxdWVzdGlvbnMgaXMgbGlrZSBzdHVkeWluZyBmb3IgYW4gb3JhbCBleGFt4oCUeW91IHRoaW5rIGFib3V0IGxpa2VseSBwcm9tcHRzIGFuZCBob3cgeW91IHdvdWxkIGV4cGxhaW4geW91ciBjaG9pY2VzIGNhbG1seS4ifQ==" />
+
+Practice short, clear answers to likely questions: "Why this loop?", "What if the array is empty?", "How does your sort work?"
+```js
+// Practice explaining this out loud, step by step:
+function totalPrice(list) {
+  let total = 0;
+  for (let i = 0; i < list.length; i++) total += list[i].price;
+  return total;
+}
+```
+
+**Writing a README**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBSRUFETUUgaXMgYSBtYXJrZG93biBmaWxlIGluIHlvdXIgcmVwb3NpdG9yeSB0aGF0IGV4cGxhaW5zIHdoYXQgdGhlIHByb2plY3QgZG9lcywgaG93IHRvIHJ1biBpdCwgYW5kIHdoYXQgeW91IGxlYXJuZWQuIEl0IGhlbHBzIHJldmlld2VycyBhbmQgZnV0dXJlIHlvdSB1bmRlcnN0YW5kIHRoZSBwcm9qZWN0IHdpdGhvdXQgb3BlbmluZyBldmVyeSBzb3VyY2UgZmlsZS4iLCJhbmFsb2d5IjoiQSBSRUFETUUgaXMgbGlrZSB0aGUgaW5zdHJ1Y3Rpb24gbWFudWFsIG9uIHRoZSBib3jigJRpdCB0ZWxscyBzb21lb25lIGhvdyB0byBzZXQgdXAgYW5kIHVzZSB3aGF0IHlvdSBidWlsdC4ifQ==" />
+
+A short README describing what your project does and how to run it is often the first thing a reviewer reads.
+```
+# README.md
+## What it does
+Tracks a small product inventory: search, total value, sorting.
+## How to run
+node inventory.js
+```
+
+**Note:** Run your demo live during the defense — it builds more trust than just reading code aloud.
+
+**More Examples:**
+```js
+console.log("=== PROJECT DEMO ===");
+console.log("Data:", products);
+console.log("Search result:", findProduct(products, "Pen"));
+```
+```
+# README.md
+## What it does
+Tracks a small product inventory: search, total value, sorting.
+## How to run
+node inventory.js
+```
+```js
+// Practice explaining this out loud, step by step
+function totalPrice(list) {
+  let total = 0;
+  for (let i = 0; i < list.length; i++) total += list[i].price;
+  return total;
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Write 2 questions you might be asked about your project, and a short answer for each.
+
+
+**2.** Write a short README for your mini-project (what it does + how to run it).
+
+
+**3.** Do one full timed practice run of your live demo, out loud, before the actual defense.

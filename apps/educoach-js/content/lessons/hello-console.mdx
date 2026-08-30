@@ -1,0 +1,139 @@
+---
+title: "console.log and .js files"
+summary: "Run statements, print values, think in Node or browser console."
+day: 1
+---
+
+**What is console.log()?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiY29uc29sZS5sb2coKSBpcyBhIGJ1aWx0LWluIGZ1bmN0aW9uIHRoYXQgcHJpbnRzIGEgdmFsdWUgdG8gdGhlIGNvbnNvbGUgc28geW91IGNhbiBzZWUgd2hhdCB5b3VyIHByb2dyYW0gaXMgZG9pbmcuIERldmVsb3BlcnMgdXNlIGl0IHRvIGluc3BlY3QgdmFyaWFibGVzLCBkZWJ1ZyBsb2dpYywgYW5kIGNvbmZpcm0gdGhhdCBjb2RlIHJ1bnMgYXMgZXhwZWN0ZWQuIiwiYW5hbG9neSI6ImNvbnNvbGUubG9nKCkgaXMgbGlrZSB0YWxraW5nIHRvIHlvdXJzZWxmIHdoaWxlIGNvb2tpbmfigJR5b3UgYW5ub3VuY2UgZWFjaCBzdGVwIHNvIHlvdSBjYW4gdGVsbCB3aGV0aGVyIHRoaW5ncyBhcmUgZ29pbmcgcmlnaHQuIn0=" />
+
+`console.log()` is a built-in function that prints whatever you put inside its parentheses. It's the main way to see what your program is doing.
+```js
+console.log("I can see this in the console!");
+```
+
+**Printing different types**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiSmF2YVNjcmlwdCBjYW4gcHJpbnQgbWFueSBraW5kcyBvZiB2YWx1ZXMgd2l0aCBjb25zb2xlLmxvZygpLCBpbmNsdWRpbmcgbnVtYmVycywgc3RyaW5ncywgYm9vbGVhbnMsIGFuZCBtb3JlIGNvbXBsZXggdmFsdWVzIGxpa2UgYXJyYXlzIGFuZCBvYmplY3RzLiBUaGUgY29uc29sZSBkaXNwbGF5cyBlYWNoIHR5cGUgaW4gYSByZWFkYWJsZSBmb3JtIHNvIHlvdSBjYW4gc3R1ZHkgdGhlIG91dHB1dC4iLCJhbmFsb2d5IjoiUHJpbnRpbmcgZGlmZmVyZW50IHR5cGVzIGlzIGxpa2UgbGFiZWxpbmcgYm94ZXMgb24gYSBzaGVsZjogbnVtYmVycywgd29yZHMsIGFuZCB5ZXMvbm8gdGFncyBhbGwgbG9vayBkaWZmZXJlbnQsIGJ1dCBlYWNoIGxhYmVsIHRlbGxzIHlvdSB3aGF0IGlzIGluc2lkZS4ifQ==" />
+
+You can print numbers, text (strings), booleans, or several values at once, separated by commas.
+```js
+console.log(42, "apples", true);
+```
+
+**Running a `.js` file**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSAuanMgZmlsZSBob2xkcyBKYXZhU2NyaXB0IGNvZGUgdGhhdCB5b3UgZXhlY3V0ZSB3aXRoIGEgcnVudGltZSBzdWNoIGFzIE5vZGUuanMgZnJvbSB0aGUgdGVybWluYWwuIFRoZSBydW50aW1lIHJlYWRzIHRoZSBmaWxlIGZyb20gdG9wIHRvIGJvdHRvbSBhbmQgcnVucyBlYWNoIHN0YXRlbWVudCBpbiBvcmRlci4iLCJhbmFsb2d5IjoiUnVubmluZyBhIC5qcyBmaWxlIGlzIGxpa2UgcHJlc3NpbmcgcGxheSBvbiBhIHJlY2lwZSB2aWRlb+KAlHRoZSBzdGVwcyBoYXBwZW4gb25lIGFmdGVyIGFub3RoZXIgZXhhY3RseSBhcyB3cml0dGVuLiJ9" />
+
+A JavaScript file is a plain text file ending in `.js`. With Node.js installed, you run it from a terminal using `node filename.js`, from the same folder as the file.
+```
+node hello.js
+```
+
+**Using a browser console instead**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQnJvd3NlcnMgcHJvdmlkZSBhIGRldmVsb3BlciBjb25zb2xlIHdoZXJlIHlvdSBjYW4gdHlwZSBKYXZhU2NyaXB0IGFuZCBzZWUgcmVzdWx0cyBpbW1lZGlhdGVseSB3aXRob3V0IHNhdmluZyBhIGZpbGUuIEl0IGlzIHVzZWZ1bCBmb3IgcXVpY2sgZXhwZXJpbWVudHMgYW5kIGZvciB0ZXN0aW5nIGNvZGUgdGhhdCBpbnRlcmFjdHMgd2l0aCBhIHdlYiBwYWdlLiIsImFuYWxvZ3kiOiJUaGUgYnJvd3NlciBjb25zb2xlIGlzIGxpa2UgYSBzY3JhdGNoIHBhZCBvbiB5b3VyIGRlc2s6IGpvdCBhIHF1aWNrIGNhbGN1bGF0aW9uIG9yIGlkZWEgYW5kIGVyYXNlIGl0IHdoZW4geW91IGFyZSBkb25lIGV4cGVyaW1lbnRpbmcuIn0=" />
+
+If you don't have Node, open your browser, press F12, go to the "Console" tab, and type JavaScript directly — it runs each line immediately, which is called a REPL.
+```js
+// Typed directly into a browser console:
+console.log("Works in the browser too!");
+```
+
+**Statements run top to bottom**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQnkgZGVmYXVsdCwgSmF2YVNjcmlwdCBleGVjdXRlcyBzdGF0ZW1lbnRzIGluIHRoZSBvcmRlciB0aGV5IGFwcGVhciwgZnJvbSB0aGUgZmlyc3QgbGluZSB0byB0aGUgbGFzdC4gTGF0ZXIgbGluZXMgY2FuIHVzZSByZXN1bHRzIHByb2R1Y2VkIGJ5IGVhcmxpZXIgbGluZXMgYmVjYXVzZSBleGVjdXRpb24gZmxvd3MgZG93bndhcmQgdGhyb3VnaCB0aGUgZmlsZS4iLCJhbmFsb2d5IjoiU3RhdGVtZW50cyBydW5uaW5nIHRvcCB0byBib3R0b20gaXMgbGlrZSBmb2xsb3dpbmcgYSBtb3JuaW5nIHJvdXRpbmU6IHlvdSBjYW5ub3QgYnJ1c2ggeW91ciB0ZWV0aCBiZWZvcmUgeW91IHdha2UgdXAsIGJlY2F1c2Ugb3JkZXIgbWF0dGVycy4ifQ==" />
+
+JavaScript runs your code one line at a time, from the top of the file to the bottom, unless a loop or function changes that order (we'll see this soon).
+```js
+console.log("first");
+console.log("second");
+console.log("third");
+```
+
+**Note:** Add a semicolon `;` at the end of each statement — it's good practice, even though JavaScript can sometimes guess where a line ends.
+
+**More Examples:**
+```js
+console.log("Hello, YouCode!");
+console.log(10, true, "text");
+```
+```js
+console.log("Step 1");
+console.log("Step 2");
+console.log("Step 3");
+```
+```js
+console.log("2 + 2 =", 2 + 2);
+console.log("10 / 2 =", 10 / 2);
+```
+
+**Exercises:**
+
+
+
+**1.** What does this print? Write the output, then run it to check.
+```js
+console.log("A");
+console.log("B");
+console.log(1 + 1);
+```
+
+
+<LessonAnswer>
+
+
+
+```
+A
+B
+2
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Fix the broken line so it runs without an error.
+```js
+console.log "Hello";
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log("Hello");
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Write a `.js` file (on paper or in your editor) that prints three lines: your name, your city, and your favorite number. What terminal command would you use to run a file named `me.js`?
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log("Yourname");
+console.log("Yourcity");
+console.log(7);
+```
+Terminal command: `node me.js`
+
+
+</LessonAnswer>
+
+

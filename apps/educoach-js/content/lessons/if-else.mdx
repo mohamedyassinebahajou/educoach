@@ -1,0 +1,202 @@
+---
+title: "Conditions — if / else / switch"
+summary: "Branch with if, else if, else, and switch."
+day: 2
+---
+
+**Basic if / else**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gaWYgc3RhdGVtZW50IHJ1bnMgYSBibG9jayBvZiBjb2RlIG9ubHkgd2hlbiBpdHMgY29uZGl0aW9uIGlzIHRydWU7IGVsc2UgcnVucyBhIGRpZmZlcmVudCBibG9jayB3aGVuIHRoZSBjb25kaXRpb24gaXMgZmFsc2UuIFRvZ2V0aGVyIHRoZXkgbGV0IHRoZSBwcm9ncmFtIGNob29zZSBiZXR3ZWVuIHR3byBwYXRocy4iLCJhbmFsb2d5IjoiaWYgLyBlbHNlIGlzIGxpa2UgY2hvb3NpbmcgYW4gdW1icmVsbGE6IGlmIGl0IGlzIHJhaW5pbmcsIHlvdSBvcGVuIGl0OyBvdGhlcndpc2UsIHlvdSBsZWF2ZSBpdCBhdCBob21lLiJ9" />
+
+An `if` statement runs its block of code only when the condition is `true`. `else` runs when it's `false`.
+```js
+let age = 20;
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+```
+
+**Chaining with else if**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiZWxzZSBpZiBhZGRzIGFkZGl0aW9uYWwgY29uZGl0aW9ucyBjaGVja2VkIGluIG9yZGVyIGFmdGVyIHRoZSBmaXJzdCBpZiBmYWlscy4gVGhlIHByb2dyYW0gcnVucyB0aGUgZmlyc3QgYmxvY2sgd2hvc2UgY29uZGl0aW9uIGlzIHRydWUgYW5kIHNraXBzIHRoZSByZXN0IG9mIHRoZSBjaGFpbi4iLCJhbmFsb2d5IjoiZWxzZSBpZiBpcyBsaWtlIGEgbXVsdGlwbGUtY2hvaWNlIHF1ZXN0aW9u4oCUeW91IHRyeSBvcHRpb24gQSwgdGhlbiBCLCB0aGVuIEMsIGFuZCBzdG9wIGF0IHRoZSBmaXJzdCBhbnN3ZXIgdGhhdCBmaXRzLiJ9" />
+
+`else if` checks additional conditions in sequence, stopping at the first one that matches.
+```js
+let grade = 85;
+if (grade >= 90) {
+  console.log("A");
+} else if (grade >= 80) {
+  console.log("B");
+} else {
+  console.log("C or below");
+}
+```
+
+**Combining conditions**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiWW91IGNhbiBjb21iaW5lIG11bHRpcGxlIHRlc3RzIGluIG9uZSBjb25kaXRpb24gdXNpbmcgbG9naWNhbCBvcGVyYXRvcnMgc3VjaCBhcyAmJiBhbmQgfHwuIFRoaXMgbGV0cyBhIHNpbmdsZSBpZiBoYW5kbGUgc2l0dWF0aW9ucyB0aGF0IGRlcGVuZCBvbiBtb3JlIHRoYW4gb25lIGZhY3QgYmVpbmcgdHJ1ZSBvciBmYWxzZS4iLCJhbmFsb2d5IjoiQ29tYmluaW5nIGNvbmRpdGlvbnMgaXMgbGlrZSBuZWVkaW5nIGJvdGggYSBrZXkgYW5kIGEgY29kZSB0byBvcGVuIGEgc2FmZeKAlG9uZSBhbG9uZSBpcyBub3QgZW5vdWdoLiJ9" />
+
+You can combine comparisons with `&&` and `||` to check ranges or multiple criteria at once.
+```js
+let temperature = 25;
+if (temperature > 20 && temperature < 30) {
+  console.log("Nice weather!");
+}
+```
+
+**Truthy and falsy values**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiSW4gYm9vbGVhbiBjb250ZXh0cywgdmFsdWVzIGxpa2UgMCwgZW1wdHkgc3RyaW5nLCBudWxsLCB1bmRlZmluZWQsIGFuZCBOYU4gYXJlIGZhbHN5IGFuZCB0cmVhdGVkIGFzIGZhbHNlOyBtb3N0IG90aGVyIHZhbHVlcyBhcmUgdHJ1dGh5IGFuZCB0cmVhdGVkIGFzIHRydWUuIGlmIHN0YXRlbWVudHMgdXNlIHRoaXMgcnVsZSB3aGVuIGV2YWx1YXRpbmcgbm9uLWJvb2xlYW4gZXhwcmVzc2lvbnMuIiwiYW5hbG9neSI6IlRydXRoeSBhbmQgZmFsc3kgYXJlIGxpa2UgYSBib3VuY2Vy4oCZcyBzaW1wbGUgcnVsZTogZW1wdHkgaGFuZHMgKGZhbHN5KSBkbyBub3QgZ2V0IGluLCBidXQgYWxtb3N0IGFueXRoaW5nIGVsc2UgKHRydXRoeSkgZG9lcy4ifQ==" />
+
+In a condition, `0`, `""`, `null`, `undefined`, and `NaN` behave as "falsy" (like `false`). Every other value is "truthy" (like `true`).
+```js
+if ("hello") {
+  console.log("non-empty strings are truthy");
+}
+```
+
+**Using switch for exact matches**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoic3dpdGNoIGNvbXBhcmVzIG9uZSB2YWx1ZSBhZ2FpbnN0IHNldmVyYWwgZXhhY3QgY2FzZXMgYW5kIHJ1bnMgdGhlIG1hdGNoaW5nIGJsb2NrLCB3aXRoIGJyZWFrIHByZXZlbnRpbmcgZmFsbC10aHJvdWdoIHRvIGxhdGVyIGNhc2VzLiBJdCBpcyBjbGVhcmVzdCB3aGVuIHlvdSB0ZXN0IG9uZSB2YXJpYWJsZSBhZ2FpbnN0IG1hbnkgc3BlY2lmaWMgY29uc3RhbnQgdmFsdWVzLiIsImFuYWxvZ3kiOiJzd2l0Y2ggaXMgbGlrZSBhIHZlbmRpbmcgbWFjaGluZSByb3c6IHlvdSBwcmVzcyBvbmUgYnV0dG9uIGZvciBjaGlwcywgYW5vdGhlciBmb3IgY2FuZHnigJRlYWNoIGNob2ljZSBtYXBzIHRvIGV4YWN0bHkgb25lIG91dGNvbWUuIn0=" />
+
+`switch` compares one value against several exact cases. Each `case` needs a `break`, or execution "falls through" into the next case.
+```js
+let day = "Sunday";
+switch (day) {
+  case "Saturday":
+  case "Sunday":
+    console.log("Weekend");
+    break;
+  default:
+    console.log("Weekday");
+}
+```
+
+**Note:** Values `0`, `""`, `null`, `undefined`, and `NaN` are "falsy" — every other value is "truthy" inside an `if`.
+
+**More Examples:**
+```js
+let age = 20;
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+```
+```js
+let grade = 85;
+if (grade >= 90) {
+  console.log("A");
+} else if (grade >= 80) {
+  console.log("B");
+} else {
+  console.log("C or below");
+}
+```
+```js
+let day = "Sunday";
+switch (day) {
+  case "Saturday":
+  case "Sunday":
+    console.log("Weekend");
+    break;
+  default:
+    console.log("Weekday");
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the code so it prints "C" when `grade` is 75.
+```js
+let grade = 75;
+if (grade >= 90) {
+  console.log("A");
+} else if (___) {
+  console.log("C");
+} else {
+  console.log("F");
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+} else if (grade >= 70) {
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Rewrite this `if/else if` chain as a `switch` statement.
+```js
+let fruit = "apple";
+if (fruit === "apple") {
+  console.log("Red or green");
+} else if (fruit === "banana") {
+  console.log("Yellow");
+} else {
+  console.log("Unknown");
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+switch (fruit) {
+  case "apple":
+    console.log("Red or green");
+    break;
+  case "banana":
+    console.log("Yellow");
+    break;
+  default:
+    console.log("Unknown");
+}
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What prints, and why?
+```js
+if ("") {
+  console.log("A");
+} else {
+  console.log("B");
+}
+```
+
+
+<LessonAnswer>
+
+
+
+`B` — an empty string `""` is falsy, so the `else` branch runs.
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 3 — Loops

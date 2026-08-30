@@ -1,0 +1,43 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Env & secrets
+.env
+*.pem
+
+# Data / artifacts (keep folders via .gitkeep)
+data/processed/*.csv
+!data/processed/.gitkeep
+models/*.pkl
+!models/.gitkeep
+vector_db/**
+!vector_db/.gitkeep
+data/runtime/*
+!data/runtime/.gitkeep
+mlruns/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node (EduCoach JS app)
+apps/**/node_modules/
+apps/**/.next/
+apps/**/out/
+apps/**/*.tsbuildinfo
+apps/educoach-js/prisma/*.db
+apps/educoach-js/prisma/*.db-journal
+apps/educoach-js/.env
+apps/educoach-js/src/generated/

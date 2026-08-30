@@ -1,0 +1,187 @@
+---
+title: "String challenges"
+summary: "Vowels, occurrences, reverse, palindrome patterns."
+day: 5
+---
+
+**Counting vowels**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ291bnRpbmcgdm93ZWxzIG1lYW5zIGxvb3BpbmcgdGhyb3VnaCBhIHN0cmluZyBhbmQgaW5jcmVtZW50aW5nIGEgY291bnRlciB3aGVuZXZlciBhIGNoYXJhY3RlciBpcyBhLCBlLCBpLCBvLCBvciB1IChvZnRlbiBpbmNsdWRpbmcgdXBwZXJjYXNlKS4gSXQgY29tYmluZXMgdHJhdmVyc2FsIHdpdGggYSBjb25kaXRpb25hbCB0ZXN0IG9uIGVhY2ggY2hhcmFjdGVyLiIsImFuYWxvZ3kiOiJDb3VudGluZyB2b3dlbHMgaXMgbGlrZSB0YWxseWluZyByZWQgY2FycyBpbiB0cmFmZmlj4oCUeW91IGxvb2sgYXQgZWFjaCB2ZWhpY2xlIGFuZCBhZGQgb25lIG9ubHkgd2hlbiBpdCBtYXRjaGVzIHlvdXIgcnVsZS4ifQ==" />
+
+Loop through every character, lowercase it, and check if it's one of `a, e, i, o, u`.
+```js
+function countVowels(word) {
+  let count = 0;
+  let vowels = "aeiou";
+  for (let i = 0; i < word.length; i++) {
+    if (vowels.includes(word[i].toLowerCase())) count++;
+  }
+  return count;
+}
+console.log(countVowels("banana")); // 3
+```
+
+**Counting occurrences of a letter**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVG8gY291bnQgaG93IG1hbnkgdGltZXMgYSBzcGVjaWZpYyBsZXR0ZXIgYXBwZWFycywgY29tcGFyZSBlYWNoIGNoYXJhY3RlciB0byB0aGUgdGFyZ2V0IGFuZCBpbmNyZWFzZSBhIGNvdW50ZXIgb24gZWFjaCBtYXRjaC4gQ2FzZSBzZW5zaXRpdml0eSBtYXR0ZXJzIHVubGVzcyB5b3Ugbm9ybWFsaXplIHRoZSBzdHJpbmcgZmlyc3QuIiwiYW5hbG9neSI6IkNvdW50aW5nIGEgbGV0dGVyIGlzIGxpa2UgY291bnRpbmcgaG93IG1hbnkgdGltZXMgeW91ciBmYXZvcml0ZSBwbGF5ZXLigJlzIGplcnNleSBudW1iZXIgc2hvd3MgdXAgaW4gYSBjcm93ZCBwaG90by4ifQ==" />
+
+Loop through, compare each character to the target letter, and increase a counter on a match.
+```js
+function countLetter(word, letter) {
+  let count = 0;
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === letter) count++;
+  }
+  return count;
+}
+console.log(countLetter("banana", "a")); // 3
+```
+
+**Reversing a string**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiUmV2ZXJzaW5nIGEgc3RyaW5nIG1lYW5zIHByb2R1Y2luZyBhIG5ldyBzdHJpbmcgd2hvc2UgY2hhcmFjdGVycyBhcHBlYXIgaW4gdGhlIG9wcG9zaXRlIG9yZGVyIGZyb20gdGhlIG9yaWdpbmFsLiBDb21tb24gYXBwcm9hY2hlcyBidWlsZCBhIG5ldyBzdHJpbmcgZnJvbSB0aGUgZW5kIGJhY2t3YXJkIG9yIHN3YXAgY2hhcmFjdGVycyBmcm9tIGJvdGggZW5kcy4iLCJhbmFsb2d5IjoiUmV2ZXJzaW5nIGEgc3RyaW5nIGlzIGxpa2UgcmVhZGluZyBhIHdvcmQgaW4gYSBtaXJyb3LigJR0aGUgbGFzdCBsZXR0ZXIgc2hvd3MgdXAgZmlyc3QuIn0=" />
+
+Loop backward from the last index to the first, building a new string one character at a time.
+```js
+function reverseString(text) {
+  let result = "";
+  for (let i = text.length - 1; i >= 0; i--) {
+    result += text[i];
+  }
+  return result;
+}
+console.log(reverseString("hello")); // "olleh"
+```
+
+**Checking a palindrome**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBwYWxpbmRyb21lIHJlYWRzIHRoZSBzYW1lIGZvcndhcmQgYW5kIGJhY2t3YXJkLCBzdWNoIGFzICdyYWNlY2FyJy4gQ2hlY2tpbmcgb25lIHVzdWFsbHkgY29tcGFyZXMgdGhlIHN0cmluZyB0byBpdHMgcmV2ZXJzZSBvciBjb21wYXJlcyBjaGFyYWN0ZXJzIGZyb20gYm90aCBlbmRzIG1vdmluZyBpbndhcmQuIiwiYW5hbG9neSI6IkEgcGFsaW5kcm9tZSBpcyBsaWtlIHRoZSB3b3JkICdCT0InIG9uIGEgbmFtZSB0YWfigJRpdCBsb29rcyBpZGVudGljYWwgd2hldGhlciB5b3UgcmVhZCBpdCBsZWZ0IHRvIHJpZ2h0IG9yIHJpZ2h0IHRvIGxlZnQuIn0=" />
+
+A palindrome reads the same forwards and backwards. Reverse the lowercase string and compare it to the original lowercase string.
+```js
+function isPalindrome(text) {
+  let lower = text.toLowerCase();
+  return lower === reverseString(lower);
+}
+console.log(isPalindrome("Level")); // true
+console.log(isPalindrome("Hello")); // false
+```
+
+**Testing edge cases**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRWRnZSBjYXNlcyBhcmUgdW51c3VhbCBpbnB1dHMgc3VjaCBhcyBlbXB0eSBzdHJpbmdzLCBzaW5nbGUgY2hhcmFjdGVycywgb3Igc3RyaW5ncyB3aXRoIG9ubHkgc3BhY2VzIHRoYXQgbWlnaHQgYnJlYWsgbmFpdmUgbG9naWMuIFRlc3RpbmcgdGhlbSBlbnN1cmVzIHlvdXIgZnVuY3Rpb24gYmVoYXZlcyBjb3JyZWN0bHkgYXQgYm91bmRhcmllcywgbm90IGp1c3Qgb24gdHlwaWNhbCBleGFtcGxlcy4iLCJhbmFsb2d5IjoiVGVzdGluZyBlZGdlIGNhc2VzIGlzIGxpa2UgY2hlY2tpbmcgd2hldGhlciB5b3VyIHVtYnJlbGxhIHdvcmtzIGluIGRyaXp6bGUsIGdhbGUgd2luZCwgYW5kIG5vIHJhaW7igJRub3QganVzdCBvbiBhIG5vcm1hbCByYWlueSBkYXkuIn0=" />
+
+Always test with an empty string, a single character, and mixed uppercase/lowercase to make sure your function is solid.
+```js
+console.log(countVowels(""));       // 0
+console.log(reverseString("a"));    // "a"
+console.log(isPalindrome("Level")); // true, case-insensitive
+```
+
+**Note:** Always lowercase both strings before comparing them, so your check is case-insensitive.
+
+**More Examples:**
+```js
+function reverseString(text) {
+  let result = "";
+  for (let i = text.length - 1; i >= 0; i--) {
+    result += text[i];
+  }
+  return result;
+}
+console.log(reverseString("hello")); // "olleh"
+```
+```js
+function countVowels(word) {
+  let count = 0;
+  let vowels = "aeiou";
+  for (let i = 0; i < word.length; i++) {
+    if (vowels.includes(word[i].toLowerCase())) count++;
+  }
+  return count;
+}
+console.log(countVowels("banana")); // 3
+```
+```js
+function isPalindrome(text) {
+  let lower = text.toLowerCase();
+  return lower === reverseString(lower);
+}
+console.log(isPalindrome("Level")); // true
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the function to count vowels in a word.
+```js
+function countVowels(word) {
+  let count = 0;
+  let vowels = "aeiou";
+  for (let i = 0; i < word.length; i++) {
+    if (___) count++;
+  }
+  return count;
+}
+console.log(countVowels("banana")); // 3
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+if (vowels.includes(word[i].toLowerCase())) count++;
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a function `countLetter(word, letter)` that counts how many times a specific letter appears.
+
+
+<LessonAnswer>
+
+
+
+```js
+function countLetter(word, letter) {
+  let count = 0;
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === letter) count++;
+  }
+  return count;
+}
+console.log(countLetter("banana", "a")); // 3
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Is `"Race car"` (with a space) a palindrome using the `isPalindrome` function above? Why or why not?
+
+
+<LessonAnswer>
+
+
+
+No — `isPalindrome` only lowercases the text, it doesn't remove spaces, so `"race car"` reversed is `"rac ecar"`, which doesn't match. You would need to also remove spaces to detect this as a palindrome.
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 6 — Arrays

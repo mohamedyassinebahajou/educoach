@@ -1,0 +1,164 @@
+---
+title: "Arrays of objects"
+summary: "Traverse and search lists of records."
+day: 7
+---
+
+**What is an array of objects?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gYXJyYXkgb2Ygb2JqZWN0cyBzdG9yZXMgbXVsdGlwbGUgcmVjb3JkcyBpbiBvbmUgbGlzdCwgZWFjaCByZWNvcmQgYmVpbmcgYW4gb2JqZWN0IHdpdGggdGhlIHNhbWUgb3Igc2ltaWxhciBwcm9wZXJ0aWVzLiBJdCBpcyB0aGUgc3RhbmRhcmQgd2F5IHRvIHJlcHJlc2VudCBjb2xsZWN0aW9ucyBzdWNoIGFzIHVzZXJzLCBwcm9kdWN0cywgb3Igc2NvcmVzLiIsImFuYWxvZ3kiOiJBbiBhcnJheSBvZiBvYmplY3RzIGlzIGxpa2UgYSBzdGFjayBvZiBzdHVkZW50IHJlcG9ydCBjYXJkc+KAlGVhY2ggY2FyZCBpcyBvbmUgb2JqZWN0LCBhbmQgdGhlIHBpbGUgaXMgdGhlIGFycmF5LiJ9" />
+
+It's a list where each item is itself an object — the way most real-world data is represented, like a list of students or products.
+```js
+let students = [
+  { id: 1, name: "Sara", age: 20 },
+  { id: 2, name: "Omar", age: 22 }
+];
+console.log(students);
+```
+
+**Accessing one record's field**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVG8gcmVhZCBvbmUgZmllbGQgZnJvbSBhIHNwZWNpZmljIHJlY29yZCwgaW5kZXggdGhlIGFycmF5IGZpcnN0LCB0aGVuIGFjY2VzcyB0aGUgcHJvcGVydHksIGxpa2Ugc3R1ZGVudHNbMl0uZ3JhZGUuIE9yZGVyIG1hdHRlcnM6IHRoZSBhcnJheSBpbmRleCBwaWNrcyB0aGUgcmVjb3JkLCBkb3Qgbm90YXRpb24gcGlja3MgdGhlIGZpZWxkLiIsImFuYWxvZ3kiOiJBY2Nlc3Npbmcgb25lIGZpZWxkIGlzIGxpa2Ugb3BlbmluZyBkcmF3ZXIgMyBvZiBhIGZpbGluZyBjYWJpbmV0IGFuZCByZWFkaW5nIHRoZSAnc2FsYXJ5JyBsaW5lIG9uIHRoYXQgZm9sZGVyLiJ9" />
+
+Access a record by its index first, then its property: `students[0].name`.
+```js
+console.log(students[0].name); // "Sara"
+```
+
+**Traversing records**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVHJhdmVyc2luZyByZWNvcmRzIGxvb3BzIHRocm91Z2ggdGhlIGFycmF5IGFuZCBwcm9jZXNzZXMgZWFjaCBvYmplY3QsIG9mdGVuIHJlYWRpbmcgb3IgcHJpbnRpbmcgc2V2ZXJhbCBvZiBpdHMgcHJvcGVydGllcy4gVGhlIHNhbWUgdHJhdmVyc2FsIHBhdHRlcm4gdXNlZCBmb3IgYXJyYXlzIGFwcGxpZXMsIHdpdGggYW4gb2JqZWN0IGF0IGVhY2ggaW5kZXguIiwiYW5hbG9neSI6IlRyYXZlcnNpbmcgcmVjb3JkcyBpcyBsaWtlIGEgdGVhY2hlciByZWFkaW5nIGVhY2ggYXR0ZW5kYW5jZSBzaGVldCBpbiBhIHBpbGXigJRzYW1lIGZvcm1hdCwgZGlmZmVyZW50IHN0dWRlbnQgZWFjaCB0aW1lLiJ9" />
+
+Loop through the array like before, but read `arr[i].property` inside the loop instead of just `arr[i]`.
+```js
+for (let i = 0; i < students.length; i++) {
+  console.log(students[i].name, students[i].age);
+}
+```
+
+**Searching by a property**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU2VhcmNoaW5nIGJ5IGEgcHJvcGVydHkgd2Fsa3MgdGhlIGFycmF5IGFuZCBjb21wYXJlcyBhIGZpZWxk4oCUc3VjaCBhcyBpZCBvciBlbWFpbOKAlHRvIGEgdGFyZ2V0IHZhbHVlIHVudGlsIGEgbWF0Y2ggaXMgZm91bmQuIEl0IHJldHVybnMgdGhlIG1hdGNoaW5nIG9iamVjdCBvciBpdHMgaW5kZXgsIG9yIGluZGljYXRlcyBmYWlsdXJlIGlmIG5vbmUgbWF0Y2guIiwiYW5hbG9neSI6IlNlYXJjaGluZyBieSBwcm9wZXJ0eSBpcyBsaWtlIGZpbmRpbmcgYSBndWVzdCBieSBuYW1lIGF0IGEgY29uZmVyZW5jZeKAlHNjYW4gZWFjaCBiYWRnZSB1bnRpbCB0aGUgbmFtZSBtYXRjaGVzLiJ9" />
+
+Loop through and compare a property (like `name` or `id`) to a target, returning the whole matching object.
+```js
+function findByName(list, name) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name === name) return list[i];
+  }
+  return null;
+}
+console.log(findByName(students, "Omar"));
+```
+
+**Computing an aggregate over objects**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gYWdncmVnYXRlIHN1Y2ggYXMgdG90YWwgc2FsZXMgb3IgYXZlcmFnZSBhZ2UgY29tYmluZXMgYSBudW1lcmljIGZpZWxkIGFjcm9zcyBhbGwgb2JqZWN0cywgdXN1YWxseSBieSBzdW1taW5nIGR1cmluZyB0cmF2ZXJzYWwgYW5kIHRoZW4gZGl2aWRpbmcgb3IgcmVwb3J0aW5nIHRoZSByZXN1bHQuIEVhY2ggb2JqZWN0IGNvbnRyaWJ1dGVzIG9uZSB2YWx1ZSB0byB0aGUgY2FsY3VsYXRpb24uIiwiYW5hbG9neSI6IkNvbXB1dGluZyBhbiBhZ2dyZWdhdGUgaXMgbGlrZSBhZGRpbmcgdXAgZXZlcnkgdGVhbeKAmXMgc2NvcmUgb24gYSBsZWFkZXJib2FyZCB0byBnZXQgYSBsZWFndWUgdG90YWwuIn0=" />
+
+Adapt the sum/average pattern from arrays, reading a specific property from each object.
+```js
+function averageAge(list) {
+  let sum = 0;
+  for (let i = 0; i < list.length; i++) sum += list[i].age;
+  return sum / list.length;
+}
+console.log(averageAge(students)); // 21
+```
+
+**Note:** A search-by-property function should return the whole matching object (or `null`), not just `true`/`false`.
+
+**More Examples:**
+```js
+let students = [
+  { name: "Sara", age: 20 },
+  { name: "Omar", age: 22 }
+];
+console.log(students[1].name); // "Omar"
+```
+```js
+for (let i = 0; i < students.length; i++) {
+  console.log(students[i].name, students[i].age);
+}
+```
+```js
+function findByName(list, name) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name === name) return list[i];
+  }
+  return null;
+}
+console.log(findByName(students, "Omar"));
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the function to find a student by name.
+```js
+function findByName(list, name) {
+  for (let i = 0; i < list.length; i++) {
+    if (___) return list[i];
+  }
+  return null;
+}
+console.log(findByName(students, "Omar"));
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+if (list[i].name === name) return list[i];
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a function `averageAge(list)` that returns the average `age` of all students.
+
+
+<LessonAnswer>
+
+
+
+```js
+function averageAge(list) {
+  let sum = 0;
+  for (let i = 0; i < list.length; i++) sum += list[i].age;
+  return sum / list.length;
+}
+console.log(averageAge(students)); // 21
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What would `findByName(students, "Nadia")` return, given the `students` array above?
+
+
+<LessonAnswer>
+
+
+
+`null` — there's no student named "Nadia" in the list.
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 8 — Search & sorting

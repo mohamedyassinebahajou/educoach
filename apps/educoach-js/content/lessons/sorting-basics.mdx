@@ -1,0 +1,193 @@
+---
+title: "Bubble sort & selection sort"
+summary: "Simple sorting algorithms by hand."
+day: 8
+---
+
+**How bubble sort works**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQnViYmxlIHNvcnQgY29tcGFyZXMgYWRqYWNlbnQgcGFpcnMgYW5kIHN3YXBzIHRoZW0gaWYgdGhleSBhcmUgb3V0IG9mIG9yZGVyLCByZXBlYXRpbmcgcGFzc2VzIHVudGlsIG5vIHN3YXBzIG9jY3VyIG9uIGEgZnVsbCBwYXNzLiBMYXJnZXIgdmFsdWVzICdidWJibGUnIHRvd2FyZCB0aGUgZW5kIG9mIHRoZSBhcnJheSBlYWNoIHBhc3MuIiwiYW5hbG9neSI6IkJ1YmJsZSBzb3J0IGlzIGxpa2UgYnViYmxlcyByaXNpbmcgaW4gYSBnbGFzc+KAlGxpZ2h0ZXIgZWxlbWVudHMgZmxvYXQgdXAgdGhyb3VnaCByZXBlYXRlZCBzbWFsbCBzd2FwcyB3aXRoIG5laWdoYm9ycy4ifQ==" />
+
+Bubble sort repeatedly walks through the array, comparing neighboring pairs and swapping them if they're out of order. After each full pass, the largest unsorted item "bubbles up" to its correct spot.
+```js
+function bubbleSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a.length - 1 - i; j++) {
+      if (a[j] > a[j + 1]) {
+        let temp = a[j];
+        a[j] = a[j + 1];
+        a[j + 1] = temp;
+      }
+    }
+  }
+  return a;
+}
+console.log(bubbleSort([3, 1, 2])); // [1, 2, 3]
+```
+
+**How selection sort works**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU2VsZWN0aW9uIHNvcnQgZmluZHMgdGhlIHNtYWxsZXN0IHJlbWFpbmluZyBlbGVtZW50IGFuZCBzd2FwcyBpdCBpbnRvIHRoZSBuZXh0IGNvcnJlY3QgcG9zaXRpb24sIHRoZW4gcmVwZWF0cyBmb3IgdGhlIHJlc3Qgb2YgdGhlIGxpc3QuIEVhY2ggcGFzcyBmaXhlcyBvbmUgbW9yZSBpbmRleCBhdCB0aGUgZnJvbnQgb2YgdGhlIGFycmF5LiIsImFuYWxvZ3kiOiJTZWxlY3Rpb24gc29ydCBpcyBsaWtlIHBpY2tpbmcgdGhlIHNob3J0ZXN0IHBlcnNvbiBmb3IgZWFjaCByb3cgaW4gYSBjbGFzcyBwaG90b+KAlHlvdSByZXBlYXRlZGx5IGNob29zZSB0aGUgbmV4dCBzbWFsbGVzdCBmb3IgdGhlIG5leHQgc3BvdC4ifQ==" />
+
+For each position, selection sort scans the rest of the array to find the smallest remaining value, then swaps it into the current position.
+```js
+function selectionSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < a.length; j++) {
+      if (a[j] < a[minIndex]) minIndex = j;
+    }
+    let temp = a[i];
+    a[i] = a[minIndex];
+    a[minIndex] = temp;
+  }
+  return a;
+}
+console.log(selectionSort([5, 2, 9, 1])); // [1, 2, 5, 9]
+```
+
+**Swapping with a temporary variable**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU3dhcHBpbmcgdHdvIHZhbHVlcyByZXF1aXJlcyBhIHRlbXBvcmFyeSB2YXJpYWJsZSB0byBob2xkIG9uZSB2YWx1ZSB3aGlsZSB0aGUgb3RoZXIgaXMgYXNzaWduZWQsIHRoZW4gY29tcGxldGluZyBib3RoIGFzc2lnbm1lbnRzLiBXaXRob3V0IHRlbXAsIG92ZXJ3cml0aW5nIG9uZSB2YWx1ZSB3b3VsZCBsb3NlIGRhdGEgbmVlZGVkIGZvciB0aGUgc3dhcC4iLCJhbmFsb2d5IjoiU3dhcHBpbmcgd2l0aCBhIHRlbXAgdmFyaWFibGUgaXMgbGlrZSBtb3ZpbmcgdHdvIGRyaW5rcyB1c2luZyBhIHRoaXJkIGN1cOKAlHlvdSBwb3VyIG9uZSBhc2lkZSBiZWZvcmUgZmlsbGluZyBlYWNoIGdsYXNzLiJ9" />
+
+To swap two values without losing one, store one value temporarily before overwriting it.
+```js
+let a = 3, b = 7;
+let temp = a;
+a = b;
+b = temp;
+console.log(a, b); // 7 3
+```
+
+**Copying an array before sorting**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ29weWluZyBiZWZvcmUgc29ydGluZyBwcmVzZXJ2ZXMgdGhlIG9yaWdpbmFsIG9yZGVyIGluIGEgc2VwYXJhdGUgYXJyYXkgd2hpbGUgeW91IHNvcnQgdGhlIGNvcHkuIFVzZSBzcHJlYWQgWy4uLmFycl0gb3Igc2xpY2UoKSBzbyBkZXN0cnVjdGl2ZSBzb3J0IGFsZ29yaXRobXMgZG8gbm90IG11dGF0ZSBkYXRhIHlvdSBzdGlsbCBuZWVkIHVuY2hhbmdlZC4iLCJhbmFsb2d5IjoiQ29weWluZyBiZWZvcmUgc29ydGluZyBpcyBsaWtlIHBob3RvY29weWluZyBhIGRvY3VtZW50IGJlZm9yZSBoaWdobGlnaHRpbmfigJR5b3Uga2VlcCB0aGUgb3JpZ2luYWwgaW50YWN0IHdoaWxlIG1hcmtpbmcgdXAgdGhlIGNvcHkuIn0=" />
+
+Use `[...arr]` to create a copy, so the original array stays unsorted and unchanged if you need it later.
+```js
+let original = [5, 1, 4];
+let sorted = bubbleSort(original);
+console.log(original); // [5, 1, 4], unchanged
+console.log(sorted);   // [1, 4, 5]
+```
+
+**Comparing the two algorithms**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQnViYmxlIHNvcnQgYW5kIHNlbGVjdGlvbiBzb3J0IGFyZSBib3RoIHNpbXBsZSBPKG7CsikgYWxnb3JpdGhtcyBzdWl0YWJsZSBmb3IgbGVhcm5pbmcgYW5kIHNtYWxsIGRhdGFzZXRzLCBidXQgbmVpdGhlciBpcyBlZmZpY2llbnQgZm9yIGxhcmdlIGxpc3RzLiBUaGV5IGRpZmZlciBpbiBzd2FwIHBhdHRlcm5zIGJ1dCBzaGFyZSBzaW1pbGFyIHBlcmZvcm1hbmNlIGZvciBiaWcgbi4iLCJhbmFsb2d5IjoiQ29tcGFyaW5nIGJ1YmJsZSBhbmQgc2VsZWN0aW9uIHNvcnQgaXMgbGlrZSB0d28gc2xvdyBidXQgcmVsaWFibGUgd2F5cyB0byBvcmdhbml6ZSBhIHNtYWxsIGNsb3NldOKAlGRpZmZlcmVudCBoYW5kIG1vdmVtZW50cywgc2ltaWxhciB0aW1lIHdoZW4gdGhlIGNsb3NldCBpcyB0aW55LiJ9" />
+
+Bubble sort swaps neighbors repeatedly; selection sort finds and places the minimum directly. Both use nested loops and work well for learning, though neither is the fastest for large data.
+```js
+let data = [40, 10, 30, 20];
+console.log(bubbleSort(data));
+console.log(selectionSort(data));
+```
+
+**Note:** Always use a temporary variable when swapping two values, or you'll lose one of them.
+
+**More Examples:**
+```js
+function bubbleSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a.length - 1 - i; j++) {
+      if (a[j] > a[j + 1]) {
+        let temp = a[j];
+        a[j] = a[j + 1];
+        a[j + 1] = temp;
+      }
+    }
+  }
+  return a;
+}
+console.log(bubbleSort([3, 1, 2])); // [1, 2, 3]
+```
+```js
+function selectionSort(arr) {
+  let a = [...arr];
+  for (let i = 0; i < a.length; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < a.length; j++) {
+      if (a[j] < a[minIndex]) minIndex = j;
+    }
+    let temp = a[i];
+    a[i] = a[minIndex];
+    a[minIndex] = temp;
+  }
+  return a;
+}
+console.log(selectionSort([5, 2, 9, 1])); // [1, 2, 5, 9]
+```
+```js
+let a = 3, b = 7;
+let temp = a;
+a = b;
+b = temp;
+console.log(a, b); // 7 3
+```
+
+**Exercises:**
+
+
+
+**1.** Trace `bubbleSort([2, 1])` by hand: what is the array after the first swap?
+
+
+<LessonAnswer>
+
+
+
+`[1, 2]` — 2 and 1 are swapped because 2 > 1.
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** What is wrong with this swap code? Fix it.
+```js
+let a = 5, b = 9;
+a = b;
+b = a;
+console.log(a, b);
+```
+
+
+<LessonAnswer>
+
+
+
+It loses the original value of `a` — both end up as `9`. Fix with a temp variable:
+```js
+let temp = a;
+a = b;
+b = temp;
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Using `selectionSort`, what is `minIndex` on the very first pass (i = 0) for `[5, 2, 9, 1]`?
+
+
+<LessonAnswer>
+
+
+
+`3` — the index of `1`, the smallest value in the array.
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 9 — Mini project SAS

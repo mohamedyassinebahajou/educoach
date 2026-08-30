@@ -1,0 +1,117 @@
+---
+title: "Mini project brief"
+summary: "Scope, core JS only, Git workflow expectations."
+day: 9
+---
+
+**Choosing your data**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ2hvb3NpbmcgeW91ciBkYXRhIG1lYW5zIHBpY2tpbmcgYSByZWFsIGRhdGFzZXTigJRzdWNoIGFzIHByb2R1Y3RzLCBzdHVkZW50cywgb3IgZ2FtZXPigJR0aGF0IGZpdHMgeW91ciBtaW5pLXByb2plY3QgYW5kIG1vdGl2YXRlcyB5b3UgdG8gYnVpbGQgc2VhcmNoIGFuZCBzdGF0cyBmZWF0dXJlcy4gR29vZCBkYXRhIGhhcyBzZXZlcmFsIHJlY29yZHMgd2l0aCBjb25zaXN0ZW50IGZpZWxkcyB5b3UgY2FuIHF1ZXJ5LiIsImFuYWxvZ3kiOiJDaG9vc2luZyB5b3VyIGRhdGEgaXMgbGlrZSBwaWNraW5nIGEgdGhlbWUgZm9yIGEgc2NyYXBib29r4oCUdGhlIHRoZW1lIGd1aWRlcyB3aGF0IHBpY3R1cmVzIGFuZCBsYWJlbHMgeW91IHdpbGwgb3JnYW5pemUuIn0=" />
+
+Start with an array of objects representing something realistic, like products or students, with 3-5 useful fields each.
+```js
+const products = [
+  { name: "Pen", price: 3, quantity: 150 },
+  { name: "Book", price: 15, quantity: 40 }
+];
+```
+
+**Writing a search function**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBzZWFyY2ggZnVuY3Rpb24gdGFrZXMgeW91ciBhcnJheSBvZiByZWNvcmRzIGFuZCBhIGNyaXRlcmlvbiwgdGhlbiByZXR1cm5zIG1hdGNoaW5nIGl0ZW1zIG9yIHRoZSBmaXJzdCBtYXRjaC4gSXQgZW5jYXBzdWxhdGVzIGxpbmVhciBzZWFyY2ggbG9naWMgc28gdGhlIHJlc3Qgb2YgeW91ciBwcm9ncmFtIGNhbiBjYWxsIGl0IGNsZWFubHkuIiwiYW5hbG9neSI6IkEgc2VhcmNoIGZ1bmN0aW9uIGlzIGxpa2UgYSBsaWJyYXJ5IGNhdGFsb2figJR5b3UgdHlwZSBhIHRpdGxlIGFuZCBpdCBmaW5kcyB0aGUgYm9vayB3aXRob3V0IHlvdSB3YWxraW5nIGV2ZXJ5IHNoZWxmIG1hbnVhbGx5IGVhY2ggdGltZS4ifQ==" />
+
+Every project needs at least one function that finds a specific record by a property, like name or id.
+```js
+function findProduct(list, name) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name === name) return list[i];
+  }
+  return null;
+}
+console.log(findProduct(products, "Pen"));
+```
+
+**Writing a statistics function**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBzdGF0aXN0aWNzIGZ1bmN0aW9uIGNvbXB1dGVzIHN1bW1hcmllcyBzdWNoIGFzIGNvdW50LCBzdW0sIGF2ZXJhZ2UsIG1pbiwgb3IgbWF4IG92ZXIgbnVtZXJpYyBmaWVsZHMgaW4geW91ciBkYXRhLiBJdCByZXVzZXMgdHJhdmVyc2FsIGFuZCBhZ2dyZWdhdGlvbiBwYXR0ZXJucyBmcm9tIGVhcmxpZXIgbGVzc29ucyBpbiBvbmUgcmV1c2FibGUgcGxhY2UuIiwiYW5hbG9neSI6IkEgc3RhdGlzdGljcyBmdW5jdGlvbiBpcyBsaWtlIGEgZGFzaGJvYXJkIGdhdWdl4oCUaXQgcmVhZHMgbWFueSByYXcgaW5wdXRzIGFuZCBzaG93cyBvbmUgbWVhbmluZ2Z1bCBudW1iZXIgYXQgYSBnbGFuY2UuIn0=" />
+
+Reuse the sum/average pattern to compute something meaningful about your data, like total value.
+```js
+function totalPrice(list) {
+  let total = 0;
+  for (let i = 0; i < list.length; i++) total += list[i].price;
+  return total;
+}
+console.log(totalPrice(products)); // 18
+```
+
+**Writing a filter function**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBmaWx0ZXIgZnVuY3Rpb24gcmV0dXJucyBhIG5ldyBhcnJheSBvZiByZWNvcmRzIHRoYXQgc2F0aXNmeSBhIGNvbmRpdGlvbiB5b3UgZGVmaW5lLCBzdWNoIGFzIHByaWNlIGJlbG93IGEgbGltaXQgb3Igc3RhdHVzIGVxdWFsIHRvICdhY3RpdmUnLiBJdCBrZWVwcyBwcmVzZW50YXRpb24gYW5kIGJ1c2luZXNzIHJ1bGVzIHNlcGFyYXRlIGZyb20gcmF3IGRhdGEgc3RvcmFnZS4iLCJhbmFsb2d5IjoiQSBmaWx0ZXIgZnVuY3Rpb24gaXMgbGlrZSBhIGNvZmZlZSBmaWx0ZXLigJRpdCBsZXRzIG9ubHkgdGhlIHBhcnRzIHRoYXQgbWF0Y2ggeW91ciBjcml0ZXJpYSBwYXNzIHRocm91Z2ggdG8gdGhlIGN1cC4ifQ==" />
+
+Add at least one function that returns a subset of your data matching a condition.
+```js
+function inStockOnly(list) {
+  let result = [];
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].quantity > 0) result.push(list[i]);
+  }
+  return result;
+}
+```
+
+**Scoping your project realistically**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiU2NvcGluZyByZWFsaXN0aWNhbGx5IG1lYW5zIGNob29zaW5nIGZlYXR1cmVzIHlvdSBjYW4gZmluaXNoIGFuZCBkZW1vIGluIHRoZSBhdmFpbGFibGUgdGltZSwgcmF0aGVyIHRoYW4gcGxhbm5pbmcgYW4gZW50aXJlIGFwcGxpY2F0aW9uLiBBIHNtYWxsIHdvcmtpbmcgcHJvZ3JhbSB3aXRoIHNlYXJjaCwgc3RhdHMsIGFuZCBmaWx0ZXIgYmVhdHMgYW4gdW5maW5pc2hlZCBhbWJpdGlvdXMgZGVzaWduLiIsImFuYWxvZ3kiOiJTY29waW5nIHJlYWxpc3RpY2FsbHkgaXMgbGlrZSBwYWNraW5nIGZvciBhIHdlZWtlbmQgdHJpcOKAlGJyaW5nIHdoYXQgZml0cyBpbiBvbmUgYmFnIGluc3RlYWQgb2YgZXZlcnl0aGluZyBpbiB5b3VyIGNsb3NldC4ifQ==" />
+
+Aim for 5-8 small, well-tested functions rather than one giant program — quality and clarity matter more than quantity of features.
+```js
+// A realistic function list for a 1.5-day project:
+// findProduct, totalPrice, inStockOnly, sortByPrice, averagePrice
+```
+
+**Note:** Aim for 5-8 small, well-tested functions rather than one giant program.
+
+**More Examples:**
+```js
+const products = [
+  { name: "Pen", price: 3 },
+  { name: "Book", price: 15 }
+];
+function totalPrice(list) {
+  let total = 0;
+  for (let i = 0; i < list.length; i++) total += list[i].price;
+  return total;
+}
+console.log(totalPrice(products)); // 18
+```
+```js
+function findProduct(list, name) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name === name) return list[i];
+  }
+  return null;
+}
+console.log(findProduct(products, "Pen"));
+```
+```js
+function inStockOnly(list) {
+  let result = [];
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].quantity > 0) result.push(list[i]);
+  }
+  return result;
+}
+```
+
+**Exercises:**
+
+
+
+**1.** Write your own array of 3 objects (your choice of fields) and one function that reads a property from them.
+
+
+**2.** Write a function that computes the average price of your array of objects.
+
+
+**3.** Write a function that returns only the items matching a condition you choose (e.g. price above a limit).

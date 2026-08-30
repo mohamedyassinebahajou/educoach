@@ -1,0 +1,162 @@
+---
+title: "Operators"
+summary: "Arithmetic, assignment, ===, and logical operators."
+day: 2
+---
+
+**Arithmetic operators**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQXJpdGhtZXRpYyBvcGVyYXRvcnMgcGVyZm9ybSBtYXRoIG9uIG51bWJlcnM6ICsgYWRkcywgLSBzdWJ0cmFjdHMsICogbXVsdGlwbGllcywgLyBkaXZpZGVzLCBhbmQgJSBnaXZlcyB0aGUgcmVtYWluZGVyIGFmdGVyIGRpdmlzaW9uLiBUaGV5IGZvbGxvdyBmYW1pbGlhciBzY2hvb2wgbWF0aCBydWxlcyB3aXRoIHN0YW5kYXJkIHByZWNlZGVuY2UuIiwiYW5hbG9neSI6IkFyaXRobWV0aWMgb3BlcmF0b3JzIGFyZSBsaWtlIGJ1dHRvbnMgb24gYSBjYWxjdWxhdG9y4oCUZWFjaCBidXR0b24gcGVyZm9ybXMgb25lIG1hdGggYWN0aW9uIG9uIHRoZSBudW1iZXJzIHlvdSBlbnRlci4ifQ==" />
+
+`+ - * /` do the four basic math operations. `%` (modulo) gives the remainder of a division, which is very useful to test even/odd numbers.
+```js
+console.log(7 + 3, 7 - 3, 7 * 3, 7 / 3, 7 % 3);
+```
+
+**Assignment operators**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQXNzaWdubWVudCBvcGVyYXRvcnMgc3RvcmUgYSB2YWx1ZSBpbnRvIGEgdmFyaWFibGUsIHVzaW5nID0gZm9yIGJhc2ljIGFzc2lnbm1lbnQgYW5kIGZvcm1zIGxpa2UgKz0gb3IgLT0gdG8gdXBkYXRlIGEgdmFyaWFibGUgYmFzZWQgb24gaXRzIGN1cnJlbnQgdmFsdWUuIFRoZXkgY29tYmluZSBjYWxjdWxhdGlvbiB3aXRoIHNhdmluZyB0aGUgcmVzdWx0IGJhY2sgaW50byB0aGUgbmFtZS4iLCJhbmFsb2d5IjoiQXNzaWdubWVudCBpcyBsaWtlIHVwZGF0aW5nIHlvdXIgYmFuayBiYWxhbmNlIGFmdGVyIGEgcHVyY2hhc2U6IHlvdSB0YWtlIHdoYXQgeW91IGhhZCwgYXBwbHkgdGhlIGNoYW5nZSwgYW5kIHdyaXRlIHRoZSBuZXcgdG90YWwuIn0=" />
+
+`=` stores a value. Compound assignments like `+=`, `-=`, `*=`, `/=` update a variable based on its current value.
+```js
+let total = 10;
+total += 5; // same as total = total + 5
+console.log(total); // 15
+```
+
+**Comparison operators**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQ29tcGFyaXNvbiBvcGVyYXRvcnMgY29tcGFyZSB0d28gdmFsdWVzIGFuZCBwcm9kdWNlIGEgYm9vbGVhbiByZXN1bHTigJR0cnVlIG9yIGZhbHNlLiBDb21tb24gb25lcyBpbmNsdWRlID09PSwgIT09LCA8LCA+LCA8PSwgYW5kID49LCB3aXRoID09PSBjaGVja2luZyBib3RoIHZhbHVlIGFuZCB0eXBlIGZvciBlcXVhbGl0eS4iLCJhbmFsb2d5IjoiQ29tcGFyaXNvbiBvcGVyYXRvcnMgYXJlIGxpa2UgYSBzY2FsZSB0aGF0IGFuc3dlcnMgeWVzIG9yIG5vOiAnSXMgdGhpcyBoZWF2aWVyIHRoYW4gdGhhdD8nIHdpdGhvdXQgdGVsbGluZyB5b3UgYnkgaG93IG11Y2guIn0=" />
+
+`<`, `>`, `<=`, `>=` compare numbers. `===` checks strict equality (same value AND type); `!==` checks strict inequality. Always prefer these over `==`/`!=`.
+```js
+console.log(5 === 5, 5 === "5", 5 !== 6);
+```
+
+**Logical operators**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTG9naWNhbCBvcGVyYXRvcnMgY29tYmluZSBib29sZWFuIGV4cHJlc3Npb25zOiAmJiByZXF1aXJlcyBib3RoIHNpZGVzIHRvIGJlIHRydWUsIHx8IHJlcXVpcmVzIGF0IGxlYXN0IG9uZSBzaWRlIHRvIGJlIHRydWUsIGFuZCAhIGZsaXBzIHRydWUgdG8gZmFsc2UgYW5kIHZpY2UgdmVyc2EuIFRoZXkgbGV0IHlvdSBidWlsZCBjb21wbGV4IGNvbmRpdGlvbnMgZnJvbSBzaW1wbGVyIHRlc3RzLiIsImFuYWxvZ3kiOiJMb2dpY2FsIG9wZXJhdG9ycyBhcmUgbGlrZSBhaXJwb3J0IHNlY3VyaXR5IHJ1bGVzOiB5b3UgbmVlZCBhIHRpY2tldCBBTkQgYW4gSUQsIE9SIGEgc3BlY2lhbCBwYXNz4oCUZGlmZmVyZW50IGNvbWJpbmF0aW9ucyBkZWNpZGUgd2hldGhlciB5b3UgZ2V0IHRocm91Z2guIn0=" />
+
+`&&` (AND) is true only if both sides are true. `||` (OR) is true if at least one side is true. `!` (NOT) flips a boolean.
+```js
+let isAdult = true;
+let hasTicket = false;
+console.log(isAdult && hasTicket, isAdult || hasTicket, !isAdult);
+```
+
+**Mixing strings and numbers with +**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiV2hlbiArIGlzIHVzZWQgd2l0aCBhIHN0cmluZywgSmF2YVNjcmlwdCBjb252ZXJ0cyB0aGUgb3RoZXIgb3BlcmFuZCB0byB0ZXh0IGFuZCBjb25jYXRlbmF0ZXMgdGhlbSBpbnN0ZWFkIG9mIGRvaW5nIG51bWVyaWMgYWRkaXRpb24uIFRoaXMgYmVoYXZpb3IgaXMgY2FsbGVkIHN0cmluZyBjb2VyY2lvbiBhbmQgY2FuIHN1cnByaXNlIHlvdSBpZiB5b3UgZXhwZWN0IG1hdGguIiwiYW5hbG9neSI6Ik1peGluZyBzdHJpbmdzIGFuZCBudW1iZXJzIHdpdGggKyBpcyBsaWtlIGdsdWluZyBhIGhvdXNlIG51bWJlciBvbnRvIGEgc3RyZWV0IG5hbWXigJR5b3UgZ2V0IGEgbGFiZWwgbGlrZSAnNDJNYWluJywgbm90IGEgYmlnZ2VyIG51bWJlci4ifQ==" />
+
+The `+` operator concatenates (joins) strings, but adds numbers. If one side is a string, JavaScript converts the other side to a string too.
+```js
+console.log("5" + 5); // "55" (text)
+console.log(5 + 5);   // 10 (number)
+```
+
+**Note:** `"5" === 5` is `false` because one is a string and the other is a number — `===` checks type too.
+
+**More Examples:**
+```js
+console.log(10 % 3);     // 1
+console.log(5 === "5");  // false
+console.log(true && false); // false
+```
+```js
+let total = 10;
+total += 5;
+console.log(total); // 15
+```
+```js
+let hasTicket = true;
+let isVIP = false;
+console.log(hasTicket || isVIP); // true
+console.log(!hasTicket);         // false
+```
+
+**Exercises:**
+
+
+
+**1.** Predict the output, then run it.
+```js
+console.log(9 % 2);
+console.log(4 === 4);
+console.log(false || true);
+```
+
+
+<LessonAnswer>
+
+
+
+```
+1
+true
+true
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Is `12` even or odd? Write one line of code using `%` to check.
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log(12 % 2 === 0); // true, so it's even
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What's wrong with this code, and what should it be if the intent is to check equality?
+```js
+let x = 5;
+if (x = 10) {
+  console.log("x is 10");
+}
+```
+
+
+<LessonAnswer>
+
+
+
+`x = 10` assigns instead of comparing. It should be `if (x === 10)`.
+
+
+</LessonAnswer>
+
+
+
+
+
+**4.** Combine two booleans: write code that prints `true` only if both `isLoggedIn` and `isAdmin` are `true`.
+
+
+<LessonAnswer>
+
+
+
+```js
+let isLoggedIn = true;
+let isAdmin = true;
+console.log(isLoggedIn && isAdmin);
+```
+
+
+</LessonAnswer>
+
+

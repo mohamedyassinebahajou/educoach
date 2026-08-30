@@ -1,0 +1,145 @@
+---
+title: "Objects"
+summary: "Properties, values, access, update."
+day: 7
+---
+
+**Creating an object**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQW4gb2JqZWN0IGdyb3VwcyByZWxhdGVkIHZhbHVlcyBhcyBuYW1lZCBwcm9wZXJ0aWVzIGluc2lkZSBjdXJseSBicmFjZXMsIHN1Y2ggYXMgeyBuYW1lOiAnQWRhJywgYWdlOiAzNiB9LiBQcm9wZXJ0aWVzIGNvbm5lY3Qga2V5cyB0byB2YWx1ZXMgc28geW91IGNhbiBtb2RlbCByZWFsLXdvcmxkIHJlY29yZHMgaW4gY29kZS4iLCJhbmFsb2d5IjoiQ3JlYXRpbmcgYW4gb2JqZWN0IGlzIGxpa2UgZmlsbGluZyBvdXQgYW4gSUQgY2FyZOKAlGVhY2ggZmllbGQgKG5hbWUsIGFnZSwgY2l0eSkgc3RvcmVzIG9uZSBwaWVjZSBvZiBpbmZvcm1hdGlvbiBhYm91dCBhIHBlcnNvbi4ifQ==" />
+
+An object stores related data as key-value pairs, written between curly braces.
+```js
+let person = { name: "Sara", age: 20, city: "Marrakesh" };
+console.log(person);
+```
+
+**Accessing with dot notation**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRG90IG5vdGF0aW9uIHJlYWRzIG9yIHdyaXRlcyBhIHByb3BlcnR5IHdoZW4geW91IGtub3cgaXRzIGtleSBuYW1lIGFuZCB0aGUga2V5IGlzIGEgdmFsaWQgaWRlbnRpZmllciwgdXNpbmcgc3ludGF4IGxpa2Ugb2JqLm5hbWUuIEl0IGlzIHRoZSBtb3N0IHJlYWRhYmxlIGZvcm0gZm9yIGZpeGVkLCBrbm93biBwcm9wZXJ0eSBuYW1lcy4iLCJhbmFsb2d5IjoiRG90IG5vdGF0aW9uIGlzIGxpa2UgcHJlc3NpbmcgYSBsYWJlbGVkIGVsZXZhdG9yIGJ1dHRvbuKAlHlvdSBnbyBkaXJlY3RseSB0byB0aGUgZmxvb3IgbmFtZWQgb24gdGhlIGJ1dHRvbi4ifQ==" />
+
+The most common way to read a property is `object.propertyName`.
+```js
+let person = { name: "Sara", age: 20 };
+console.log(person.name); // "Sara"
+```
+
+**Accessing with bracket notation**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQnJhY2tldCBub3RhdGlvbiBhY2Nlc3NlcyBwcm9wZXJ0aWVzIHdpdGggb2JqWydrZXknXSBvciBvYmpbdmFyaWFibGVdLCB3aGljaCB3b3JrcyB3aGVuIHRoZSBrZXkgaGFzIHNwYWNlcywgc3BlY2lhbCBjaGFyYWN0ZXJzLCBvciBpcyBzdG9yZWQgaW4gYSB2YXJpYWJsZS4gSXQgaXMgcmVxdWlyZWQgd2hlbiB0aGUgcHJvcGVydHkgbmFtZSBpcyBub3QgYSBzaW1wbGUgaWRlbnRpZmllci4iLCJhbmFsb2d5IjoiQnJhY2tldCBub3RhdGlvbiBpcyBsaWtlIGxvb2tpbmcgdXAgYSBsb2NrZXIgd2l0aCBhIG51bWJlciB5b3UgcmVhZCBmcm9tIGEgc2xpcCBvZiBwYXBlcuKAlHRoZSBsYWJlbCBjYW4gY2hhbmdlIGVhY2ggdGltZS4ifQ==" />
+
+Bracket notation is required when the key is stored in a variable, or contains spaces/special characters.
+```js
+let key = "name";
+let person = { name: "Omar" };
+console.log(person[key]); // "Omar"
+```
+
+**Updating and adding properties**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQXNzaWduaW5nIHRvIGFuIGV4aXN0aW5nIGtleSB1cGRhdGVzIHRoYXQgcHJvcGVydHk7IGFzc2lnbmluZyB0byBhIG5ldyBrZXkgYWRkcyBhIHByb3BlcnR5IHRvIHRoZSBvYmplY3QuIE9iamVjdHMgYXJlIG11dGFibGUsIHNvIHRoZWlyIHNoYXBlIGNhbiBncm93IG9yIGNoYW5nZSBkdXJpbmcgdGhlIHByb2dyYW0uIiwiYW5hbG9neSI6IlVwZGF0aW5nIGFuZCBhZGRpbmcgcHJvcGVydGllcyBpcyBsaWtlIGVkaXRpbmcgYSBjb250YWN0IGNhcmTigJR5b3UgY2FuIGNoYW5nZSBhIHBob25lIG51bWJlciBvciBhZGQgYSBuZXcgZW1haWwgZmllbGQgYW55dGltZS4ifQ==" />
+
+Assign a new value to update an existing property, or assign to a new key to add a brand-new property.
+```js
+let person = { name: "Sara", age: 20 };
+person.age = 21;     // update
+person.city = "Fes"; // add
+console.log(person);
+```
+
+**Nested objects**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBuZXN0ZWQgb2JqZWN0IGlzIGEgcHJvcGVydHkgd2hvc2UgdmFsdWUgaXMgYW5vdGhlciBvYmplY3QsIGFsbG93aW5nIGhpZXJhcmNoaWNhbCBkYXRhIHN1Y2ggYXMgYSB1c2VyIHdpdGggYW4gYWRkcmVzcyBvYmplY3QgaW5zaWRlLiBZb3UgY2hhaW4gZG90IG9yIGJyYWNrZXQgbm90YXRpb24gdG8gcmVhY2ggZGVlcGVyIGxldmVscy4iLCJhbmFsb2d5IjoiTmVzdGVkIG9iamVjdHMgYXJlIGxpa2UgZm9sZGVycyBpbnNpZGUgZm9sZGVycyBvbiB5b3VyIGNvbXB1dGVy4oCUb3BlbiB0aGUgb3V0ZXIgZm9sZGVyLCB0aGVuIHRoZSBpbm5lciBvbmUsIHRvIHJlYWNoIHRoZSBmaWxlIHlvdSBuZWVkLiJ9" />
+
+An object's value can itself be another object, letting you model more complex data.
+```js
+let car = { brand: "Toyota", specs: { year: 2022, color: "blue" } };
+console.log(car.specs.year); // 2022
+```
+
+**Checking if a key exists**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVXNlIHRoZSBpbiBvcGVyYXRvciBvciBoYXNPd25Qcm9wZXJ0eSB0byB0ZXN0IHdoZXRoZXIgYW4gb2JqZWN0IGNvbnRhaW5zIGEgZ2l2ZW4ga2V5IGJlZm9yZSByZWx5aW5nIG9uIGl0cyB2YWx1ZS4gVGhpcyBhdm9pZHMgY29uZnVzaW5nIG1pc3Npbmcga2V5cyB3aXRoIGtleXMgdGhhdCBleGlzdCBidXQgaG9sZCB1bmRlZmluZWQuIiwiYW5hbG9neSI6IkNoZWNraW5nIGlmIGEga2V5IGV4aXN0cyBpcyBsaWtlIGtub2NraW5nIG9uIGEgZG9vciBiZWZvcmUgZW50ZXJpbmfigJR5b3UgY29uZmlybSBzb21lb25lIGlzIGhvbWUgaW5zdGVhZCBvZiBhc3N1bWluZy4ifQ==" />
+
+Use the `in` operator to check whether a property exists on an object.
+```js
+let product = { title: "Book", price: 50 };
+console.log("price" in product); // true
+```
+
+**Note:** A `const` object can still have its properties changed or added — only the variable itself is locked.
+
+**More Examples:**
+```js
+let person = { name: "Sara", age: 20 };
+console.log(person.name); // "Sara"
+person.age = 21;
+```
+```js
+let key = "name";
+let person = { name: "Omar" };
+console.log(person[key]); // "Omar"
+```
+```js
+let car = { brand: "Toyota", specs: { year: 2022 } };
+console.log(car.specs.year); // 2022
+```
+
+**Exercises:**
+
+
+
+**1.** Add a new property `city` with value `"Rabat"` to this object.
+```js
+let person = { name: "Omar" };
+___
+console.log(person);
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+person.city = "Rabat";
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Given `let product = { title: "Book", price: 50 };`, write code to check if it has a property called `price` using the `in` operator.
+
+
+<LessonAnswer>
+
+
+
+```js
+console.log("price" in product); // true
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Why does `person.key` NOT work the same as `person[key]` when `key = "name"`?
+
+
+<LessonAnswer>
+
+
+
+`person.key` looks for a literal property literally named `"key"`, while `person[key]` uses the *value* stored in the `key` variable (`"name"`) to look up the property.
+
+
+</LessonAnswer>
+
+

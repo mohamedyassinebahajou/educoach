@@ -1,0 +1,174 @@
+---
+title: "Array traversal — sum, avg, min, max"
+summary: "Loop to analyze numeric lists."
+day: 6
+---
+
+**The traversal pattern**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVGhlIHRyYXZlcnNhbCBwYXR0ZXJuIHZpc2l0cyBldmVyeSBlbGVtZW50IG9mIGFuIGFycmF5IGluIG9yZGVyLCB0eXBpY2FsbHkgd2l0aCBhIGZvciBsb29wIGZyb20gaW5kZXggMCB0byBsZW5ndGggLSAxLiBJdCBpcyB0aGUgZm91bmRhdGlvbiBmb3Igc3VtbWluZywgc2VhcmNoaW5nLCBmaWx0ZXJpbmcsIGFuZCB0cmFuc2Zvcm1pbmcgbGlzdHMuIiwiYW5hbG9neSI6IlRyYXZlcnNpbmcgYW4gYXJyYXkgaXMgbGlrZSBhIHRlYWNoZXIgdGFraW5nIGF0dGVuZGFuY2XigJRlYWNoIG5hbWUgb24gdGhlIGxpc3QgZ2V0cyBjaGVja2VkIG9uY2UsIGluIG9yZGVyLiJ9" />
+
+Loop through every index with `for (let i = 0; i < arr.length; i++)` to visit each element in order.
+```js
+let numbers = [10, 20, 30];
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+}
+```
+
+**Calculating a sum**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVG8gc3VtIGFycmF5IG51bWJlcnMsIHN0YXJ0IGEgdG90YWwgYXQgMCBhbmQgYWRkIGVhY2ggZWxlbWVudCBkdXJpbmcgdHJhdmVyc2FsLiBBZnRlciB0aGUgbG9vcCwgdGhlIHRvdGFsIGhvbGRzIHRoZSBjb21iaW5lZCB2YWx1ZSBvZiBhbGwgaXRlbXMuIiwiYW5hbG9neSI6IkNhbGN1bGF0aW5nIGEgc3VtIGlzIGxpa2UgZHJvcHBpbmcgZWFjaCBjb2luIGludG8gYSBqYXLigJR5b3Uga2VlcCBhZGRpbmcgdW50aWwgZXZlcnkgY29pbiBpcyBjb3VudGVkLiJ9" />
+
+Start an accumulator at `0` before the loop, then add each item to it as you traverse.
+```js
+function sumArray(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) sum += arr[i];
+  return sum;
+}
+console.log(sumArray([1, 2, 3])); // 6
+```
+
+**Calculating an average**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVGhlIGF2ZXJhZ2UgZXF1YWxzIHRoZSBzdW0gb2YgYWxsIG51bWVyaWMgZWxlbWVudHMgZGl2aWRlZCBieSBob3cgbWFueSBlbGVtZW50cyB0aGVyZSBhcmUuIFlvdSB1c3VhbGx5IGNvbXB1dGUgdGhlIHN1bSBmaXJzdCwgdGhlbiBkaXZpZGUgYnkgYXJyLmxlbmd0aCwgd2F0Y2hpbmcgb3V0IGZvciBlbXB0eSBhcnJheXMuIiwiYW5hbG9neSI6IkFuIGF2ZXJhZ2UgaXMgbGlrZSBzcGxpdHRpbmcgYSBwaXp6YSBiaWxsIGVxdWFsbHnigJRhZGQgZXZlcnl0aGluZyB1cCwgdGhlbiBkaXZpZGUgYnkgdGhlIG51bWJlciBvZiBwZW9wbGUgZWF0aW5nLiJ9" />
+
+Divide the sum by the array's length after the loop finishes.
+```js
+function averageArray(arr) {
+  return sumArray(arr) / arr.length;
+}
+console.log(averageArray([2, 4, 6])); // 4
+```
+
+**Finding the maximum**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVG8gZmluZCB0aGUgbWF4aW11bSwgdHJhY2sgdGhlIGxhcmdlc3QgdmFsdWUgc2VlbiBzbyBmYXIgd2hpbGUgdHJhdmVyc2luZyB0aGUgYXJyYXksIHVwZGF0aW5nIHdoZW5ldmVyIGEgYmlnZ2VyIGVsZW1lbnQgYXBwZWFycy4gQWZ0ZXIgdGhlIGxvb3AsIHRoYXQgdHJhY2tlciBob2xkcyB0aGUgbWF4aW11bS4iLCJhbmFsb2d5IjoiRmluZGluZyB0aGUgbWF4aW11bSBpcyBsaWtlIHJlbWVtYmVyaW5nIHRoZSB0YWxsZXN0IHBlcnNvbiBhcyBlYWNoIG5ldyBwZXJzb24gd2Fsa3MgdGhyb3VnaCB0aGUgZG9vcuKAlHlvdSB1cGRhdGUgeW91ciByZWNvcmQgb25seSB3aGVuIHNvbWVvbmUgaXMgdGFsbGVyLiJ9" />
+
+Start by assuming the first item is the biggest, then compare it against every other item, updating your candidate whenever you find something bigger.
+```js
+function maxArray(arr) {
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+  return max;
+}
+console.log(maxArray([3, 7, 2])); // 7
+```
+
+**Finding the minimum**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiRmluZGluZyB0aGUgbWluaW11bSB1c2VzIHRoZSBzYW1lIHRyYXZlcnNhbCBwYXR0ZXJuIGJ1dCBrZWVwcyB0aGUgc21hbGxlc3QgdmFsdWUgc2VlbiBzbyBmYXIuIEluaXRpYWxpemUgd2l0aCB0aGUgZmlyc3QgZWxlbWVudCBvciBJbmZpbml0eSwgdGhlbiBjb21wYXJlIGVhY2ggaXRlbSBkdXJpbmcgdGhlIGxvb3AuIiwiYW5hbG9neSI6IkZpbmRpbmcgdGhlIG1pbmltdW0gaXMgbGlrZSB0cmFja2luZyB0aGUgbG93ZXN0IHByaWNlIHdoaWxlIHNob3BwaW5n4oCUeW91IG5vdGUgYSBuZXcgbG93IHdoZW5ldmVyIHlvdSBzZWUgYSBjaGVhcGVyIHRhZy4ifQ==" />
+
+The same pattern as maximum, but flipping the comparison to look for smaller values.
+```js
+function minArray(arr) {
+  let min = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < min) min = arr[i];
+  }
+  return min;
+}
+console.log(minArray([3, 7, 2])); // 2
+```
+
+**Note:** Start `max`/`min` as `arr[0]`, not `0` — this avoids wrong results with all-negative arrays.
+
+**More Examples:**
+```js
+function sumArray(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) sum += arr[i];
+  return sum;
+}
+console.log(sumArray([1, 2, 3])); // 6
+```
+```js
+function averageArray(arr) {
+  return sumArray(arr) / arr.length;
+}
+console.log(averageArray([2, 4, 6])); // 4
+```
+```js
+function maxArray(arr) {
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > max) max = arr[i];
+  }
+  return max;
+}
+console.log(maxArray([3, 7, 2])); // 7
+```
+
+**Exercises:**
+
+
+
+**1.** Complete the function to find the max value.
+```js
+function maxArray(arr) {
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (___) max = arr[i];
+  }
+  return max;
+}
+console.log(maxArray([3, 7, 2])); // 7
+```
+
+
+<LessonAnswer>
+
+
+
+```js
+if (arr[i] > max) max = arr[i];
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write a `minArray(arr)` function, following the same pattern as `maxArray`.
+
+
+<LessonAnswer>
+
+
+
+```js
+function minArray(arr) {
+  let min = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < min) min = arr[i];
+  }
+  return min;
+}
+console.log(minArray([3, 7, 2])); // 2
+```
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** What would `maxArray([-5, -2, -9])` return? Trace it by hand first, then check by running the code.
+
+
+<LessonAnswer>
+
+
+
+`-2` — it's the largest (least negative) value.
+
+
+</LessonAnswer>
+
+

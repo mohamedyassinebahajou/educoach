@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "rmse": 2.7283381736007977,
+    "mae": 2.200100258124104,
+    "r2": 0.8038419282150413,
+    "at_risk_recall": 0.9615384615384616
+  },
+  "random_forest": {
+    "rmse": 2.6505290909903225,
+    "mae": 2.149844264135123,
+    "r2": 0.8148707954041362,
+    "at_risk_recall": 1.0,
+    "best_params": {
+      "model__max_depth": 10,
+      "model__min_samples_leaf": 2,
+      "model__min_samples_split": 2,
+      "model__n_estimators": 300
+    }
+  }
+}

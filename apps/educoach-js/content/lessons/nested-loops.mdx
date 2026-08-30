@@ -1,0 +1,180 @@
+---
+title: "Loops with conditions & nesting"
+summary: "Traverse with conditions inside loops; nested loops intro."
+day: 3
+---
+
+**What is a nested loop?**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiQSBuZXN0ZWQgbG9vcCBpcyBhIGxvb3AgcGxhY2VkIGluc2lkZSBhbm90aGVyIGxvb3AsIHNvIHRoZSBpbm5lciBsb29wIHJ1bnMgY29tcGxldGVseSBmb3IgZWFjaCBpdGVyYXRpb24gb2YgdGhlIG91dGVyIGxvb3AuIFRoaXMgcGF0dGVybiBoYW5kbGVzIHR3by1kaW1lbnNpb25hbCB3b3JrIHN1Y2ggYXMgcm93cyBhbmQgY29sdW1ucyBvciBwYWlycyBvZiBpdGVtcy4iLCJhbmFsb2d5IjoiQSBuZXN0ZWQgbG9vcCBpcyBsaWtlIHJlYWRpbmcgZXZlcnkgcGFnZSBpbiBldmVyeSBib29rIG9uIGEgc2hlbGY6IGZvciBlYWNoIGJvb2ssIHlvdSBnbyBwYWdlIGJ5IHBhZ2UgYmVmb3JlIHBpY2tpbmcgdXAgdGhlIG5leHQgYm9vay4ifQ==" />
+
+A nested loop is a loop written inside another loop. For every single pass of the outer loop, the entire inner loop runs from start to finish.
+```js
+for (let i = 1; i <= 2; i++) {
+  for (let j = 1; j <= 2; j++) {
+    console.log(i, j);
+  }
+}
+```
+
+**Why use nested loops**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiTmVzdGVkIGxvb3BzIHNvbHZlIHByb2JsZW1zIHdoZXJlIGVhY2ggaXRlbSBtdXN0IGJlIGNvbXBhcmVkIHdpdGggb3IgY29tYmluZWQgd2l0aCBldmVyeSBvdGhlciBpdGVtLCBvciB3aGVyZSBkYXRhIGhhcyB0d28gbGV2ZWxzIHN1Y2ggYXMgZ3JpZCBjb29yZGluYXRlcy4gVGhleSBhcmUgdGhlIHN0cmFpZ2h0Zm9yd2FyZCB3YXkgdG8gdmlzaXQgYWxsIGNvbWJpbmF0aW9ucyBpbiBhIHN0cnVjdHVyZWQgb3JkZXIuIiwiYW5hbG9neSI6Ik5lc3RlZCBsb29wcyBhcmUgbGlrZSBzZWF0aW5nIGd1ZXN0cyBhdCB0YWJsZXM6IGZvciBlYWNoIHRhYmxlLCB5b3UgYXNzaWduIGV2ZXJ5IGNoYWlyIGJlZm9yZSBtb3ZpbmcgdG8gdGhlIG5leHQgdGFibGUuIn0=" />
+
+Nested loops are useful when you need to work with two dimensions at once, like rows and columns, or every pair of items in two lists.
+```js
+// Multiplication table for 1 to 3
+for (let i = 1; i <= 3; i++) {
+  for (let j = 1; j <= 3; j++) {
+    console.log(i + " x " + j + " = " + (i * j));
+  }
+}
+```
+
+**Building strings with a nested loop**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiWW91IGNhbiBjb25jYXRlbmF0ZSBjaGFyYWN0ZXJzIG9yIGxpbmVzIGluc2lkZSBuZXN0ZWQgbG9vcHMgdG8gYnVpbGQgcGF0dGVybnMgc3VjaCBhcyB0cmlhbmdsZXMsIGdyaWRzLCBvciByZXBlYXRlZCB0ZXh0LiBUaGUgb3V0ZXIgbG9vcCBvZnRlbiBjb250cm9scyByb3dzIHdoaWxlIHRoZSBpbm5lciBsb29wIGFkZHMgY2hhcmFjdGVycyB0byBlYWNoIHJvdy4iLCJhbmFsb2d5IjoiQnVpbGRpbmcgc3RyaW5ncyB3aXRoIG5lc3RlZCBsb29wcyBpcyBsaWtlIGtuaXR0aW5nIHJvdyBieSByb3c6IGVhY2ggcm93IGFkZHMgYW5vdGhlciBsaW5lIHRvIHRoZSBmYWJyaWMgdW50aWwgdGhlIHBhdHRlcm4gaXMgY29tcGxldGUuIn0=" />
+
+You can accumulate a string inside the inner loop, then print the finished result after it completes — useful for drawing simple shapes.
+```js
+for (let i = 1; i <= 3; i++) {
+  let row = "";
+  for (let j = 0; j < i; j++) {
+    row += "*";
+  }
+  console.log(row);
+}
+```
+
+**Scope of break and continue**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiYnJlYWsgYW5kIGNvbnRpbnVlIGFmZmVjdCBvbmx5IHRoZSBpbm5lcm1vc3QgbG9vcCB0aGV5IGFwcGVhciBpbiwgbm90IG91dGVyIGxvb3BzIHdyYXBwaW5nIHRoZW0uIFRvIHN0b3AgYW4gb3V0ZXIgbG9vcCBmcm9tIGluc2lkZSBhIG5lc3RlZCBsb29wLCB5b3UgdHlwaWNhbGx5IG5lZWQgZXh0cmEgZmxhZ3Mgb3IgcmVzdHJ1Y3R1cmUgdGhlIGxvZ2ljLiIsImFuYWxvZ3kiOiJTY29wZSBvZiBicmVhayBhbmQgY29udGludWUgaXMgbGlrZSBzaG91dGluZyAnc3RvcCcgaW4gb25lIHJvb23igJRpdCBlbmRzIGFjdGl2aXR5IGluIHRoYXQgcm9vbSwgbm90IGluIHRoZSB3aG9sZSBidWlsZGluZy4ifQ==" />
+
+`break` and `continue` only affect the loop they are directly written inside — usually the innermost one, not the outer loop.
+```js
+for (let i = 0; i < 2; i++) {
+  for (let j = 0; j < 3; j++) {
+    if (j === 1) break; // only stops the inner loop
+    console.log("i:", i, "j:", j);
+  }
+}
+```
+
+**Naming loop variables**
+
+<ConceptIntro encoded="eyJkZWZpbml0aW9uIjoiVXNlIGNsZWFyLCBkaXN0aW5jdCBuYW1lcyBmb3Igb3V0ZXIgYW5kIGlubmVyIGxvb3AgdmFyaWFibGVz4oCUc3VjaCBhcyBpIGFuZCBqLCBvciByb3cgYW5kIGNvbOKAlHNvIHJlYWRlcnMga25vdyB3aGljaCBsZXZlbCB0aGV5IHJlZmVyIHRvLiBHb29kIG5hbWVzIHJlZHVjZSBjb25mdXNpb24gd2hlbiBsb29wcyBhcmUgbmVzdGVkIHNldmVyYWwgbGV2ZWxzIGRlZXAuIiwiYW5hbG9neSI6Ik5hbWluZyBsb29wIHZhcmlhYmxlcyBpcyBsaWtlIGxhYmVsaW5nIGZsb29ycyBpbiBhIGJ1aWxkaW5nOiAnZ3JvdW5kJyBhbmQgJ2ZpcnN0JyBhcmUgY2xlYXJlciB0aGFuIGNhbGxpbmcgZXZlcnkgZmxvb3IgJ2xldmVsJy4ifQ==" />
+
+Use different variable names for each loop level — commonly `i` for the outer loop and `j` for the inner loop — so they don't overwrite each other.
+```js
+for (let i = 0; i < 2; i++) {
+  for (let j = 0; j < 2; j++) {
+    console.log(`outer=${i} inner=${j}`);
+  }
+}
+```
+
+**Note:** `break` and `continue` only affect the loop they are written inside (usually the innermost one).
+
+**More Examples:**
+```js
+for (let i = 1; i <= 2; i++) {
+  for (let j = 1; j <= 2; j++) {
+    console.log(i, j);
+  }
+}
+```
+```js
+for (let i = 1; i <= 3; i++) {
+  for (let j = 1; j <= 3; j++) {
+    console.log(i + " x " + j + " = " + (i * j));
+  }
+}
+```
+```js
+for (let i = 1; i <= 3; i++) {
+  let row = "";
+  for (let j = 0; j < i; j++) {
+    row += "*";
+  }
+  console.log(row);
+}
+```
+
+**Exercises:**
+
+
+
+**1.** How many times does `console.log` run?
+```js
+for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 4; j++) {
+    console.log(i, j);
+  }
+}
+```
+
+
+<LessonAnswer>
+
+
+
+12 times (3 × 4).
+
+
+</LessonAnswer>
+
+
+
+
+
+**2.** Write nested loops that print a multiplication table for the number 7 only (7x1 to 7x10), using a single loop — is a nested loop actually necessary here? Explain.
+
+
+<LessonAnswer>
+
+
+
+A single loop is enough since only one number (7) is involved:
+```js
+for (let j = 1; j <= 10; j++) {
+  console.log("7 x " + j + " = " + (7 * j));
+}
+```
+Nested loops are needed when you must vary **two** things at once, like every row *and* every column of a full table.
+
+
+</LessonAnswer>
+
+
+
+
+
+**3.** Predict the output.
+```js
+for (let i = 0; i < 2; i++) {
+  for (let j = 0; j < 2; j++) {
+    if (j === 1) break;
+    console.log("i:", i, "j:", j);
+  }
+}
+```
+
+
+<LessonAnswer>
+
+
+
+```
+i: 0 j: 0
+i: 1 j: 0
+```
+(`break` only stops the inner loop each time `j` reaches 1.)
+
+
+</LessonAnswer>
+
+
+
+---
+
+## Day 4 — Functions & scope
