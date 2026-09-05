@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { createSessionToken, setSessionCookie } from "@/lib/auth";
+import { createSessionToken, SESSION_COOKIE_NAME, sessionCookieOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
 export async function POST(request: Request) {
@@ -15,7 +15,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Username and password required" }, { status: 400 });
   }
 
-  const user = await prisma.user.findUnique({ where: { username } });
+  const user = await prisma.user.findFirst({
+    where: { username: { equals: username, mode: "insensitive" } },
+  });
   if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
@@ -27,7 +29,7 @@ export async function POST(request: Request) {
     displayName: user.displayName,
   };
   const token = await createSessionToken(sessionUser);
-  await setSessionCookie(token);
-
-  return NextResponse.json({ user: sessionUser });
+  const response = NextResponse.json({ user: sessionUser });
+  response.cookies.set(SESSION_COOKIE_NAME, token, sessionCookieOptions());
+  return response;
 }

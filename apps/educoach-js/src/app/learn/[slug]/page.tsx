@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { AskTutorButton } from "@/components/chat/AskTutorButton";
 import { CurriculumSidebar } from "@/components/learn/CurriculumSidebar";
 import { LessonMdx } from "@/components/learn/LessonMdx";
 import { getSession } from "@/lib/auth";
+import { assertLearnerCanAccessLesson } from "@/lib/dayAccess";
 import { getAllLessons } from "@/lib/curriculum";
 import {
   findLocalizedLesson,
@@ -30,13 +31,17 @@ export default async function LessonPage({ params }: PageProps) {
   const { locale, t } = await getI18n();
   const found = findLocalizedLesson(slug, locale);
   if (!found || !lessonFileExists(slug)) notFound();
+  const { day, lesson } = found;
 
   const user = await getSession();
   if (user?.role === "learner") {
+    const allowed = await assertLearnerCanAccessLesson(user.id, slug);
+    if (!allowed) {
+      redirect(`/learn/locked?day=${day.day}`);
+    }
     await markLessonSeen(user.id, slug);
   }
 
-  const { day, lesson } = found;
   const { content } = getLessonSource(slug);
   const { prev, next } = getLocalizedLessonNav(slug, locale);
 

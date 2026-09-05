@@ -7,7 +7,13 @@ export function normalizeDatabaseUrl(url: string | undefined): string | undefine
     const parsed = new URL(url);
     parsed.searchParams.delete("channel_binding");
     parsed.searchParams.delete("channelBinding");
-    if (!parsed.searchParams.has("sslmode")) {
+    const isLocal =
+      parsed.hostname === "localhost" ||
+      parsed.hostname === "127.0.0.1" ||
+      parsed.hostname === "db";
+    if (isLocal) {
+      parsed.searchParams.set("sslmode", "disable");
+    } else if (!parsed.searchParams.has("sslmode")) {
       parsed.searchParams.set("sslmode", "require");
     }
     return parsed.toString();

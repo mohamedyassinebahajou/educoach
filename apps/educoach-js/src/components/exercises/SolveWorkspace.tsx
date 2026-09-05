@@ -7,6 +7,7 @@ import { ExerciseOutputExamples } from "@/components/exercises/ExerciseOutputExa
 import { useI18n } from "@/components/i18n/I18nProvider";
 import { formatMessage } from "@/lib/i18n/messages";
 import { getNextExercise, type Exercise, type ExerciseHint } from "@/lib/exercises";
+import { isFixCodeExercise } from "@/lib/exerciseFix";
 import { pointsRemaining } from "@/lib/exerciseScoring";
 import { gradeExercise, type GradeResult } from "@/lib/gradeExercise";
 import { runConsoleSandbox } from "@/lib/runSandbox";
@@ -17,6 +18,7 @@ type AttemptRecord = {
   passed: boolean;
   passedCount: number;
   totalCount: number;
+  aiFeedback?: string | null;
   at: string;
 };
 
@@ -33,13 +35,14 @@ function readProgress(exerciseId: string): StoredProgress {
   if (typeof window === "undefined") return { hintsRevealed: 0, completed: false };
   try {
     const raw = localStorage.getItem(storageKey(exerciseId));
-    if (!raw) return { hintsRevealed: 0, completed: false };
+    if (!raw?.trim()) return { hintsRevealed: 0, completed: false };
     const data = JSON.parse(raw) as StoredProgress;
     return {
       hintsRevealed: Number(data.hintsRevealed) || 0,
       completed: Boolean(data.completed),
     };
   } catch {
+    localStorage.removeItem(storageKey(exerciseId));
     return { hintsRevealed: 0, completed: false };
   }
 }
@@ -70,8 +73,14 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
   const [runOutput, setRunOutput] = useState<string>(t.tryIt.clickRun);
   const [runIsError, setRunIsError] = useState(false);
   const [grade, setGrade] = useState<GradeResult | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [aiFeedback, setAiFeedback] = useState<string | null>(null);
+  const [aiPassed, setAiPassed] = useState<boolean | null>(null);
+  const [aiSkipped, setAiSkipped] = useState(false);
 
   const isGraded = exercise.kind === "code" && (exercise.checks?.length ?? 0) > 0;
+  const isFixExercise = isFixCodeExercise(exercise);
+  const showAutoChecks = isGraded && !isFixExercise && (exercise.visibleTests?.length ?? 0) > 0;
   const nextExercise = useMemo(() => getNextExercise(exercise.id), [exercise.id]);
   const hints = exercise.hints;
   const revealedHints: ExerciseHint[] = hints.slice(0, hintsRevealed);
@@ -79,9 +88,19 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
 
   useEffect(() => {
     const saved = readProgress(exercise.id);
+    setCode(exercise.starterCode ?? "");
     setHintsRevealed(saved.hintsRevealed);
     setCompleted(saved.completed);
-  }, [exercise.id]);
+    setJustSubmitted(false);
+    setGrade(null);
+    setAiFeedback(null);
+    setAiPassed(null);
+    setAiSkipped(false);
+    setSubmitting(false);
+    setRunOutput(t.tryIt.clickRun);
+    setRunIsError(false);
+    setAuthError(null);
+  }, [exercise.id, exercise.starterCode, t.tryIt.clickRun]);
 
   useEffect(() => {
     writeProgress(exercise.id, { hintsRevealed, completed });
@@ -96,7 +115,8 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
     if (!res.ok) return;
     const data = (await res.json()) as { attempts: AttemptRecord[] };
     setAttempts(data.attempts);
-    if (data.attempts[0]?.code) setCode(data.attempts[0].code);
+    const latestCode = data.attempts[0]?.code?.trim();
+    if (latestCode) setCode(latestCode);
     if (data.attempts.some((a) => a.passed)) setCompleted(true);
   }, [exercise.id, t.solve.signInRequired]);
 
@@ -113,6 +133,9 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
     setCompleted(false);
     setJustSubmitted(false);
     setGrade(null);
+    setAiFeedback(null);
+    setAiPassed(null);
+    setAiSkipped(false);
   }, []);
 
   const runCode = useCallback(() => {
@@ -152,38 +175,58 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
   }, [goToNextExercise]);
 
   const submitAttempt = useCallback(
-    async (passed: boolean, advanceAfter = false) => {
-      const res = await fetch("/api/attempts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          exerciseId: exercise.id,
-          code,
-          passed,
-          passedCount: passed ? remaining : 0,
-          totalCount: exercise.maxPoints,
-        }),
-      });
-      if (res.status === 401) {
-        setAuthError(t.solve.signInRequiredSubmit);
-        return false;
+    async (advanceAfter = false) => {
+      setSubmitting(true);
+      setAiFeedback(null);
+      setAiPassed(null);
+      setAiSkipped(false);
+      try {
+        const res = await fetch("/api/attempts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            exerciseId: exercise.id,
+            code,
+            hintsRevealed,
+          }),
+        });
+        if (res.status === 401) {
+          setAuthError(t.solve.signInRequiredSubmit);
+          return false;
+        }
+        if (!res.ok) return false;
+
+        const data = (await res.json()) as {
+          attempt: AttemptRecord;
+          grade?: {
+            auto: GradeResult | null;
+            ai: { passed: boolean; feedback: string; skipped: boolean };
+            passed: boolean;
+          };
+        };
+
+        if (data.grade?.auto) setGrade(data.grade.auto);
+        setAiFeedback(data.grade?.ai.feedback ?? data.attempt.aiFeedback ?? null);
+        setAiPassed(data.grade?.ai.passed ?? null);
+        setAiSkipped(Boolean(data.grade?.ai.skipped));
+
+        if (data.attempt.passed) {
+          setCompleted(true);
+          setJustSubmitted(true);
+          await loadAttempts();
+          if (advanceAfter) goToNextExercise();
+        }
+        return data.attempt.passed;
+      } finally {
+        setSubmitting(false);
       }
-      if (!res.ok) return false;
-      if (passed) {
-        setCompleted(true);
-        setJustSubmitted(true);
-        await loadAttempts();
-        if (advanceAfter) goToNextExercise();
-      }
-      return true;
     },
     [
       code,
       exercise.id,
-      exercise.maxPoints,
       goToNextExercise,
+      hintsRevealed,
       loadAttempts,
-      remaining,
       t.solve.signInRequiredSubmit,
     ],
   );
@@ -194,16 +237,19 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
         runTests();
         return;
       }
-      await submitAttempt(true, true);
+      await submitAttempt(true);
       return;
     }
-    await submitAttempt(true, true);
+    await submitAttempt(true);
   }, [grade?.passed, isGraded, runTests, submitAttempt]);
 
   const resetDraft = useCallback(() => {
     setCode(exercise.starterCode ?? "");
     setJustSubmitted(false);
     setGrade(null);
+    setAiFeedback(null);
+    setAiPassed(null);
+    setAiSkipped(false);
     setRunOutput(t.tryIt.clickRun);
     setRunIsError(false);
   }, [exercise.starterCode, t.tryIt.clickRun]);
@@ -242,7 +288,11 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
             })}
           </p>
           <p className="mt-1 text-xs text-[var(--muted)]">
-            {isGraded ? t.solve.gradedHint : t.solve.noSolutions}
+            {isFixExercise
+              ? t.solve.fixHint
+              : isGraded
+                ? t.solve.gradedHint
+                : t.solve.noSolutions}
             {nextExercise ? ` ${t.solve.autoAdvanceHint}` : ""}
           </p>
           {authError ? (
@@ -328,13 +378,13 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
 
       <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
         <aside className="space-y-4">
-          {isGraded && exercise.visibleTests?.length ? (
+          {showAutoChecks ? (
             <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
               <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
                 {t.solve.autoChecks}
               </h2>
               <ul className="mt-2 space-y-1 text-sm text-[var(--ink)]">
-                {exercise.visibleTests.map((label, i) => (
+                {exercise.visibleTests!.map((label, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-[var(--muted)]">•</span>
                     <span>{label}</span>
@@ -369,13 +419,16 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
                 {t.solve.testResults}
               </h2>
               <ul className="mt-2 space-y-2 text-sm">
-                {grade.checks.map((check) => (
+                {grade.checks.map((check, i) => (
                   <li
                     key={check.id}
                     className={check.passed ? "text-[var(--accent)]" : "text-[#9f1239]"}
                   >
-                    {check.passed ? "✓" : "✗"} {check.label}
-                    {check.detail ? (
+                    {check.passed ? "✓" : "✗"}{" "}
+                    {isFixExercise
+                      ? formatMessage(t.solve.checkNumber, { n: i + 1 })
+                      : check.label}
+                    {!isFixExercise && check.detail ? (
                       <pre className="mt-1 whitespace-pre-wrap text-xs text-[var(--muted)]">
                         {check.detail}
                       </pre>
@@ -384,10 +437,37 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
                 ))}
               </ul>
               {grade.passed ? (
-                <p className="mt-3 text-sm font-semibold text-[var(--accent)]">{t.solve.testsPassed}</p>
+                <>
+                  <p className="mt-3 text-sm font-semibold text-[var(--accent)]">
+                    {t.solve.testsPassed}
+                  </p>
+                  {!completed ? (
+                    <p className="mt-1 text-xs text-[var(--muted)]">{t.solve.autoChecksPassedHint}</p>
+                  ) : null}
+                </>
               ) : (
                 <p className="mt-3 text-sm text-[var(--muted)]">{t.solve.testsMustPass}</p>
               )}
+            </section>
+          ) : null}
+
+          {aiFeedback ? (
+            <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+                {t.solve.aiReviewTitle}
+              </h2>
+              <p
+                className={`mt-2 text-sm ${
+                  aiPassed ? "text-[var(--accent)]" : "text-[#9f1239]"
+                }`}
+              >
+                {aiPassed
+                  ? aiSkipped
+                    ? t.solve.aiReviewSkipped
+                    : t.solve.aiReviewPassed
+                  : t.solve.aiReviewFailed}
+              </p>
+              <p className="mt-2 whitespace-pre-wrap text-sm text-[var(--ink)]">{aiFeedback}</p>
             </section>
           ) : null}
 
@@ -414,7 +494,7 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
               htmlFor={editorId}
               className="text-xs font-semibold uppercase tracking-[0.08em] text-[var(--muted)]"
             >
-              {isGraded ? t.solve.codeEditor : t.solve.draftEditor}
+              {isFixExercise ? t.solve.fixEditor : isGraded ? t.solve.codeEditor : t.solve.draftEditor}
             </label>
             <div className="flex flex-wrap gap-2">
               {isGraded ? (
@@ -438,10 +518,10 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
               <button
                 type="button"
                 onClick={() => void submitSolution()}
-                disabled={isGraded && !canSubmitGraded}
+                disabled={(isGraded && !canSubmitGraded) || submitting}
                 className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {submitLabel}
+                {submitting ? t.solve.submitting : submitLabel}
               </button>
               <button
                 type="button"
@@ -458,6 +538,9 @@ export function SolveWorkspace({ exercise }: SolveWorkspaceProps) {
             onChange={(e) => {
               setCode(e.target.value);
               setGrade(null);
+              setAiFeedback(null);
+              setAiPassed(null);
+              setAiSkipped(false);
             }}
             spellCheck={false}
             className="min-h-[280px] w-full resize-y bg-[#0b1220] p-3 font-[family-name:var(--font-mono)] text-sm leading-relaxed text-[#e8eef5] outline-none"

@@ -70,3 +70,19 @@ class CoachAlert(BaseModel):
 
 class CoachAlertsResponse(BaseModel):
     alerts: list[CoachAlert]
+
+
+class GradeRequest(BaseModel):
+    exercise_id: str = Field(..., min_length=1)
+    title: str = Field(..., min_length=1)
+    prompt: str = Field(..., min_length=1)
+    code: str = ""
+    console_output: str = ""
+    auto_tests_passed: bool = False
+    auto_test_summary: str = ""
+
+
+class GradeResponse(BaseModel):
+    passed: bool
+    feedback: str
+    reasons: list[str] = Field(default_factory=list)

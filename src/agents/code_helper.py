@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from src.agents.llm import get_llm
+from src.agents.llm import invoke_with_fallback
 from src.agents.state import AgentState
 
 SYSTEM_PROMPT = """You are EduCoach Code Helper for beginner JavaScript students (browser JS).
@@ -28,11 +28,10 @@ def run_code_helper(state: AgentState) -> dict:
         f"Conversation so far:\n{history}\n\n" if history else ""
     ) + f"Student message:\n{question}"
 
-    llm = get_llm()
-    response = llm.invoke(
+    content, _provider = invoke_with_fallback(
         [
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=user_block),
         ]
     )
-    return {"reply": response.content.strip()}
+    return {"reply": content}

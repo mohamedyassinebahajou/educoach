@@ -209,6 +209,21 @@ function extractFunctionChecks(title, prompt) {
 function extractFixChecks(prompt, title) {
   const text = `${title} ${prompt}`;
 
+  if (/fix the const bug|const total = 0;\s*total\s*=/i.test(text)) {
+    return [
+      includes("use-let", "Uses let for total", "let\\s+total", "i"),
+      includes("reassign", "Updates total", "total\\s*=", "i"),
+    ];
+  }
+
+  if (/intended output was ["']Total: 60["']/i.test(text)) {
+    return [linesExact(["Total: 60"])];
+  }
+
+  if (/spot the assignment bug|if \(x = 5\)/i.test(text)) {
+    return [includes("strict-eq", "Uses === in the if condition", "===", "i")];
+  }
+
   if (/Console\.log/.test(prompt)) {
     return [includes("fix-case", "Uses console.log (lowercase)", "console\\.log\\s*\\(", "i")];
   }
@@ -236,7 +251,8 @@ function extractFixChecks(prompt, title) {
   return null;
 }
 
-function extractOperatorChecks(prompt) {
+function extractOperatorChecks(prompt, title) {
+  const text = `${title} ${prompt}`;
   const checks = [];
   if (/typeof\s+\d+/i.test(prompt) || /typeof 100/i.test(prompt)) {
     checks.push(includes("typeof-num", "Uses typeof on a number", "typeof\\s+\\d+", "i"));
@@ -255,6 +271,15 @@ function extractOperatorChecks(prompt) {
   }
   if (/temp > 15 && temp < 25/i.test(prompt)) {
     checks.push(includes("range", "Combines comparisons with &&", "&&", "i"));
+  }
+  if (/"10" \+ 5/i.test(prompt)) {
+    return [linesExact(["105", "15"])];
+  }
+  if (/truthy or falsy|if \(0\)/i.test(text)) {
+    return [
+      includes("if-zero", "Uses if (0)", "if\\s*\\(\\s*0\\s*\\)", "i"),
+      linesExact(["skipped"]),
+    ];
   }
   return checks.length ? checks : null;
 }
@@ -295,11 +320,36 @@ function extractExplainOutputChecks(prompt, title) {
 const REFLECT_RE =
   /\b(git add|git commit|git push|git status|git log|git clone|git init|git pull|git remote|commit message|terminal command|on paper|out loud|write the (?:full )?sequence of commands|state the exact terminal command|create a file .* containing|name the three core commands|which command shows|write a clear,? specific commit message|simulate,? command|README|mock defense|timed run|full checkpoint audit|design and explain without|plan out|feedback|list your own|prepare for|which command|what does git|what happened and how|rewrite it to be|without looking at notes|trace.*by hand|compare linear search and binary search from memory|without notes|recorded if possible|inventing a plausible|classmate's checkpoint|spoken intro|short honest answers|questions an instructor might ask|put these in order|true or false)\b/i;
 
-export function inferExerciseChecks({ prompt, title, lessonSlug }) {
-  if (lessonSlug === "git-github-basics") {
-    return reflectMeta();
+function extractGitCommandChecks(prompt, title) {
+  const text = `${title} ${prompt}`;
+  if (!/git |terminal command|node hello|cd day1/i.test(text)) return null;
+
+  const patterns = [];
+  const addMatch = text.match(/git add ([^\s.]+)/i);
+  if (addMatch) patterns.push(`git add ${addMatch[1]}`);
+  if (/git status/i.test(text) && /which command|check your repo/i.test(text)) {
+    patterns.push("git status");
+  }
+  if (/git log --oneline|compact.*history/i.test(text)) patterns.push("git log --oneline");
+  if (/git pull/i.test(text) && /push fail/i.test(text)) patterns.push("git pull");
+  if (/name the three core commands/i.test(text)) {
+    patterns.push("git add", "git commit", "git push");
+  }
+  if (/stage only.*app\.js/i.test(text)) patterns.push("git add app.js");
+  if (/put these in order/i.test(text)) {
+    patterns.push("git add", "git commit", "git push");
+  }
+  if (/git init/i.test(text) && /simulation|full session/i.test(text)) {
+    patterns.push("git init", "git add", "git commit", "git remote add", "git push");
   }
 
+  if (!patterns.length) return null;
+  return patterns.map((cmd, idx) =>
+    includes(`git-${idx}`, `Includes: ${cmd}`, cmd.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
+  );
+}
+
+export function inferExerciseChecks({ prompt, title, lessonSlug }) {
   let lines = extractPredictedOutput(prompt, title);
   if (lines) return codeMeta([linesExact(lines)]);
 
@@ -315,7 +365,7 @@ export function inferExerciseChecks({ prompt, title, lessonSlug }) {
   checks = extractFixChecks(prompt, title);
   if (checks) return codeMeta(checks, checks.map((c) => c.label));
 
-  checks = extractOperatorChecks(prompt);
+  checks = extractOperatorChecks(prompt, title);
   if (checks) return codeMeta(checks, checks.map((c) => c.label));
 
   checks = extractDeclareChecks(prompt);
@@ -323,6 +373,33 @@ export function inferExerciseChecks({ prompt, title, lessonSlug }) {
 
   checks = extractFunctionChecks(title, prompt);
   if (checks) return codeMeta(checks, checks.map((c) => c.label));
+
+  checks = extractGitCommandChecks(prompt, title);
+  if (checks) {
+    return codeMeta(
+      checks,
+      checks.map((c) => c.label),
+      "// Write the terminal commands below (one per line, as comments or strings)\n",
+    );
+  }
+
+  if (/naming check|1stPlace/i.test(`${title} ${prompt}`)) {
+    return codeMeta(
+      [
+        includes("first", "Declares firstPlace", "firstPlace", "i"),
+        includes("temp", "Declares _temp", "_temp", "i"),
+      ],
+      ["Declares the valid names firstPlace and _temp"],
+    );
+  }
+
+  if (/switch skeleton|Fill in a switch/i.test(`${title} ${prompt}`)) {
+    return codeMeta([
+      includes("switch", "Uses switch", "switch\\s*\\(", "i"),
+      includes("case-red", 'Has case "red"', 'case\\s+"red"', "i"),
+      includes("default", "Has default case", "default\\s*:", "i"),
+    ]);
+  }
 
   if (
     /\b(print|logging|console\.log)\b/i.test(`${title} ${prompt}`) &&

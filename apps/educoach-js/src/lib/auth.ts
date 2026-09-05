@@ -60,13 +60,17 @@ export async function getSession(): Promise<SessionUser | null> {
 
 export async function setSessionCookie(token: string) {
   const jar = await cookies();
-  jar.set(COOKIE, token, {
+  jar.set(COOKIE, token, sessionCookieOptions());
+}
+
+export function sessionCookieOptions() {
+  return {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "lax" as const,
     secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 60 * 60 * 24 * 7,
-  });
+  };
 }
 
 export async function clearSessionCookie() {

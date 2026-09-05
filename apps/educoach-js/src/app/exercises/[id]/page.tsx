@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ExerciseOutputExamples } from "@/components/exercises/ExerciseOutputExamples";
 import { PageShell } from "@/components/PageShell";
+import { getSession } from "@/lib/auth";
+import { assertLearnerCanAccessExerciseDay } from "@/lib/dayAccess";
 import { exercises, getExercise, getNextExercise, type Difficulty } from "@/lib/exercises";
 import { getI18n } from "@/lib/i18n/server";
 import { formatMessage } from "@/lib/i18n/messages";
@@ -19,6 +21,13 @@ export default async function ExerciseDetailPage({ params }: PageProps) {
   const { t } = await getI18n();
   const exercise = getExercise(id);
   if (!exercise) notFound();
+
+  const user = await getSession();
+  if (user?.role === "learner") {
+    const allowed = await assertLearnerCanAccessExerciseDay(user.id, exercise.day);
+    if (!allowed) redirect(`/learn/locked?day=${exercise.day}`);
+  }
+
   const nextExercise = getNextExercise(id);
 
   const difficultyLabel: Record<Difficulty, string> = {

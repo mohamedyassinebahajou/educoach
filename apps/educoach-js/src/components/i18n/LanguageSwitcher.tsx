@@ -3,11 +3,14 @@
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import type { Locale } from "@/lib/i18n/config";
-import { useI18n } from "@/components/i18n/I18nProvider";
 
-export function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  locale: Locale;
+  ariaLabel: string;
+};
+
+export function LanguageSwitcher({ locale, ariaLabel }: LanguageSwitcherProps) {
   const router = useRouter();
-  const { locale, t } = useI18n();
   const [pending, startTransition] = useTransition();
 
   function switchLocale(next: Locale) {
@@ -26,7 +29,7 @@ export function LanguageSwitcher() {
     <div
       className="flex items-center gap-0.5 rounded-md border border-[var(--border)] bg-[var(--paper)] p-0.5 text-xs"
       role="group"
-      aria-label={t.lang.label}
+      aria-label={ariaLabel}
     >
       {(["en", "fr"] as const).map((code) => {
         const active = locale === code;

@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PageShell } from "@/components/PageShell";
 import { ScoringRubricTable } from "@/components/exercises/ScoringRubricTable";
+import { getSession } from "@/lib/auth";
 import { curriculum } from "@/lib/curriculum";
+import { getMaxUnlockedDayForUser, isDayUnlocked } from "@/lib/dayAccess";
 import { exercises, listExerciseDays, type Difficulty } from "@/lib/exercises";
 import { getI18n } from "@/lib/i18n/server";
 import { formatMessage } from "@/lib/i18n/messages";
@@ -14,6 +17,9 @@ export default async function ExercisesPage({
   searchParams: SearchParams;
 }) {
   const { t } = await getI18n();
+  const user = await getSession();
+  const maxUnlockedDay =
+    user == null ? 10 : await getMaxUnlockedDayForUser(user.id, user.role ?? "learner");
   const difficultyLabel: Record<Difficulty, string> = {
     easy: t.difficulty.easy,
     medium: t.difficulty.medium,
@@ -35,6 +41,7 @@ export default async function ExercisesPage({
 
   const grouped = days
     .filter((d) => !dayFilter || d === dayFilter)
+    .filter((d) => user?.role === "coach" || isDayUnlocked(d, maxUnlockedDay))
     .map((day) => ({
       day,
       lessons: curriculum
@@ -79,7 +86,10 @@ export default async function ExercisesPage({
         >
           {t.exercises.all}
         </Link>
-        {days.map((day) => (
+        {days.map((day) => {
+          const locked = user?.role === "learner" && !isDayUnlocked(day, maxUnlockedDay);
+          if (locked) return null;
+          return (
           <Link
             key={day}
             href={`/exercises?day=${day}`}
@@ -91,7 +101,7 @@ export default async function ExercisesPage({
           >
             {formatMessage(t.exercises.day, { n: day })}
           </Link>
-        ))}
+        );})}
       </div>
 
       <div className="space-y-10">

@@ -8,12 +8,24 @@ const globalForPrisma = globalThis as unknown as {
   pgPool?: Pool;
 };
 
+function poolSsl(connectionString: string) {
+  if (
+    connectionString.includes("localhost") ||
+    connectionString.includes("127.0.0.1") ||
+    connectionString.includes("@db:")
+  ) {
+    return false as const;
+  }
+  if (connectionString.includes("neon.tech")) {
+    return { rejectUnauthorized: false } as const;
+  }
+  return undefined;
+}
+
 function poolConfig(connectionString: string) {
   return {
     connectionString,
-    ssl: connectionString.includes("neon.tech")
-      ? ({ rejectUnauthorized: false } as const)
-      : undefined,
+    ssl: poolSsl(connectionString),
   };
 }
 
@@ -30,7 +42,16 @@ function createPrisma() {
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrisma();
+/** Dev hot-reload keeps a global Prisma instance; drop it after `prisma generate`. */
+function isStalePrismaClient(client: PrismaClient | undefined): client is undefined {
+  if (!client) return true;
+  return !("cohortSettings" in client);
+}
+
+const prismaInstance =
+  !isStalePrismaClient(globalForPrisma.prisma) ? globalForPrisma.prisma : createPrisma();
+
+export const prisma = prismaInstance;
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;

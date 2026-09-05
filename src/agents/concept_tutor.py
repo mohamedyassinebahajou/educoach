@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from src.agents.llm import get_llm
+from src.agents.llm import invoke_with_fallback
 from src.agents.state import AgentState
 from src.rag.retrieval import format_context, retrieve_context
 
@@ -34,11 +34,10 @@ def run_concept_tutor(state: AgentState) -> dict:
         else ""
     ) + f"Lesson context:\n{context}\n\nStudent question:\n{question}"
 
-    llm = get_llm()
-    response = llm.invoke(
+    content, _provider = invoke_with_fallback(
         [
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=user_block),
         ]
     )
-    return {"reply": response.content.strip()}
+    return {"reply": content}

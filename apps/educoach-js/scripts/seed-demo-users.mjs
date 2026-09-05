@@ -12,9 +12,23 @@ if (!connectionString) {
   process.exit(1);
 }
 
+function poolSsl(connectionString) {
+  if (
+    connectionString.includes("localhost") ||
+    connectionString.includes("127.0.0.1") ||
+    connectionString.includes("@db:")
+  ) {
+    return false;
+  }
+  if (connectionString.includes("neon.tech")) {
+    return { rejectUnauthorized: false };
+  }
+  return undefined;
+}
+
 const pool = new pg.Pool({
   connectionString,
-  ssl: connectionString.includes("neon.tech") ? { rejectUnauthorized: false } : undefined,
+  ssl: poolSsl(connectionString),
 });
 
 async function upsertUser(username, passwordHash, role, displayName) {
@@ -31,17 +45,12 @@ async function upsertUser(username, passwordHash, role, displayName) {
 }
 
 async function main() {
-  const studentHash = await bcrypt.hash("student123", 10);
   const coachHash = await bcrypt.hash("coach123", 10);
 
   await upsertUser("coach", coachHash, "coach", "Coach");
-  for (let i = 1; i <= 5; i++) {
-    await upsertUser(`student${i}`, studentHash, "learner", `Student ${i}`);
-  }
 
   console.log("Seeded users:");
   console.log("  coach / coach123");
-  console.log("  student1…student5 / student123");
 }
 
 main()

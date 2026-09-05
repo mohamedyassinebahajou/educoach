@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getLocalizedCurriculum } from "@/lib/i18n/curriculum-locale";
 import { getI18n } from "@/lib/i18n/server";
 import { formatMessage } from "@/lib/i18n/messages";
+import { getSession } from "@/lib/auth";
+import { getMaxUnlockedDayForUser, isDayUnlocked } from "@/lib/dayAccess";
 import type { DayMeta } from "@/lib/curriculum";
 
 type CurriculumSidebarProps = {
@@ -10,6 +12,9 @@ type CurriculumSidebarProps = {
 
 export async function CurriculumSidebar({ activeSlug }: CurriculumSidebarProps) {
   const { locale, t } = await getI18n();
+  const user = await getSession();
+  const maxUnlockedDay =
+    user == null ? 10 : await getMaxUnlockedDayForUser(user.id, user.role);
   const curriculum = getLocalizedCurriculum(locale);
   const week1 = curriculum.filter((d) => d.week === 1);
   const week2 = curriculum.filter((d) => d.week === 2);
@@ -24,12 +29,14 @@ export async function CurriculumSidebar({ activeSlug }: CurriculumSidebarProps) 
           label={formatMessage(t.learn.week, { n: 1 })}
           days={week1}
           activeSlug={activeSlug}
+          maxUnlockedDay={maxUnlockedDay}
           t={t}
         />
         <WeekBlock
           label={formatMessage(t.learn.week, { n: 2 })}
           days={week2}
           activeSlug={activeSlug}
+          maxUnlockedDay={maxUnlockedDay}
           t={t}
         />
       </div>
@@ -41,21 +48,30 @@ function WeekBlock({
   label,
   days,
   activeSlug,
+  maxUnlockedDay,
   t,
 }: {
   label: string;
   days: DayMeta[];
   activeSlug?: string;
+  maxUnlockedDay: number;
   t: Awaited<ReturnType<typeof getI18n>>["t"];
 }) {
   return (
     <div className="mt-4">
       <h2 className="text-sm font-semibold text-[var(--ink)]">{label}</h2>
       <ul className="mt-2 space-y-3">
-        {days.map((day) => (
+        {days.map((day) => {
+          const dayOpen = isDayUnlocked(day.day, maxUnlockedDay);
+          return (
           <li key={day.id}>
             <p className="text-xs text-[var(--muted)]">
               {formatMessage(t.learn.day, { n: day.day })} · {day.dateLabel} · {day.title}
+              {!dayOpen ? (
+                <span className="ml-1 rounded bg-[var(--paper)] px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                  {t.learn.dayLocked}
+                </span>
+              ) : null}
             </p>
             {day.lessons.length === 0 ? (
               <p className="mt-1 text-xs italic text-[var(--muted)]">{t.learn.lessonsComingSoon}</p>
@@ -63,6 +79,15 @@ function WeekBlock({
               <ul className="mt-1 space-y-0.5">
                 {day.lessons.map((lesson) => {
                   const active = lesson.slug === activeSlug;
+                  if (!dayOpen) {
+                    return (
+                      <li key={lesson.slug}>
+                        <span className="block rounded-md px-2 py-1 text-sm text-[var(--muted)] opacity-60">
+                          {lesson.title}
+                        </span>
+                      </li>
+                    );
+                  }
                   return (
                     <li key={lesson.slug}>
                       <Link
@@ -81,7 +106,7 @@ function WeekBlock({
               </ul>
             )}
           </li>
-        ))}
+        );})}
       </ul>
     </div>
   );

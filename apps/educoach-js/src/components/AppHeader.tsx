@@ -6,7 +6,7 @@ import { getI18n } from "@/lib/i18n/server";
 
 export async function AppHeader() {
   const user = await getSession();
-  const { t } = await getI18n();
+  const { locale, t } = await getI18n();
 
   const nav = [
     { href: "/learn", label: t.nav.learn },
@@ -40,7 +40,7 @@ export async function AppHeader() {
             );
           })}
           <div className="ml-1 border-l border-[var(--border)] pl-2 sm:ml-2 sm:pl-3">
-            <LanguageSwitcher />
+            <LanguageSwitcher locale={locale} ariaLabel={t.lang.label} />
           </div>
           {user ? (
             <span className="ml-1 flex items-center gap-2 border-l border-[var(--border)] pl-2 sm:ml-2 sm:pl-3">
@@ -48,7 +48,7 @@ export async function AppHeader() {
                 {user.displayName}{" "}
                 <span className="text-xs">({user.role})</span>
               </span>
-              <LogoutButton />
+              <LogoutButton label={t.nav.logout} />
             </span>
           ) : (
             <Link

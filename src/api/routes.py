@@ -9,11 +9,14 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException
 
 from src.agents.orchestrator import chat as run_chat
+from src.agents.solution_grader import grade_solution
 from src.api.schemas import (
     ChatRequest,
     ChatResponse,
     CoachAlert,
     CoachAlertsResponse,
+    GradeRequest,
+    GradeResponse,
     PredictRequest,
     PredictResponse,
     RiskBoardResponse,
@@ -55,6 +58,25 @@ def chat_endpoint(body: ChatRequest) -> ChatResponse:
         append_alert(body.student_id, alert)
 
     return ChatResponse(**result)
+
+
+@router.post("/grade", response_model=GradeResponse)
+def grade_endpoint(body: GradeRequest) -> GradeResponse:
+    """Judge whether learner code satisfies the exercise prompt (after auto-tests)."""
+    try:
+        result = grade_solution(
+            exercise_id=body.exercise_id,
+            title=body.title,
+            prompt=body.prompt,
+            code=body.code,
+            console_output=body.console_output,
+            auto_tests_passed=body.auto_tests_passed,
+            auto_test_summary=body.auto_test_summary,
+        )
+    except Exception as exc:  # noqa: BLE001 — surface cleanly in API
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+    return GradeResponse(**result)
 
 
 @router.post("/predict_today", response_model=PredictResponse)

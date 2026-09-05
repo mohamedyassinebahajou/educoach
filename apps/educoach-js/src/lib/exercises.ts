@@ -36,6 +36,12 @@ export type ExerciseCheck =
       label: string;
       kind: "consoleLogMinCount";
       min: number;
+    }
+  | {
+      id: string;
+      label: string;
+      kind: "consoleIncludesLine";
+      equals: string;
     };
 
 export type Exercise = {

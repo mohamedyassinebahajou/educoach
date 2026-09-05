@@ -13,6 +13,12 @@ export type PythonChatResponse = {
   coach_alert: string;
 };
 
+export type PythonGradeResponse = {
+  passed: boolean;
+  feedback: string;
+  reasons: string[];
+};
+
 export function pythonApiBaseUrl(): string {
   return (process.env.EDUCOACH_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
 }
@@ -59,4 +65,43 @@ export async function pythonChat(input: {
   }
 
   return (await res.json()) as PythonChatResponse;
+}
+
+export async function pythonGrade(input: {
+  exerciseId: string;
+  title: string;
+  prompt: string;
+  code: string;
+  consoleOutput: string;
+  autoTestsPassed: boolean;
+  autoTestSummary: string;
+}): Promise<PythonGradeResponse> {
+  const res = await fetch(`${pythonApiBaseUrl()}/grade`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      exercise_id: input.exerciseId,
+      title: input.title,
+      prompt: input.prompt,
+      code: input.code,
+      console_output: input.consoleOutput,
+      auto_tests_passed: input.autoTestsPassed,
+      auto_test_summary: input.autoTestSummary,
+    }),
+    signal: AbortSignal.timeout(120_000),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    let detail = res.statusText;
+    try {
+      const err = (await res.json()) as { detail?: string };
+      if (err.detail) detail = err.detail;
+    } catch {
+      /* ignore */
+    }
+    throw new Error(`EduCoach grade API ${res.status}: ${detail}`);
+  }
+
+  return (await res.json()) as PythonGradeResponse;
 }

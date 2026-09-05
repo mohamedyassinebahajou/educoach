@@ -94,7 +94,7 @@ export const exerciseDays = [
     "title": "Basic math print",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Basic math print Print the result of 12 * 4 without calculating it yourself.",
+    "prompt": "This code throws an error: Console.log(\"test\"); Fix it.",
     "hints": [
       {
         "text": "Let JavaScript do the math for you.",
@@ -270,7 +270,7 @@ export const exerciseDays = [
     "title": "Fix the case-sensitivity bug",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Fix the case-sensitivity bug This code throws an error: Console.log(\"test\");. Explain why and fix it.",
+    "prompt": "This code throws an error: Console.log(\"test\");. Fix it.",
     "hints": [
       {
         "text": "JavaScript cares about uppercase vs lowercase.",
@@ -286,10 +286,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Uses console.log (lowercase)"
-    ],
+    "starterCode": "Console.log(\"test\");\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -360,10 +358,10 @@ export const exerciseDays = [
     "id": "ex-welcome-to-javascript-09",
     "day": 1,
     "lessonSlug": "welcome-to-javascript",
-    "title": "Explain the output, don't just state it",
+    "title": "Practice the output, don't just state it",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Explain the output, don't just state it For console.log(\"Age: \" + 20 + 5);, predict the output AND explain why it isn't \"Age: 25\".",
+    "prompt": "For console.log(\"Age: \" + 20 + 5);, predict the output and show why it is not \"Age: 25\".",
     "hints": [
       {
         "text": "+ is evaluated left to right.",
@@ -446,10 +444,10 @@ export const exerciseDays = [
     "id": "ex-welcome-to-javascript-11",
     "day": 1,
     "lessonSlug": "welcome-to-javascript",
-    "title": "Diagnose a silent mistake",
+    "title": "Fix a silent mistake",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Diagnose a silent mistake Explain what's wrong with console.log(\"Total: \" + 10 + 20 + 30); if the intended output was \"Total: 60\".",
+    "prompt": "Diagnose a silent mistake Fix the code so with console.log(\"Total: \" + 10 + 20 + 30); if the intended output was \"Total: 60\".",
     "hints": [
       {
         "text": "The problem is about order, not syntax — this code runs without an error.",
@@ -465,23 +463,21 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Console output matches the expected result"
-    ],
+    "starterCode": "console.log(\"Total: \" + 10 + 20 + 30);\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
-        "body": "Total: 102030"
+        "body": "Total: 60"
       }
     ],
     "checks": [
       {
         "id": "out-exact",
-        "label": "Console output: \"Total: 102030\"",
+        "label": "Console output: \"Total: 60\"",
         "kind": "consoleLinesExact",
         "lines": [
-          "Total: 102030"
+          "Total: 60"
         ]
       }
     ]
@@ -493,7 +489,7 @@ export const exerciseDays = [
     "title": "Full diagnostic",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full diagnostic Given console.log(\"Result: \" + 2 + 3 + \"4\" + 5);, predict the exact final string output character by character, and explain the reasoning behind every operator.",
+    "prompt": "Given console.log(\"Result: \" + 2 + 3 + \"4\" + 5);, predict the exact final string output character by character, behind every operator.",
     "hints": [
       {
         "text": "Track the running value after each +, one at a time, left to right.",
@@ -537,7 +533,7 @@ export const exerciseDays = [
     "title": "Run your first file",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Run your first file Create a file hello.js containing one console.log line, and state the exact terminal command to run it.",
+    "prompt": "Create a file hello.js containing one console.log line, and state the exact terminal command to run it.",
     "hints": [
       {
         "text": "The command starts with node.",
@@ -552,16 +548,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: node hello.js"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ node hello.js\nHello, World!"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: node hello.js",
+        "kind": "sourceIncludes",
+        "pattern": "node hello\\.js",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-hello-console-02",
@@ -749,7 +755,7 @@ export const exerciseDays = [
     "title": "Fix a syntax error",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Fix a syntax error Fix this broken statement: console.log \"Hello\";",
+    "prompt": "Fix this broken statement: console.log \"Hello\";",
     "hints": [
       {
         "text": "Something structural is missing, not just a typo in the text.",
@@ -765,10 +771,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Console output: \"Hello\""
-    ],
+    "starterCode": "console.log \"Hello\";\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -793,7 +797,7 @@ export const exerciseDays = [
     "title": "Console vs file behavior",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Console vs file behavior Explain one difference between typing code directly into a browser console versus running a .js file with Node.",
+    "prompt": "Explain one difference between typing code directly into a browser console versus running a .js file with Node.",
     "hints": [
       {
         "text": "Think about how each one executes code — line by line, or all at once.",
@@ -808,16 +812,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write two short console.log lines comparing console vs file execution"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "two-logs",
+        "label": "At least 2 console.log(...) calls",
+        "kind": "consoleLogMinCount",
+        "min": 2
+      }
+    ]
   },
   {
     "id": "ex-hello-console-08",
@@ -877,7 +890,7 @@ export const exerciseDays = [
     "title": "Debug silently wrong output",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Debug silently wrong output A student wrote console.log(\"Result: \" 5 + 5); and got an error. Identify and fix the mistake.",
+    "prompt": "A student wrote console.log(\"Result: \" 5 + 5); and got an error. Identify and fix the mistake.",
     "hints": [
       {
         "text": "Look between the string and the number.",
@@ -893,10 +906,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Adds + after \"Result: \""
-    ],
+    "starterCode": "console.log(\"Result: \" 5 + 5);\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -917,10 +928,10 @@ export const exerciseDays = [
     "id": "ex-hello-console-10",
     "day": 1,
     "lessonSlug": "hello-console",
-    "title": "Explain execution order",
+    "title": "Practice execution order",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Explain execution order Given a 5-line script mixing console.log and comments, explain out loud (in writing) the exact order lines will execute and print.",
+    "prompt": "Explain execution order Given a 5-line script mixing console.log and comments, explain in the editor (in writing) the exact order lines will execute and print.",
     "hints": [
       {
         "text": "Comments never execute, regardless of position.",
@@ -963,7 +974,7 @@ export const exerciseDays = [
     "title": "Terminal navigation",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Terminal navigation You have a file day1/hello.js and your terminal is currently in the parent folder. Write the full sequence of commands needed to run it.",
+    "prompt": "You have a file day1/hello.js and your terminal is currently in the parent folder. Write the full sequence of commands needed to run it.",
     "hints": [
       {
         "text": "You'll need to change directories first.",
@@ -978,16 +989,33 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// cd day1\n// node hello.js\n",
+    "visibleTests": [
+      "Write the cd and node commands"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ cd day1\n$ node hello.js\nHello from hello.js"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cd",
+        "label": "Includes cd day1",
+        "kind": "sourceIncludes",
+        "pattern": "cd\\s+day1",
+        "flags": "i"
+      },
+      {
+        "id": "node",
+        "label": "Includes node hello.js",
+        "kind": "sourceIncludes",
+        "pattern": "node\\s+hello\\.js",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-hello-console-12",
@@ -1038,7 +1066,7 @@ export const exerciseDays = [
     "title": "Name the three core commands",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Name the three core commands Name the three Git commands used in the everyday save-and-upload workflow, in order.",
+    "prompt": "Name the three Git commands used in the everyday save-and-upload workflow, in order.",
     "hints": [
       {
         "text": "The first one prepares files.",
@@ -1053,16 +1081,34 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git add, git commit -m",
+      "Includes: git push."
+    ],
     "outputExamples": [
       {
         "medium": "text",
         "body": "Example format:\n1. git add\n2. git commit\n3. git push"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git add, git commit -m",
+        "kind": "sourceIncludes",
+        "pattern": "git add, git commit -m",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-1",
+        "label": "Includes: git push.",
+        "kind": "sourceIncludes",
+        "pattern": "git push\\.",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-02",
@@ -1071,7 +1117,7 @@ export const exerciseDays = [
     "title": "Stage a single file",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Stage a single file Write the command to stage only a file named app.js (not everything).",
+    "prompt": "Write the command to stage only a file named app.js (not everything).",
     "hints": [
       {
         "text": "You don't need the . shortcut here.",
@@ -1086,16 +1132,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git add app.js"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git add app.js",
+        "kind": "sourceIncludes",
+        "pattern": "git add app\\.js",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-03",
@@ -1104,7 +1160,7 @@ export const exerciseDays = [
     "title": "Write a good commit message",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write a good commit message Write a clear, specific commit message for a commit that adds a function counting vowels.",
+    "prompt": "Write a clear, specific commit message for a commit that adds a function counting vowels.",
     "hints": [
       {
         "text": "Avoid vague words like \"update\" or \"fix\".",
@@ -1119,16 +1175,33 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a clear commit message as a string and log it"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "log-msg",
+        "label": "Logs a commit message string",
+        "kind": "sourceIncludes",
+        "pattern": "console\\.log\\s*\\(",
+        "flags": "i"
+      },
+      {
+        "id": "specific",
+        "label": "Message mentions what changed",
+        "kind": "sourceIncludes",
+        "pattern": "fix|add|update|function|bug",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-04",
@@ -1137,7 +1210,7 @@ export const exerciseDays = [
     "title": "Check your repo's state",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Check your repo's state Which command shows you which files are staged, modified, or untracked?",
+    "prompt": "Which command shows you which files are staged, modified, or untracked?",
     "hints": [
       {
         "text": "It's not git log.",
@@ -1152,16 +1225,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git status"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git status",
+        "kind": "sourceIncludes",
+        "pattern": "git status",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-05",
@@ -1170,7 +1253,7 @@ export const exerciseDays = [
     "title": "Order the workflow",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Order the workflow Put these in the correct order: git commit -m \"add feature\", git push, git add feature.js.",
+    "prompt": "Put these in the correct order: git commit -m \"add feature\", git push, git add feature.js.",
     "hints": [
       {
         "text": "You must stage before you can commit.",
@@ -1185,16 +1268,42 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git add feature.js",
+      "Includes: git commit -m",
+      "Includes: git push"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git push origin main\nEnumerating objects: 5, done.\nTo github.com:you/repo.git\n   abc123..def456  main -> main"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git add feature.js",
+        "kind": "sourceIncludes",
+        "pattern": "git add feature\\.js",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-1",
+        "label": "Includes: git commit -m",
+        "kind": "sourceIncludes",
+        "pattern": "git commit -m",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-2",
+        "label": "Includes: git push",
+        "kind": "sourceIncludes",
+        "pattern": "git push",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-06",
@@ -1203,7 +1312,7 @@ export const exerciseDays = [
     "title": "Clone vs init",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Clone vs init Explain the difference between git init and git clone, and when you'd use each.",
+    "prompt": "Explain the difference between git init and git clone, and when you'd use each.",
     "hints": [
       {
         "text": "One starts tracking a brand-new folder; the other downloads an existing repo.",
@@ -1218,16 +1327,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git clone needs a URL; git init doesn't."
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git clone https://github.com/org/repo.git\nCloning into 'repo'..."
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git clone needs a URL; git init doesn't.",
+        "kind": "sourceIncludes",
+        "pattern": "git clone needs a URL; git init doesn't\\.",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-07",
@@ -1236,7 +1355,7 @@ export const exerciseDays = [
     "title": "View history",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "View history Write the command that shows a compact, one-line-per-commit history of the repo.",
+    "prompt": "Write the command that shows a compact, one-line-per-commit history of the repo.",
     "hints": [
       {
         "text": "It's a variation of git log.",
@@ -1251,16 +1370,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git log --oneline"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git log --oneline",
+        "kind": "sourceIncludes",
+        "pattern": "git log --oneline",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-08",
@@ -1269,7 +1398,7 @@ export const exerciseDays = [
     "title": "Vague vs clear commit messages",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Vague vs clear commit messages Given the message \"fix stuff\", rewrite it to be clear and specific, inventing a plausible change it describes.",
+    "prompt": "Given the message \"fix stuff\", rewrite it to be clear and specific, inventing a plausible change it describes.",
     "hints": [
       {
         "text": "Say exactly what changed, not that \"something\" changed.",
@@ -1284,16 +1413,33 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a clear commit message as a string and log it"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "log-msg",
+        "label": "Logs a commit message string",
+        "kind": "sourceIncludes",
+        "pattern": "console\\.log\\s*\\(",
+        "flags": "i"
+      },
+      {
+        "id": "specific",
+        "label": "Message mentions what changed",
+        "kind": "sourceIncludes",
+        "pattern": "fix|add|update|function|bug",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-09",
@@ -1302,7 +1448,7 @@ export const exerciseDays = [
     "title": "Recover from a forgotten add",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Recover from a forgotten add You ran git commit -m \"message\" but forgot to git add your new file first. Explain what happened and how to fix it.",
+    "prompt": "You ran git commit -m \"message\" but forgot to git add your new file first. Explain what happened and how to fix it.",
     "hints": [
       {
         "text": "The commit only includes what was staged beforehand.",
@@ -1317,16 +1463,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git add on the missing file, then commit again (a new commit, or amend the previous one)."
+    ],
     "outputExamples": [
       {
         "medium": "text",
         "body": "Example shape (not your exact task):\n\"add countVowels helper for string tally\""
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git add on the missing file, then commit again (a new commit, or amend the previous one).",
+        "kind": "sourceIncludes",
+        "pattern": "git add on the missing file, then commit again \\(a new commit, or amend the previous one\\)\\.",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-10",
@@ -1335,7 +1491,7 @@ export const exerciseDays = [
     "title": "Design a commit plan",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Design a commit plan You're about to build 4 functions today. Plan out 4 separate commit messages you would use, one per function, as you finish each.",
+    "prompt": "You're about to build 4 functions today. Plan out 4 separate commit messages you would use, one per function, as you finish each.",
     "hints": [
       {
         "text": "Each message should be tied to exactly one function's completion.",
@@ -1350,22 +1506,39 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a clear commit message as a string and log it"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "log-msg",
+        "label": "Logs a commit message string",
+        "kind": "sourceIncludes",
+        "pattern": "console\\.log\\s*\\(",
+        "flags": "i"
+      },
+      {
+        "id": "specific",
+        "label": "Message mentions what changed",
+        "kind": "sourceIncludes",
+        "pattern": "fix|add|update|function|bug",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-11",
     "day": 1,
     "lessonSlug": "git-github-basics",
-    "title": "Explain the push failure git push fails with a message about the remote having work you don't have locally.",
+    "title": "Fix a push failure",
     "difficulty": "hard",
     "maxPoints": 35,
     "prompt": "Explain the push failure git push fails with a message about the remote having work you don't have locally. What should you do first?",
@@ -1383,16 +1556,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git pull first, resolve anything necessary, then try git push again."
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git push origin main\nEnumerating objects: 5, done.\nTo github.com:you/repo.git\n   abc123..def456  main -> main"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git pull first, resolve anything necessary, then try git push again.",
+        "kind": "sourceIncludes",
+        "pattern": "git pull first, resolve anything necessary, then try git push again\\.",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-git-github-basics-12",
@@ -1401,7 +1584,7 @@ export const exerciseDays = [
     "title": "Full day-one Git simulation",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full day-one Git simulation Simulate, command by command, a full session: initialize a repo, create and stage a file, commit it, connect it to a GitHub remote, and push it — writing every single command in the correct order.",
+    "prompt": "Simulate, command by command, a full session: initialize a repo, create and stage a file, commit it, connect it to a GitHub remote, and push it — writing every single command in the correct order.",
     "hints": [
       {
         "text": "You'll need at least 5 distinct commands.",
@@ -1416,16 +1599,34 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git init, git add ., git commit -m",
+      "Includes: git remote add origin <url>, git push -u origin main."
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git status\n# your Git command and typical output go here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git init, git add ., git commit -m",
+        "kind": "sourceIncludes",
+        "pattern": "git init, git add \\., git commit -m",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-1",
+        "label": "Includes: git remote add origin <url>, git push -u origin main.",
+        "kind": "sourceIncludes",
+        "pattern": "git remote add origin <url>, git push -u origin main\\.",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-variables-let-const-01",
@@ -1477,7 +1678,7 @@ export const exerciseDays = [
     "title": "Check a type",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Check a type Print the result of typeof 100.",
+    "prompt": "Print the result of `typeof 100`.",
     "hints": [
       {
         "text": "typeof goes before the value.",
@@ -1495,20 +1696,28 @@ export const exerciseDays = [
     "kind": "code",
     "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
     "visibleTests": [
-      "Uses typeof on a number"
+      "Prints \"number\"",
+      "Uses typeof on 100"
     ],
     "outputExamples": [
       {
         "medium": "console",
-        "body": "number\nboolean\nstring"
+        "body": "number"
       }
     ],
     "checks": [
       {
+        "id": "output-number",
+        "label": "Prints \"number\"",
+        "kind": "consoleLine",
+        "index": 0,
+        "equals": "number"
+      },
+      {
         "id": "typeof-num",
-        "label": "Uses typeof on a number",
+        "label": "Uses typeof on 100",
         "kind": "sourceIncludes",
-        "pattern": "typeof\\s+\\d+",
+        "pattern": "typeof\\s+100",
         "flags": "i"
       }
     ]
@@ -1571,7 +1780,7 @@ export const exerciseDays = [
     "title": "Naming check",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Naming check Which of these variable names is invalid in JavaScript: 1stPlace, firstPlace, _temp? Explain why.",
+    "prompt": "Which variable name is invalid: 1stPlace, firstPlace, or _temp? Declare the valid names in code.",
     "hints": [
       {
         "text": "Look at what each name starts with.",
@@ -1586,16 +1795,33 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Declares the valid names firstPlace and _temp"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "first",
+        "label": "Declares firstPlace",
+        "kind": "sourceIncludes",
+        "pattern": "firstPlace",
+        "flags": "i"
+      },
+      {
+        "id": "temp",
+        "label": "Declares _temp",
+        "kind": "sourceIncludes",
+        "pattern": "_temp",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-variables-let-const-05",
@@ -1604,7 +1830,7 @@ export const exerciseDays = [
     "title": "Fix the const bug",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Fix the const bug This throws an error. Fix it while keeping the intent that the value changes: const total = 0; total = total + 5;",
+    "prompt": "This throws an error. Fix it while keeping the intent that the value changes: const total = 0; total = total + 5;",
     "hints": [
       {
         "text": "The variable is clearly meant to be reassigned.",
@@ -1619,16 +1845,39 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
+    "kind": "code",
+    "starterCode": "const total = 0;\ntotal = total + 5;\nconsole.log(total);\n",
     "visibleTests": [],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "5"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "use-let",
+        "label": "Uses let for total",
+        "kind": "sourceIncludes",
+        "pattern": "let\\s+total",
+        "flags": "i"
+      },
+      {
+        "id": "reassign",
+        "label": "Updates total",
+        "kind": "sourceIncludes",
+        "pattern": "total\\s*=",
+        "flags": "i"
+      },
+      {
+        "id": "out-exact",
+        "label": "Console output: \"5\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "5"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-variables-let-const-06",
@@ -1766,7 +2015,7 @@ export const exerciseDays = [
     "title": "Spot every bug",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Spot every bug Find and fix all bugs in: const Age = 20; age = 21; console.log(Age);",
+    "prompt": "Find and fix all bugs in: const Age = 20; age = 21; console.log(Age);",
     "hints": [
       {
         "text": "There are two separate issues here, not one.",
@@ -1782,10 +2031,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Uses console.log(...)"
-    ],
+    "starterCode": "const Age = 20;\nage = 21;\nconsole.log(Age);\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -1806,10 +2053,10 @@ export const exerciseDays = [
     "id": "ex-variables-let-const-10",
     "day": 2,
     "lessonSlug": "variables-let-const",
-    "title": "Explain in your own words",
+    "title": "Practice undefined vs null",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Explain in your own words Explain, in 3-4 sentences, the difference between undefined and null, with one example of each.",
+    "prompt": "Explain in code Write code to show: the difference between undefined and null, with one example of each.",
     "hints": [
       {
         "text": "One is automatic; the other is intentional.",
@@ -1824,16 +2071,37 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Logs one undefined example and one null example"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "undefined\nnull"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "undef",
+        "label": "Logs undefined example",
+        "kind": "consoleIncludesLine",
+        "equals": "undefined"
+      },
+      {
+        "id": "null-val",
+        "label": "Logs null example",
+        "kind": "consoleIncludesLine",
+        "equals": "null"
+      },
+      {
+        "id": "two-logs",
+        "label": "At least 2 console.log(...) calls",
+        "kind": "consoleLogMinCount",
+        "min": 2
+      }
+    ]
   },
   {
     "id": "ex-variables-let-const-11",
@@ -1886,7 +2154,7 @@ export const exerciseDays = [
     "title": "Design a small variable set for a scenario",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Design a small variable set for a scenario You're modeling a single student's basic info (not yet as an object — just separate variables): name, age, grade average, and whether they passed. Declare all four with appropriate let/const choices and explain your choice for each.",
+    "prompt": "You're modeling a single student's basic info (not yet as an object — just separate variables): name, age, grade average, and whether they passed. Declare all four with appropriate let/const choices and explain your choice for each.",
     "hints": [
       {
         "text": "Ask for each variable: \"will this ever be reassigned in a real program?\"",
@@ -1901,16 +2169,47 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Declares four separate variables for the student scenario"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "name",
+        "label": "Declares a name variable",
+        "kind": "sourceIncludes",
+        "pattern": "name",
+        "flags": "i"
+      },
+      {
+        "id": "age",
+        "label": "Declares an age variable",
+        "kind": "sourceIncludes",
+        "pattern": "age",
+        "flags": "i"
+      },
+      {
+        "id": "grade",
+        "label": "Declares a grade/average variable",
+        "kind": "sourceIncludes",
+        "pattern": "grade|average",
+        "flags": "i"
+      },
+      {
+        "id": "passed",
+        "label": "Declares a passed/status variable",
+        "kind": "sourceIncludes",
+        "pattern": "passed|status",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-operators-arithmetic-01",
@@ -2048,7 +2347,7 @@ export const exerciseDays = [
     "title": "Logical AND",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Logical AND Print the result of true && false.",
+    "prompt": "Predict the output of console.log(2 + 3 * 4); and show why it is not 20.",
     "hints": [
       {
         "text": "AND is only true if both sides are true.",
@@ -2177,7 +2476,7 @@ export const exerciseDays = [
     "title": "Spot the assignment bug",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Spot the assignment bug Explain why if (x = 5) is almost always a mistake compared to if (x === 5).",
+    "prompt": "Fix the condition so it compares x to 5 with === instead of assigning with =.",
     "hints": [
       {
         "text": "One of these changes x's value; the other only checks it.",
@@ -2192,16 +2491,24 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
+    "kind": "code",
+    "starterCode": "let x = 0;\nif (x = 5) {\n  console.log('bug');\n}\n",
     "visibleTests": [],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "strict-eq",
+        "label": "Uses === in the if condition",
+        "kind": "sourceIncludes",
+        "pattern": "===",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-operators-arithmetic-08",
@@ -2210,7 +2517,7 @@ export const exerciseDays = [
     "title": "String vs number addition",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "String vs number addition Predict and explain the outputs of \"10\" + 5 and 10 + 5.",
+    "prompt": "Predict and explain the outputs of \"10\" + 5 and 10 + 5.",
     "hints": [
       {
         "text": "Look at the type of the left-hand value in each case.",
@@ -2225,16 +2532,28 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Logs \"105\" then 15"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "105\n15"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"105\", \"15\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "105",
+          "15"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-operators-arithmetic-09",
@@ -2243,7 +2562,7 @@ export const exerciseDays = [
     "title": "Range check",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Range check Given temp = 22, write a single expression (no if) that is true only if temp is strictly between 15 and 25.",
+    "prompt": "Given temp = 22, write a single expression (no if) that is true only if temp is strictly between 15 and 25.",
     "hints": [
       {
         "text": "You need two comparisons combined.",
@@ -2258,16 +2577,27 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Expression evaluates to true for temp = 22"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "true"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"true\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "true"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-operators-arithmetic-10",
@@ -2276,7 +2606,7 @@ export const exerciseDays = [
     "title": "Precedence puzzle Predict the",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Precedence puzzle Predict the output of console.log(2 + 3 * 4); and explain why it isn't 20.",
+    "prompt": "output of console.log(2 + 3 * 4); — show why it is not 20.",
     "hints": [
       {
         "text": "Not all operators run strictly left to right.",
@@ -2320,7 +2650,7 @@ export const exerciseDays = [
     "title": "Build a compound boolean",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Build a compound boolean Given isWeekend = true, isHoliday = false, hasWork = true, write an expression that's true only when it's a day off — meaning weekend OR holiday, but NOT if there's work anyway.",
+    "prompt": "Given isWeekend = true, isHoliday = false, hasWork = true, write an expression that's true only when it's a day off — meaning weekend OR holiday, but NOT if there's work anyway.",
     "hints": [
       {
         "text": "You need ||, &&, and ! together.",
@@ -2335,16 +2665,33 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "const isWeekend = true;\nconst isHoliday = false;\nconst hasWork = true;\n// write one expression and console.log it\n",
+    "visibleTests": [
+      "Builds (isWeekend || isHoliday) && !hasWork"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "or",
+        "label": "Uses ||",
+        "kind": "sourceIncludes",
+        "pattern": "\\|\\|",
+        "flags": "i"
+      },
+      {
+        "id": "not",
+        "label": "Uses !",
+        "kind": "sourceIncludes",
+        "pattern": "!",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-operators-arithmetic-12",
@@ -2485,7 +2832,7 @@ export const exerciseDays = [
     "title": "Truthy or falsy?",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Truthy or falsy? Without running it, decide if if (0) would run its block, and explain why.",
+    "prompt": "Write code that uses if (0) and logs \"skipped\" when the block does not run.",
     "hints": [
       {
         "text": "Some numbers behave as false in a condition.",
@@ -2500,16 +2847,34 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Log \"skipped\" when the if (0) block does not run\n",
+    "visibleTests": [
+      "Shows that if (0) does not run its block"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "skipped"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "if-zero",
+        "label": "Uses if (0)",
+        "kind": "sourceIncludes",
+        "pattern": "if\\s*\\(\\s*0\\s*\\)",
+        "flags": "i"
+      },
+      {
+        "id": "out-exact",
+        "label": "Console output: \"skipped\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "skipped"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-if-else-04",
@@ -2518,7 +2883,7 @@ export const exerciseDays = [
     "title": "Switch skeleton",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Switch skeleton Fill in a switch statement that prints \"Red\" when color === \"red\", and \"Unknown\" otherwise.",
+    "prompt": "Fill in a switch statement that prints \"Red\" when color === \"red\", and \"Unknown\" otherwise.",
     "hints": [
       {
         "text": "You need one case and a default.",
@@ -2533,16 +2898,27 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "Red"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"Red\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "Red"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-if-else-05",
@@ -2595,7 +2971,7 @@ export const exerciseDays = [
     "title": "Fix the fallthrough bug",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Fix the fallthrough bug This switch prints too much. Fix it: switch(x) { case 1: console.log(\"one\"); case 2: console.log(\"two\"); }",
+    "prompt": "This switch prints too much. Fix it: switch(x) { case 1: console.log(\"one\"); case 2: console.log(\"two\"); }",
     "hints": [
       {
         "text": "Something is missing after each case block.",
@@ -2611,10 +2987,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Uses console.log(...)"
-    ],
+    "starterCode": "let x = 1;\nswitch (x) { case 1: console.log(\"one\"); case 2: console.log(\"two\"); }\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -2726,7 +3100,7 @@ export const exerciseDays = [
     "title": "Reorder broken conditions",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Reorder broken conditions This code always prints \"F\" even for a grade of 95. Find and fix the ordering bug.\nlet grade = 95; if (grade >= 60) { console.log(\"Pass\"); } else if (grade >= 90) { console.log(\"A\"); } else { console.log(\"F\"); }",
+    "prompt": "This code always prints \"F\" even for a grade of 95. Find and fix the ordering bug.\nlet grade = 95; if (grade >= 60) { console.log(\"Pass\"); } else if (grade >= 90) { console.log(\"A\"); } else { console.log(\"F\"); }",
     "hints": [
       {
         "text": "The first matching condition wins, even if a later one would also match.",
@@ -2742,10 +3116,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Uses console.log(...)"
-    ],
+    "starterCode": "let grade = 95; if (grade >= 60) { console.log(\"Pass\"); } else if (grade >= 90) { console.log(\"A\"); } else { console.log(\"F\"); }\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -2857,7 +3229,7 @@ export const exerciseDays = [
     "title": "Full decision table",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full decision table Design and implement conditions for a ticket price system: children (under 12) pay 5, seniors (65+) pay 7, everyone else pays 10 — but if it's a \"Tuesday\", everyone gets a 2 discount regardless of age group. Implement this with a combination of if/else if/else and a nested check for the Tuesday discount.",
+    "prompt": "Design and implement conditions for a ticket price system: children (under 12) pay 5, seniors (65+) pay 7, everyone else pays 10 — but if it's a \"Tuesday\", everyone gets a 2 discount regardless of age group. Implement this with a combination of if/else if/else and a nested check for the Tuesday discount.",
     "hints": [
       {
         "text": "First determine the base price using an age-based if/else if/else chain.",
@@ -2872,16 +3244,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-for-while-loops-01",
@@ -3201,7 +3583,7 @@ export const exerciseDays = [
     "title": "while loop with a condition change",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "while loop with a condition change Using while, keep doubling a number starting at 1 until it exceeds 100, printing each value.",
+    "prompt": "Using while, keep doubling a number starting at 1 until it exceeds 100, printing each value.",
     "hints": [
       {
         "text": "The condition should check against 100.",
@@ -3216,16 +3598,33 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "1\n2\n4\n8\n16\n32\n64"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"1\", \"2\", \"4\", \"8\", \"16\", \"32\", \"64\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "1",
+          "2",
+          "4",
+          "8",
+          "16",
+          "32",
+          "64"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-for-while-loops-09",
@@ -3234,7 +3633,7 @@ export const exerciseDays = [
     "title": "Count digits of a number using a loop",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Count digits of a number using a loop Given n = 4827, count how many digits it has using a while loop (no .toString() shortcuts).",
+    "prompt": "Given n = 4827, count how many digits it has using a while loop (no .toString() shortcuts).",
     "hints": [
       {
         "text": "Repeated division by 10 removes one digit at a time.",
@@ -3249,16 +3648,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-for-while-loops-10",
@@ -3482,7 +3891,7 @@ export const exerciseDays = [
     "title": "Count total iterations",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Count total iterations If the outer loop runs 4 times and the inner loop runs 5 times each time, how many total inner passes happen?",
+    "prompt": "If the outer loop runs 4 times and the inner loop runs 5 times each time, how many total inner passes happen?",
     "hints": [
       {
         "text": "Multiply the two loop counts.",
@@ -3497,16 +3906,27 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Logs the total iteration count 20"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "20"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"20\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "20"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-nested-loops-04",
@@ -3687,7 +4107,7 @@ export const exerciseDays = [
     "title": "Break only the inner loop",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Break only the inner loop Given nested loops where i and j both go 0 to 2, add a break so that whenever j === 1, only the inner loop stops (not the outer one). Predict the full output.",
+    "prompt": "Given nested loops where i and j both go 0 to 2, add a break so that whenever j === 1, only the inner loop stops (not the outer one). Predict the full output.",
     "hints": [
       {
         "text": "break inside the inner loop only affects that loop.",
@@ -3702,16 +4122,32 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Reproduce the nested loop output with break in the inner loop"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "break",
+        "label": "Uses break",
+        "kind": "sourceIncludes",
+        "pattern": "break\\b",
+        "flags": "i"
+      },
+      {
+        "id": "pairs",
+        "label": "Logs pair output",
+        "kind": "consoleLogMinCount",
+        "min": 3
+      }
+    ]
   },
   {
     "id": "ex-nested-loops-09",
@@ -4437,7 +4873,7 @@ export const exerciseDays = [
     "title": "Build a small function toolkit",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Build a small function toolkit Write three functions that work together: isEven(n), isOdd(n) (using isEven internally, not repeating the logic), and describeParity(n) that returns \"even\" or \"odd\" by calling one of the first two.",
+    "prompt": "Write three functions that work together: isEven(n), isOdd(n) (using isEven internally, not repeating the logic), and describeParity(n) that returns \"even\" or \"odd\" by calling one of the first two.",
     "hints": [
       {
         "text": "isOdd should be the exact opposite of isEven — reuse it with !.",
@@ -4452,16 +4888,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// calling toolkit(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrow-functions-scope-01",
@@ -4488,8 +4934,8 @@ export const exerciseDays = [
     "kind": "code",
     "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
     "visibleTests": [
-      "Defines double()",
-      "Uses return"
+      "Defines double() as arrow",
+      "Uses => syntax"
     ],
     "outputExamples": [
       {
@@ -4500,17 +4946,17 @@ export const exerciseDays = [
     "checks": [
       {
         "id": "fn-def",
-        "label": "Defines double()",
+        "label": "Defines double() as arrow",
         "kind": "sourceIncludes",
-        "pattern": "function\\s+double\\s*\\(|const\\s+double\\s*=\\s*(\\([^)]*\\)\\s*=>|function)",
+        "pattern": "const\\s+double\\s*=\\s*(\\([^)]*\\)|[a-zA-Z_$][\\w$]*)\\s*=>",
         "flags": "i"
       },
       {
-        "id": "fn-return",
-        "label": "Uses return",
+        "id": "fn-arrow",
+        "label": "Uses => syntax",
         "kind": "sourceIncludes",
-        "pattern": "return\\b",
-        "flags": "i"
+        "pattern": "=>",
+        "flags": ""
       }
     ]
   },
@@ -4572,7 +5018,7 @@ export const exerciseDays = [
     "title": "Block scope check",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Block scope check Declare let x = 1; inside an if (true) { } block. Can you access x right after the block, outside of it?",
+    "prompt": "Declare let x = 1; inside an if (true) { } block. Can you access x right after the block, outside of it?",
     "hints": [
       {
         "text": "Think about where let variables \"live\".",
@@ -4587,16 +5033,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Demonstrate block scope with a variable inside {}"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "block",
+        "label": "Uses a block with let/const",
+        "kind": "sourceIncludes",
+        "pattern": "\\{\\s*let|\\{\\s*const",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrow-functions-scope-04",
@@ -4758,7 +5214,7 @@ export const exerciseDays = [
     "title": "Loop variable scope",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Loop variable scope Explain why console.log(i) after a for (let i = 0; i < 5; i++) {...} loop causes an error.",
+    "prompt": "Write code to show console.log(i) after a for (let i = 0; i < 5; i++) {...} loop causes an error.",
     "hints": [
       {
         "text": "let inside a for loop's header is scoped to the loop itself.",
@@ -4801,7 +5257,7 @@ export const exerciseDays = [
     "title": "Arrow function inside a function",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Arrow function inside a function Write a regular function makeGreeter() that returns an arrow function which itself returns \"Hi!\" when called.",
+    "prompt": "Write code that shows why console.log(i) after a for (let i = 0; i < 5; i++) {...} loop causes an error.",
     "hints": [
       {
         "text": "The outer function's return value is the arrow function itself, not a call to it.",
@@ -4903,7 +5359,7 @@ export const exerciseDays = [
     "title": "Predict a scope chain",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Predict a scope chain Given three nested blocks each declaring a variable with the same technique (let value = ...) at different levels, explain which value is used inside the innermost block if you don't redeclare it there.",
+    "prompt": "Given three nested blocks each declaring a variable with the same technique (let value = ...) at different levels, explain which value is used inside the innermost block if you don't redeclare it there.",
     "hints": [
       {
         "text": "Look outward from the innermost block if a name isn't found there.",
@@ -4918,16 +5374,32 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write nested scopes and log which value is used"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "nested",
+        "label": "Uses nested blocks or functions",
+        "kind": "sourceIncludes",
+        "pattern": "\\{|function",
+        "flags": "i"
+      },
+      {
+        "id": "one",
+        "label": "Logs a value",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-arrow-functions-scope-11",
@@ -4936,7 +5408,7 @@ export const exerciseDays = [
     "title": "Fix an accidental global",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Fix an accidental global Given function setScore(){ score = 100; } setScore(); console.log(score); explain what's happening and why it's risky, then fix it.",
+    "prompt": "Given function setScore(){ score = 100; } setScore(); console.log(score); explain what's happening and why it's risky, then fix it.",
     "hints": [
       {
         "text": "score was never declared with let/const inside the function.",
@@ -4952,10 +5424,8 @@ export const exerciseDays = [
       }
     ],
     "kind": "code",
-    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
-    "visibleTests": [
-      "Defines setScore()"
-    ],
+    "starterCode": "function setScore(){ score = 100; } setScore(); console.log(score);\n",
+    "visibleTests": [],
     "outputExamples": [
       {
         "medium": "console",
@@ -4964,10 +5434,10 @@ export const exerciseDays = [
     ],
     "checks": [
       {
-        "id": "fn-def",
-        "label": "Defines setScore()",
+        "id": "has-fn",
+        "label": "Defines a function",
         "kind": "sourceIncludes",
-        "pattern": "function\\s+setScore\\s*\\(|const\\s+setScore\\s*=\\s*(\\([^)]*\\)\\s*=>|function)",
+        "pattern": "function\\s+\\w+",
         "flags": "i"
       }
     ]
@@ -5246,7 +5716,7 @@ export const exerciseDays = [
     "title": "Build a sentence with multiple variables",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Build a sentence with multiple variables Using a template literal, combine name, age, and city variables into one readable sentence.",
+    "prompt": "Using a template literal, combine name, age, and city variables into one readable sentence.",
     "hints": [
       {
         "text": "You can use ${} multiple times in one template literal.",
@@ -5261,16 +5731,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-string-basics-07",
@@ -5279,7 +5758,7 @@ export const exerciseDays = [
     "title": "Case-sensitive comparison Predict the",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Case-sensitive comparison Predict the output of console.log(\"Apple\" === \"apple\"); and explain why.",
+    "prompt": "output of console.log(\"Apple\" === \"apple\"); and Write code to demonstrate.",
     "hints": [
       {
         "text": "String comparison checks every character exactly.",
@@ -5366,7 +5845,7 @@ export const exerciseDays = [
     "title": "Build your own .length-like counter",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Build your own .length-like counter Without using .length, count the characters of a string by looping until text[i] becomes undefined.",
+    "prompt": "Without using .length, count the characters of a string by looping until text[i] becomes undefined.",
     "hints": [
       {
         "text": "Use a while loop with a counter starting at 0.",
@@ -5381,16 +5860,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-basics-10",
@@ -5442,7 +5931,7 @@ export const exerciseDays = [
     "title": "Build a string manually in reverse using a loop",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Build a string manually in reverse using a loop Without using any built-in reverse trick, build the reverse of a string character by character using a for loop and concatenation.",
+    "prompt": "Without using any built-in reverse trick, build the reverse of a string character by character using a for loop and concatenation.",
     "hints": [
       {
         "text": "Loop backward from the last index to 0.",
@@ -5457,16 +5946,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-basics-12",
@@ -5562,7 +6061,7 @@ export const exerciseDays = [
     "title": "Check for a substring",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Check for a substring Check if \"hello world\" includes the word \"world\".",
+    "prompt": "Check if \"hello world\" includes the word \"world\".",
     "hints": [
       {
         "text": "Use .includes().",
@@ -5577,16 +6076,27 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "true"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"true\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "true"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-methods-03",
@@ -5810,7 +6320,7 @@ export const exerciseDays = [
     "title": "Extract a file extension",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Extract a file extension Given \"photo.png\", use .slice() and .indexOf() together to extract just \"png\".",
+    "prompt": "Given \"photo.png\", use .slice() and .indexOf() together to extract just \"png\".",
     "hints": [
       {
         "text": "Find the position of the \".\" first.",
@@ -5825,16 +6335,27 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "png"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"png\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "png"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-methods-09",
@@ -5843,7 +6364,7 @@ export const exerciseDays = [
     "title": "Case-insensitive includes check",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Case-insensitive includes check Given \"Hello World\", check if it includes \"WORLD\" regardless of case (a direct .includes(\"WORLD\") would fail).",
+    "prompt": "Given \"Hello World\", check if it includes \"WORLD\" regardless of case (a direct .includes(\"WORLD\") would fail).",
     "hints": [
       {
         "text": "Convert both sides to the same case before comparing.",
@@ -5858,16 +6379,27 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "true"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"true\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "true"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-methods-10",
@@ -5876,7 +6408,7 @@ export const exerciseDays = [
     "title": "Count words in a sentence",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Count words in a sentence Given a sentence, count how many words it has using .split() and .length (assume single spaces between words, no extra punctuation).",
+    "prompt": "Given a sentence, count how many words it has using .split() and .length (assume single spaces between words, no extra punctuation).",
     "hints": [
       {
         "text": "Split first, then check the resulting array's size.",
@@ -5891,16 +6423,27 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "3"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"3\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "3"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-methods-11",
@@ -5909,7 +6452,7 @@ export const exerciseDays = [
     "title": "Capitalize the first letter",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Capitalize the first letter Given \"javascript\", produce \"Javascript\" (only the first letter capitalized) using .slice() and .toUpperCase().",
+    "prompt": "Given \"javascript\", produce \"Javascript\" (only the first letter capitalized) using .slice() and .toUpperCase().",
     "hints": [
       {
         "text": "You need to handle the first character separately from the rest.",
@@ -5924,16 +6467,27 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "Javascript"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"Javascript\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "Javascript"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-methods-12",
@@ -5942,7 +6496,7 @@ export const exerciseDays = [
     "title": "Clean and normalize messy input",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Clean and normalize messy input Given \" HeLLo WoRLD!! \", write code that: trims it, lowercases it, and removes the exclamation marks, ending with a clean, normal-looking sentence (you may use .split() and .join() creatively, or repeated .replace()-like logic using only allowed methods — note: .replace() is fine to use here even though it's beyond the core list, OR do it manually with a loop rebuilding the string character by character, skipping \"!\" characters).",
+    "prompt": "Given \" HeLLo WoRLD!! \", write code that: trims it, lowercases it, and removes the exclamation marks, ending with a clean, normal-looking sentence (you may use .split() and .join() creatively, or repeated .replace()-like logic using only allowed methods — note: .replace() is fine to use here even though it's beyond the core list, OR do it manually with a loop rebuilding the string character by character, skipping \"!\" characters).",
     "hints": [
       {
         "text": "Start with .trim().toLowerCase() to handle the easy part first.",
@@ -5957,16 +6511,27 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "hello world"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"hello world\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "hello world"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-01",
@@ -5975,7 +6540,7 @@ export const exerciseDays = [
     "title": "Count one vowel type",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Count one vowel type Count how many times the letter \"a\" appears in \"banana\" (not all vowels, just \"a\").",
+    "prompt": "Count how many times the letter \"a\" appears in \"banana\" (not all vowels, just \"a\").",
     "hints": [
       {
         "text": "Loop through and compare each character to \"a\".",
@@ -5990,16 +6555,27 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "3"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"3\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "3"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-02",
@@ -6008,7 +6584,7 @@ export const exerciseDays = [
     "title": "Reverse a short word",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Reverse a short word Reverse the word \"cat\" using a loop (don't just type \"tac\").",
+    "prompt": "Reverse the word \"cat\" using a loop (don't just type \"tac\").",
     "hints": [
       {
         "text": "Loop backward from the last index.",
@@ -6023,16 +6599,27 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "tac"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"tac\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "tac"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-03",
@@ -6041,7 +6628,7 @@ export const exerciseDays = [
     "title": "Check a simple palindrome",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Check a simple palindrome Check if \"level\" is a palindrome using a reverse function you write.",
+    "prompt": "Check if \"level\" is a palindrome using a reverse function you write.",
     "hints": [
       {
         "text": "Reverse the string first, then compare.",
@@ -6056,16 +6643,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling you(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-04",
@@ -6074,7 +6671,7 @@ export const exerciseDays = [
     "title": "Count all vowels in a short word",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Count all vowels in a short word Count all vowels (a, e, i, o, u) in \"orange\".",
+    "prompt": "Count all vowels (a, e, i, o, u) in \"orange\".",
     "hints": [
       {
         "text": "Check each character against a string of vowels.",
@@ -6089,16 +6686,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-05",
@@ -6107,7 +6714,7 @@ export const exerciseDays = [
     "title": "Case-insensitive palindrome",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Case-insensitive palindrome Check if \"Level\" (capital L) is a palindrome, accounting for case.",
+    "prompt": "Check if \"Level\" (capital L) is a palindrome, accounting for case.",
     "hints": [
       {
         "text": "Lowercase the string before checking.",
@@ -6122,16 +6729,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-06",
@@ -6140,7 +6757,7 @@ export const exerciseDays = [
     "title": "Count consonants",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Count consonants Count how many consonants (non-vowel letters) are in \"programming\".",
+    "prompt": "Count how many consonants (non-vowel letters) are in \"programming\".",
     "hints": [
       {
         "text": "A consonant is a letter that is NOT a vowel.",
@@ -6155,16 +6772,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-07",
@@ -6173,7 +6800,7 @@ export const exerciseDays = [
     "title": "Find the longest word in a sentence",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Find the longest word in a sentence Given a sentence, split it into words and find the longest one using the max-value loop pattern.",
+    "prompt": "Given a sentence, split it into words and find the longest one using the max-value loop pattern.",
     "hints": [
       {
         "text": "Split the sentence into an array first.",
@@ -6188,16 +6815,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-08",
@@ -6206,7 +6843,7 @@ export const exerciseDays = [
     "title": "Count a specific word's occurrences",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Count a specific word's occurrences Given \"the cat sat on the mat with the hat\", count how many times the word \"the\" appears (not the letter \"t\").",
+    "prompt": "Given \"the cat sat on the mat with the hat\", count how many times the word \"the\" appears (not the letter \"t\").",
     "hints": [
       {
         "text": "Split the sentence into words first.",
@@ -6221,16 +6858,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-09",
@@ -6239,7 +6886,7 @@ export const exerciseDays = [
     "title": "Palindrome ignoring spaces",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Palindrome ignoring spaces Check if \"race car\" is a palindrome once spaces are ignored (this should return true).",
+    "prompt": "Check if \"race car\" is a palindrome once spaces are ignored (this should return true).",
     "hints": [
       {
         "text": "You need to remove spaces before checking.",
@@ -6254,16 +6901,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-10",
@@ -6315,7 +6971,7 @@ export const exerciseDays = [
     "title": "Check if two words are anagrams",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Check if two words are anagrams Given \"listen\" and \"silent\", determine if they're anagrams (contain exactly the same letters, possibly in a different order) — without sorting (sorting isn't in Core JS scope here), using counting instead.",
+    "prompt": "Given \"listen\" and \"silent\", determine if they're anagrams (contain exactly the same letters, possibly in a different order) — without sorting (sorting isn't in Core JS scope here), using counting instead.",
     "hints": [
       {
         "text": "First check if both words have the same length — a quick early exit.",
@@ -6330,16 +6986,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-string-challenges-12",
@@ -6649,7 +7315,7 @@ export const exerciseDays = [
     "title": "const array mutation",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "const array mutation Explain, with an example, why this code works even though arr is declared with const: const arr = [1, 2]; arr.push(3);",
+    "prompt": "Explain, with an example, why this code works even though arr is declared with const: const arr = [1, 2]; arr.push(3);",
     "hints": [
       {
         "text": "const protects the variable binding, not the array's contents.",
@@ -6664,16 +7330,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrays-basics-08",
@@ -6682,7 +7358,7 @@ export const exerciseDays = [
     "title": "Build an array with a loop",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Build an array with a loop Using a loop and .push(), build an array containing the squares of 1 through 5 ([1, 4, 9, 16, 25]).",
+    "prompt": "Using a loop and .push(), build an array containing the squares of 1 through 5 ([1, 4, 9, 16, 25]).",
     "hints": [
       {
         "text": "Start with an empty array before the loop.",
@@ -6697,16 +7373,27 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Console output matches the expected result"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "1,4,9,16,25"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "out-exact",
+        "label": "Console output: \"1,4,9,16,25\"",
+        "kind": "consoleLinesExact",
+        "lines": [
+          "1,4,9,16,25"
+        ]
+      }
+    ]
   },
   {
     "id": "ex-arrays-basics-09",
@@ -6715,7 +7402,7 @@ export const exerciseDays = [
     "title": "Swap two items in an array",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Swap two items in an array Given let arr = [1, 2, 3, 4];, swap the values at index 0 and index 3, resulting in [4, 2, 3, 1].",
+    "prompt": "Given let arr = [1, 2, 3, 4];, swap the values at index 0 and index 3, resulting in [4, 2, 3, 1].",
     "hints": [
       {
         "text": "You'll need a temporary variable, just like swapping regular variables.",
@@ -6730,16 +7417,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrays-basics-10",
@@ -6748,7 +7445,7 @@ export const exerciseDays = [
     "title": "Remove an item by value (not index)",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Remove an item by value (not index) Given let arr = [10, 20, 30, 40];, remove the value 30 (wherever it is) by rebuilding a new array that excludes it, without using .filter() or .splice().",
+    "prompt": "Given let arr = [10, 20, 30, 40];, remove the value 30 (wherever it is) by rebuilding a new array that excludes it, without using .filter() or .splice().",
     "hints": [
       {
         "text": "Loop through and build a new array, skipping the target value.",
@@ -6763,16 +7460,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrays-basics-11",
@@ -6781,7 +7488,7 @@ export const exerciseDays = [
     "title": "Insert a value at a specific index manually",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Insert a value at a specific index manually Given let arr = [1, 2, 4, 5];, insert 3 between 2 and 4 by building a new array manually (no .splice()).",
+    "prompt": "Given let arr = [1, 2, 4, 5];, insert 3 between 2 and 4 by building a new array manually (no .splice()).",
     "hints": [
       {
         "text": "Loop through and copy items, but insert the new value at the right point.",
@@ -6796,16 +7503,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-arrays-basics-12",
@@ -6814,7 +7531,7 @@ export const exerciseDays = [
     "title": "Rotate an array manually",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Rotate an array manually Given let arr = [1, 2, 3, 4, 5];, produce a \"rotated\" array where the first item moves to the end: [2, 3, 4, 5, 1] — without using any built-in shift/rotate methods.",
+    "prompt": "Given let arr = [1, 2, 3, 4, 5];, produce a \"rotated\" array where the first item moves to the end: [2, 3, 4, 5, 1] — without using any built-in shift/rotate methods.",
     "hints": [
       {
         "text": "Save the first item in a separate variable before building the rest.",
@@ -6829,16 +7546,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-01",
@@ -6890,7 +7617,7 @@ export const exerciseDays = [
     "title": "Basic sum",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Basic sum Compute the sum of [2, 4, 6, 8] using a loop.",
+    "prompt": "Compute the sum of [2, 4, 6, 8] using a loop.",
     "hints": [
       {
         "text": "Start an accumulator at 0.",
@@ -6905,16 +7632,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-03",
@@ -6923,7 +7660,7 @@ export const exerciseDays = [
     "title": "Basic average",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Basic average Compute the average of [10, 20, 30] using your sum logic divided by the array's length.",
+    "prompt": "Compute the average of [10, 20, 30] using your sum logic divided by the array's length.",
     "hints": [
       {
         "text": "First compute the sum, then divide.",
@@ -6938,16 +7675,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-04",
@@ -6956,7 +7703,7 @@ export const exerciseDays = [
     "title": "Basic max",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Basic max Find the maximum value in [3, 9, 1, 7] using a loop.",
+    "prompt": "Find the maximum value in [3, 9, 1, 7] using a loop.",
     "hints": [
       {
         "text": "Start max as the first item.",
@@ -6971,16 +7718,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-05",
@@ -6989,7 +7746,7 @@ export const exerciseDays = [
     "title": "Basic min",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Basic min Find the minimum value in [3, 9, 1, 7] using the same pattern as max, but flipped.",
+    "prompt": "Find the minimum value in [3, 9, 1, 7] using the same pattern as max, but flipped.",
     "hints": [
       {
         "text": "Start min as the first item too.",
@@ -7004,16 +7761,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-06",
@@ -7022,7 +7788,7 @@ export const exerciseDays = [
     "title": "Count positive numbers",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Count positive numbers Given [-3, 5, -1, 8, 0], count how many values are strictly positive.",
+    "prompt": "Given [-3, 5, -1, 8, 0], count how many values are strictly positive.",
     "hints": [
       {
         "text": "Use a counter and an if inside the loop.",
@@ -7037,16 +7803,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-07",
@@ -7106,7 +7882,7 @@ export const exerciseDays = [
     "title": "Average excluding one value",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Average excluding one value Compute the average of an array while excluding the maximum value.",
+    "prompt": "Compute the average of an array while excluding the maximum value.",
     "hints": [
       {
         "text": "Find the max first, then sum everything except it.",
@@ -7121,16 +7897,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-09",
@@ -7139,7 +7925,7 @@ export const exerciseDays = [
     "title": "Weighted-feel average (manual)",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Weighted-feel average (manual) Given an array of numbers, compute the average but round it to 2 decimal places without using .toFixed() beyond basic math (you may use .toFixed(), it's a simple built-in, or use Math.round(value * 100) / 100).",
+    "prompt": "Given an array of numbers, compute the average but round it to 2 decimal places without using .toFixed() beyond basic math (you may use .toFixed(), it's a simple built-in, or use Math.round(value * 100) / 100).",
     "hints": [
       {
         "text": "Compute the plain average first.",
@@ -7154,16 +7940,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-10",
@@ -7172,7 +7968,7 @@ export const exerciseDays = [
     "title": "Find the index of the maximum (not just the value)",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Find the index of the maximum (not just the value) Given [4, 9, 2, 9, 1], find the index of the FIRST occurrence of the maximum value.",
+    "prompt": "Given [4, 9, 2, 9, 1], find the index of the FIRST occurrence of the maximum value.",
     "hints": [
       {
         "text": "Track both the max value AND its index as you loop.",
@@ -7187,16 +7983,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-11",
@@ -7205,7 +8010,7 @@ export const exerciseDays = [
     "title": "Sum only even-indexed items",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Sum only even-indexed items Given an array, sum only the values at even indexes (0, 2, 4, ...), not even-valued items.",
+    "prompt": "Given an array, sum only the values at even indexes (0, 2, 4, ...), not even-valued items.",
     "hints": [
       {
         "text": "This is about the index, not the value.",
@@ -7220,16 +8025,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-traversal-12",
@@ -7289,7 +8104,7 @@ export const exerciseDays = [
     "title": "Find an index",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Find an index Given [5, 8, 2, 9], find the index of the value 2 using a loop.",
+    "prompt": "Given [5, 8, 2, 9], find the index of the value 2 using a loop.",
     "hints": [
       {
         "text": "Compare each item to the target.",
@@ -7304,16 +8119,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-02",
@@ -7322,7 +8147,7 @@ export const exerciseDays = [
     "title": "Count even numbers",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Count even numbers Given [1, 2, 3, 4, 5, 6], count how many are even.",
+    "prompt": "Given [1, 2, 3, 4, 5, 6], count how many are even.",
     "hints": [
       {
         "text": "Use % to check evenness.",
@@ -7337,16 +8162,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-03",
@@ -7355,7 +8190,7 @@ export const exerciseDays = [
     "title": "Reverse an array",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Reverse an array Reverse [1, 2, 3] manually using a backward loop and .push().",
+    "prompt": "Reverse [1, 2, 3] manually using a backward loop and .push().",
     "hints": [
       {
         "text": "Start a new empty array.",
@@ -7370,16 +8205,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-04",
@@ -7388,7 +8233,7 @@ export const exerciseDays = [
     "title": "Filter values above a limit",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Filter values above a limit Given [4, 15, 8, 23, 1], build a new array of only values greater than 10.",
+    "prompt": "Given [4, 15, 8, 23, 1], build a new array of only values greater than 10.",
     "hints": [
       {
         "text": "Loop through and check the condition.",
@@ -7403,16 +8248,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-05",
@@ -7421,7 +8276,7 @@ export const exerciseDays = [
     "title": "Count occurrences of a specific value",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Count occurrences of a specific value Given [1, 2, 2, 3, 2, 4], count how many times 2 appears.",
+    "prompt": "Given [1, 2, 2, 3, 2, 4], count how many times 2 appears.",
     "hints": [
       {
         "text": "Similar to counting even numbers, but comparing to a fixed value.",
@@ -7436,16 +8291,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-06",
@@ -7548,7 +8413,7 @@ export const exerciseDays = [
     "title": "Remove duplicates manually",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Remove duplicates manually Given [1, 2, 2, 3, 1, 4], build a new array with duplicates removed, keeping only the first occurrence of each value (no Set).",
+    "prompt": "Given [1, 2, 2, 3, 1, 4], build a new array with duplicates removed, keeping only the first occurrence of each value (no Set).",
     "hints": [
       {
         "text": "For each item, check if it's already in your result array before adding it.",
@@ -7563,16 +8428,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-09",
@@ -7581,7 +8456,7 @@ export const exerciseDays = [
     "title": "Find the second largest value",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Find the second largest value Given [4, 9, 2, 9, 7], find the second largest DISTINCT value (so if the max repeats, skip the duplicate).",
+    "prompt": "Given [4, 9, 2, 9, 7], find the second largest DISTINCT value (so if the max repeats, skip the duplicate).",
     "hints": [
       {
         "text": "Find the max first, then look for the largest value that is strictly smaller than the max.",
@@ -7596,16 +8471,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-10",
@@ -7614,7 +8498,7 @@ export const exerciseDays = [
     "title": "Merge two arrays without duplicates",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Merge two arrays without duplicates Given [1, 2, 3] and [3, 4, 5], build a single array containing all unique values from both, in order encountered.",
+    "prompt": "Given [1, 2, 3] and [3, 4, 5], build a single array containing all unique values from both, in order encountered.",
     "hints": [
       {
         "text": "Combine the arrays conceptually by looping through both, one after another.",
@@ -7629,16 +8513,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-11",
@@ -7647,7 +8541,7 @@ export const exerciseDays = [
     "title": "Group numbers by even/odd (two arrays)",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Group numbers by even/odd (two arrays) Given [1, 2, 3, 4, 5, 6], build two separate arrays: one containing only the even numbers, one containing only the odd numbers.",
+    "prompt": "Given [1, 2, 3, 4, 5, 6], build two separate arrays: one containing only the even numbers, one containing only the odd numbers.",
     "hints": [
       {
         "text": "Start two empty arrays before the loop.",
@@ -7662,16 +8556,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-challenges-12",
@@ -7680,7 +8584,7 @@ export const exerciseDays = [
     "title": "Find the longest run of consecutive equal values",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Find the longest run of consecutive equal values Given [1, 1, 2, 2, 2, 3, 1, 1, 1, 1], find the length of the longest run of the same value repeated consecutively (in this case, four 1's at the end, so the answer is 4).",
+    "prompt": "Given [1, 1, 2, 2, 2, 3, 1, 1, 1, 1], find the length of the longest run of the same value repeated consecutively (in this case, four 1's at the end, so the answer is 4).",
     "hints": [
       {
         "text": "Track a \"current run length\" and a \"longest run so far\" as you loop.",
@@ -7695,16 +8599,25 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-01",
@@ -7799,7 +8712,7 @@ export const exerciseDays = [
     "title": "Add a new property",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Add a new property Given let book = {title:\"JS Basics\"};, add a price property of 20.",
+    "prompt": "Given let book = {title:\"JS Basics\"};, add a price property of 20.",
     "hints": [
       {
         "text": "You can add a property that doesn't exist yet the same way you'd update one.",
@@ -7814,16 +8727,25 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-04",
@@ -7875,7 +8797,7 @@ export const exerciseDays = [
     "title": "Check property existence",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Check property existence Given let item = {name:\"Pen\"};, check if it has a price property using the in operator.",
+    "prompt": "Given let item = {name:\"Pen\"};, check if it has a price property using the in operator.",
     "hints": [
       {
         "text": "The property name goes in quotes on the left of in.",
@@ -7890,16 +8812,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-06",
@@ -7994,7 +8925,7 @@ export const exerciseDays = [
     "title": "Build an object from separate variables",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Build an object from separate variables Given let name=\"Omar\", age=22;, build an object using these variables as the values for name and age keys.",
+    "prompt": "Given let name=\"Omar\", age=22;, build an object using these variables as the values for name and age keys.",
     "hints": [
       {
         "text": "You can reuse variable names as key names directly.",
@@ -8009,16 +8940,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-09",
@@ -8070,7 +9011,7 @@ export const exerciseDays = [
     "title": "Compare two objects' properties",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Compare two objects' properties Given let a={x:1,y:2}; let b={x:1,y:3};, write code that checks if their x properties are equal AND their y properties are equal, printing true/false for the whole comparison.",
+    "prompt": "Given let a={x:1,y:2}; let b={x:1,y:3};, write code that checks if their x properties are equal AND their y properties are equal, printing true/false for the whole comparison.",
     "hints": [
       {
         "text": "Compare each shared property individually.",
@@ -8085,16 +9026,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-11",
@@ -8103,7 +9054,7 @@ export const exerciseDays = [
     "title": "Update a nested property conditionally",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Update a nested property conditionally Given let product = {name:\"Shoe\", stock:{quantity:5}};, write code that decreases stock.quantity by 1, but only if it's greater than 0.",
+    "prompt": "Given let product = {name:\"Shoe\", stock:{quantity:5}};, write code that decreases stock.quantity by 1, but only if it's greater than 0.",
     "hints": [
       {
         "text": "Check the nested property inside an if.",
@@ -8118,16 +9069,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-objects-basics-12",
@@ -8410,7 +9370,7 @@ export const exerciseDays = [
     "title": "Sum a numeric field across records",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Sum a numeric field across records Given an array of product objects with price, compute the total price of all products.",
+    "prompt": "Given an array of product objects with price, compute the total price of all products.",
     "hints": [
       {
         "text": "This is the same sum pattern as arrays of numbers, just reading a property.",
@@ -8425,16 +9385,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-of-objects-07",
@@ -8443,7 +9413,7 @@ export const exerciseDays = [
     "title": "Filter records by a boolean field",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Filter records by a boolean field Given products with an inStock boolean, build a new array with only the ones currently in stock.",
+    "prompt": "Given products with an inStock boolean, build a new array with only the ones currently in stock.",
     "hints": [
       {
         "text": "Use the manual-filter pattern from arrays, reading a property this time.",
@@ -8458,16 +9428,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-of-objects-08",
@@ -8519,7 +9499,7 @@ export const exerciseDays = [
     "title": "Update a specific record's field",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Update a specific record's field Given an array of products, find the one named \"Pen\" and increase its quantity by 10, leaving others unchanged.",
+    "prompt": "Given an array of products, find the one named \"Pen\" and increase its quantity by 10, leaving others unchanged.",
     "hints": [
       {
         "text": "Find the record first (or update it directly while looping).",
@@ -8534,16 +9514,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-of-objects-10",
@@ -8552,7 +9542,7 @@ export const exerciseDays = [
     "title": "Count records matching a condition",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Count records matching a condition Given an array of student objects, count how many students have an age of 20 or older.",
+    "prompt": "Given an array of student objects, count how many students have an age of 20 or older.",
     "hints": [
       {
         "text": "Same counting pattern as before, but the condition checks a property.",
@@ -8567,16 +9557,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-of-objects-11",
@@ -8585,7 +9585,7 @@ export const exerciseDays = [
     "title": "Find the record with the highest value AND its index",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Find the record with the highest value AND its index Given an array of product objects with price, find both the most expensive product's object and its index in the array.",
+    "prompt": "Given an array of product objects with price, find both the most expensive product's object and its index in the array.",
     "hints": [
       {
         "text": "Track both the best object and its index as you loop, just like the \"index of max\" array exercise.",
@@ -8600,16 +9600,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-array-of-objects-12",
@@ -8618,7 +9628,7 @@ export const exerciseDays = [
     "title": "Build a mini leaderboard",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Build a mini leaderboard Given an array of player objects with name and score, write a function that returns a NEW array of just the names, ordered from highest to lowest score, without using .sort() (use your own simple approach — repeatedly finding the current max and removing it conceptually, or building a sorted copy manually with nested loops similar to selection sort, but comparing .score).",
+    "prompt": "Given an array of player objects with name and score, write a function that returns a NEW array of just the names, ordered from highest to lowest score, without using .sort() (use your own simple approach — repeatedly finding the current max and removing it conceptually, or building a sorted copy manually with nested loops similar to selection sort, but comparing .score).",
     "hints": [
       {
         "text": "Think of this as selection sort, but the \"value\" you're comparing is .score, and what you actually collect at the end is .name.",
@@ -8633,16 +9643,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling that(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-01",
@@ -8651,7 +9671,7 @@ export const exerciseDays = [
     "title": "Find a value's index",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Find a value's index Find the index of 15 in [4, 8, 15, 16, 23] using linear search.",
+    "prompt": "Find the index of 15 in [4, 8, 15, 16, 23] using linear search.",
     "hints": [
       {
         "text": "Loop through comparing each item.",
@@ -8666,16 +9686,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-02",
@@ -8684,7 +9714,7 @@ export const exerciseDays = [
     "title": "Search for a missing",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Search for a missing value Search for 99 in [1, 2, 3] and confirm your function correctly returns -1.",
+    "prompt": "value Search for 99 in [1, 2, 3] and confirm your function correctly returns -1.",
     "hints": [
       {
         "text": "The loop should complete without ever matching.",
@@ -8699,16 +9729,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling correctly(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-03",
@@ -8717,7 +9757,7 @@ export const exerciseDays = [
     "title": "Search on unsorted data",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Search on unsorted data Confirm linear search works correctly on [23, 4, 16, 8] by finding the index of 16.",
+    "prompt": "Confirm linear search works correctly on [23, 4, 16, 8] by finding the index of 16.",
     "hints": [
       {
         "text": "Order doesn't matter for linear search.",
@@ -8732,16 +9772,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-04",
@@ -8750,7 +9800,7 @@ export const exerciseDays = [
     "title": "Search a string array",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Search a string array Adapt linear search to find the index of \"banana\" in [\"apple\", \"banana\", \"cherry\"].",
+    "prompt": "Adapt linear search to find the index of \"banana\" in [\"apple\", \"banana\", \"cherry\"].",
     "hints": [
       {
         "text": "The comparison logic (===) works the same for strings.",
@@ -8765,16 +9815,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-05",
@@ -8834,7 +9894,7 @@ export const exerciseDays = [
     "title": "Count matches with linear search logic",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Count matches with linear search logic Modify linear search's idea to count ALL occurrences of a target instead of stopping at the first.",
+    "prompt": "Modify linear search's idea to count ALL occurrences of a target instead of stopping at the first.",
     "hints": [
       {
         "text": "Don't return immediately on a match.",
@@ -8849,16 +9909,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-07",
@@ -8867,7 +9937,7 @@ export const exerciseDays = [
     "title": "Binary search trace",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Binary search trace Given the sorted array [2, 4, 8, 15, 16, 23], trace binarySearch looking for 8 step by step: what is mid on each iteration?",
+    "prompt": "Given the sorted array [2, 4, 8, 15, 16, 23], trace binarySearch looking for 8 step by step: what is mid on each iteration?",
     "hints": [
       {
         "text": "Start with low=0, high=5.",
@@ -8882,16 +9952,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-08",
@@ -8900,7 +9980,7 @@ export const exerciseDays = [
     "title": "Why binary search fails here",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Why binary search fails here Explain, using a concrete unsorted example, why running binarySearch on unsorted data can give a wrong (or missed) result.",
+    "prompt": "Explain, using a concrete unsorted example, why running binarySearch on unsorted data can give a wrong (or missed) result.",
     "hints": [
       {
         "text": "Binary search eliminates half the array based on a comparison to the middle.",
@@ -8915,16 +9995,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-09",
@@ -8933,7 +10023,7 @@ export const exerciseDays = [
     "title": "Search for the first even number",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Search for the first even number Using the linear search pattern, find the index of the FIRST even number in [1, 3, 5, 8, 9, 10] (not searching for a specific value, but a condition).",
+    "prompt": "Using the linear search pattern, find the index of the FIRST even number in [1, 3, 5, 8, 9, 10] (not searching for a specific value, but a condition).",
     "hints": [
       {
         "text": "Change the comparison from === to a condition check.",
@@ -8948,16 +10038,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-10",
@@ -8966,7 +10066,7 @@ export const exerciseDays = [
     "title": "Search an array of objects by a property",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Search an array of objects by a property Adapt linear search to find the index of the student object with name === \"Omar\" in an array of student objects.",
+    "prompt": "Adapt linear search to find the index of the student object with name === \"Omar\" in an array of student objects.",
     "hints": [
       {
         "text": "Compare a property of each item, not the item itself.",
@@ -8981,16 +10081,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-linear-search-11",
@@ -9042,7 +10152,7 @@ export const exerciseDays = [
     "title": "Compare search cost between linear and binary",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Compare search cost between linear and binary For a sorted array of 16 elements, manually count (by tracing) how many comparisons linear search would need in the worst case, versus how many binary search would need in the worst case, and explain the pattern you notice.",
+    "prompt": "For a sorted array of 16 elements, manually count (by tracing) how many comparisons linear search would need in the worst case, versus how many binary search would need in the worst case, and explain the pattern you notice.",
     "hints": [
       {
         "text": "Linear search's worst case checks every single element once.",
@@ -9057,16 +10167,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-01",
@@ -9075,7 +10195,7 @@ export const exerciseDays = [
     "title": "Trace one bubble sort pass",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Trace one bubble sort pass Given [3, 1, 2], manually trace just the FIRST full pass of bubble sort and write the resulting array.",
+    "prompt": "Given [3, 1, 2], manually trace just the FIRST full pass of bubble sort and write the resulting array.",
     "hints": [
       {
         "text": "Compare index 0 and 1 first, then 1 and 2.",
@@ -9090,16 +10210,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-02",
@@ -9108,7 +10238,7 @@ export const exerciseDays = [
     "title": "Identify a swap In [5, 2], should bubble sort swap these two values?",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Identify a swap In [5, 2], should bubble sort swap these two values? Why or why not?",
+    "prompt": "Why or why not?",
     "hints": [
       {
         "text": "Compare the two values directly.",
@@ -9123,16 +10253,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-03",
@@ -9227,7 +10367,7 @@ export const exerciseDays = [
     "title": "Trace selection sort's first pass",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Trace selection sort's first pass Given [6, 2, 9, 1], trace the first pass of selection sort: what is minIndex found, and what does the array look like after the swap?",
+    "prompt": "Given [6, 2, 9, 1], trace the first pass of selection sort: what is minIndex found, and what does the array look like after the swap?",
     "hints": [
       {
         "text": "Scan the whole array for the smallest value first.",
@@ -9242,16 +10382,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-06",
@@ -9260,7 +10410,7 @@ export const exerciseDays = [
     "title": "Sort strings alphabetically (adapt the logic)",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Sort strings alphabetically (adapt the logic) Adapt bubbleSort to sort an array of strings alphabetically (hint: > and < also work on strings in JavaScript).",
+    "prompt": "Adapt bubbleSort to sort an array of strings alphabetically (hint: > and < also work on strings in JavaScript).",
     "hints": [
       {
         "text": "The comparison operators work the same way, just applied to strings.",
@@ -9275,16 +10425,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-07",
@@ -9336,7 +10496,7 @@ export const exerciseDays = [
     "title": "Sort in descending order",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Sort in descending order Modify bubbleSort (or selectionSort) to sort in descending order instead of ascending.",
+    "prompt": "Modify bubbleSort (or selectionSort) to sort in descending order instead of ascending.",
     "hints": [
       {
         "text": "Only one comparison operator needs to change.",
@@ -9351,16 +10511,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-09",
@@ -9369,7 +10539,7 @@ export const exerciseDays = [
     "title": "Sort an array of objects by a numeric field",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Sort an array of objects by a numeric field Adapt bubbleSort to sort an array of product objects by their price, ascending.",
+    "prompt": "Adapt bubbleSort to sort an array of product objects by their price, ascending.",
     "hints": [
       {
         "text": "The comparison should look at .price instead of the raw item.",
@@ -9384,16 +10554,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-10",
@@ -9402,7 +10582,7 @@ export const exerciseDays = [
     "title": "Detect an already-sorted array early",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Detect an already-sorted array early Modify bubbleSort to stop early (using a flag) if a full pass makes zero swaps, since that means the array is already sorted.",
+    "prompt": "Modify bubbleSort to stop early (using a flag) if a full pass makes zero swaps, since that means the array is already sorted.",
     "hints": [
       {
         "text": "Add a boolean flag before each outer pass, e.g. let swapped = false;.",
@@ -9417,16 +10597,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-sorting-basics-11",
@@ -9478,7 +10668,7 @@ export const exerciseDays = [
     "title": "Combine search and sort into one task",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Combine search and sort into one task Given an unsorted array of numbers, write code that: sorts it using bubbleSort or selectionSort, then uses binarySearch on the sorted result to find a target value — printing whether it was found and at what index (in the sorted array).",
+    "prompt": "Given an unsorted array of numbers, write code that: sorts it using bubbleSort or selectionSort, then uses binarySearch on the sorted result to find a target value — printing whether it was found and at what index (in the sorted array).",
     "hints": [
       {
         "text": "The order matters: you must sort BEFORE running binary search.",
@@ -9493,16 +10683,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-01",
@@ -9511,7 +10711,7 @@ export const exerciseDays = [
     "title": "Define your sample data",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Define your sample data Create an array of at least 3 objects representing your chosen project theme (products, students, books, etc.) with at least 3 fields each.",
+    "prompt": "Create an array of at least 3 objects representing your chosen project theme (products, students, books, etc.) with at least 3 fields each.",
     "hints": [
       {
         "text": "Keep field names consistent across all objects.",
@@ -9526,16 +10726,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-02",
@@ -9544,7 +10754,7 @@ export const exerciseDays = [
     "title": "Write one simple read function",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write one simple read function Write a function that returns a single property from the first item in your array (e.g. the name of the first product).",
+    "prompt": "Write a function that returns a single property from the first item in your array (e.g. the name of the first product).",
     "hints": [
       {
         "text": "This is just index + property access, no loop needed.",
@@ -9559,16 +10769,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling Write(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-03",
@@ -9671,7 +10891,7 @@ export const exerciseDays = [
     "title": "Search function",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Search function Write a search function for your data that finds one record by a key field (like name or id), returning the object or null.",
+    "prompt": "Write a search function for your data that finds one record by a key field (like name or id), returning the object or null.",
     "hints": [
       {
         "text": "Reuse the array-of-objects search pattern from Day 7.",
@@ -9686,16 +10906,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling Write(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-06",
@@ -9704,7 +10934,7 @@ export const exerciseDays = [
     "title": "Statistic function",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Statistic function Write a function that computes a meaningful total or average across a numeric field in your data (e.g. total price, average score).",
+    "prompt": "Write a function that computes a meaningful total or average across a numeric field in your data (e.g. total price, average score).",
     "hints": [
       {
         "text": "This is the sum/average pattern applied to a property.",
@@ -9719,16 +10949,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling Write(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-07",
@@ -9737,7 +10977,7 @@ export const exerciseDays = [
     "title": "Filter function",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Filter function Write a function that returns a subset of your data matching a condition you choose (e.g. price above a limit, students above a certain age).",
+    "prompt": "Write a function that returns a subset of your data matching a condition you choose (e.g. price above a limit, students above a certain age).",
     "hints": [
       {
         "text": "This is the manual-filter pattern from arrays of objects.",
@@ -9752,16 +10992,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling Write(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-08",
@@ -9770,7 +11020,7 @@ export const exerciseDays = [
     "title": "Sort your data",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Sort your data Adapt bubble or selection sort to order your array of objects by one numeric field.",
+    "prompt": "Adapt bubble or selection sort to order your array of objects by one numeric field.",
     "hints": [
       {
         "text": "Copy the array first with [...list] before sorting, so the original stays intact.",
@@ -9785,16 +11035,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-09",
@@ -9803,7 +11063,7 @@ export const exerciseDays = [
     "title": "Combine search + statistic",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Combine search + statistic Write a function that finds all records matching a search AND immediately computes a statistic on just that filtered subset (e.g. \"average price of all in-stock items\").",
+    "prompt": "Write a function that finds all records matching a search AND immediately computes a statistic on just that filtered subset (e.g. \"average price of all in-stock items\").",
     "hints": [
       {
         "text": "First filter, then run your statistic function on the filtered result, not the original list.",
@@ -9818,16 +11078,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling that(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-10",
@@ -9836,7 +11106,7 @@ export const exerciseDays = [
     "title": "Add a validation function",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Add a validation function Write a function that checks if a new record (before adding it to your array) has all required fields filled in correctly (right types, non-empty strings, positive numbers).",
+    "prompt": "Write a function that checks if a new record (before adding it to your array) has all required fields filled in correctly (right types, non-empty strings, positive numbers).",
     "hints": [
       {
         "text": "Check each field's type with typeof, similar to the Day 7 profile validation exercise.",
@@ -9851,16 +11121,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling Write(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-brief-11",
@@ -9971,7 +11251,7 @@ export const exerciseDays = [
     "title": "Write your checkpoint list",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write your checkpoint list Write out your own 4-5 checkpoints for your specific project, in the order you plan to tackle them.",
+    "prompt": "Write out your own 4-5 checkpoints for your specific project, in the order you plan to tackle them.",
     "hints": [
       {
         "text": "Start with data, end with the demo/Git history.",
@@ -9986,16 +11266,25 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-02",
@@ -10004,7 +11293,7 @@ export const exerciseDays = [
     "title": "Commit your first checkpoint",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Commit your first checkpoint Once your sample data is ready and printed correctly, write and run the Git commands to commit it.",
+    "prompt": "Once your sample data is ready and printed correctly, write and run the Git commands to commit it.",
     "hints": [
       {
         "text": "Stage, then commit, then push.",
@@ -10019,16 +11308,42 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write the terminal commands below (one per line, as comments or strings)\n",
+    "visibleTests": [
+      "Includes: git add",
+      "Includes: git commit -m",
+      "Includes: git push"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "cmd-0",
+        "label": "Includes: git add",
+        "kind": "sourceIncludes",
+        "pattern": "git add",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-1",
+        "label": "Includes: git commit -m",
+        "kind": "sourceIncludes",
+        "pattern": "git commit -m",
+        "flags": "i"
+      },
+      {
+        "id": "cmd-2",
+        "label": "Includes: git push",
+        "kind": "sourceIncludes",
+        "pattern": "git push",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-03",
@@ -10037,7 +11352,7 @@ export const exerciseDays = [
     "title": "Test a function in isolation",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Test a function in isolation Pick one function from your project and call it with two different inputs, printing both results to confirm it behaves correctly.",
+    "prompt": "Pick one function from your project and call it with two different inputs, printing both results to confirm it behaves correctly.",
     "hints": [
       {
         "text": "Choose inputs that are meaningfully different (e.g. found vs not found).",
@@ -10052,16 +11367,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling in(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-04",
@@ -10070,7 +11395,7 @@ export const exerciseDays = [
     "title": "Identify an untested edge case",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Identify an untested edge case For one of your functions, name one edge case you haven't tested yet (e.g. empty array, missing field, zero value).",
+    "prompt": "For one of your functions, name one edge case you haven't tested yet (e.g. empty array, missing field, zero value).",
     "hints": [
       {
         "text": "Think about what happens if your array has 0 items.",
@@ -10085,16 +11410,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-05",
@@ -10103,7 +11438,7 @@ export const exerciseDays = [
     "title": "Fix a checkpoint that's actually broken",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Fix a checkpoint that's actually broken Run your Checkpoint 2 functions again after adding Checkpoint 3 code — confirm nothing from Checkpoint 2 broke. If something did, identify exactly what changed.",
+    "prompt": "Run your Checkpoint 2 functions again after adding Checkpoint 3 code — confirm nothing from Checkpoint 2 broke. If something did, identify exactly what changed.",
     "hints": [
       {
         "text": "Compare your Checkpoint 2 test outputs before and after adding new code.",
@@ -10118,16 +11453,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-06",
@@ -10179,7 +11524,7 @@ export const exerciseDays = [
     "title": "Verify your Git history tells a story",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Verify your Git history tells a story Run git log --oneline and check: do your commit messages, read in order, describe a clear progression of work? Rewrite any that don't.",
+    "prompt": "Run git log --oneline and check: do your commit messages, read in order, describe a clear progression of work? Rewrite any that don't.",
     "hints": [
       {
         "text": "Vague messages like \"fix\" or \"update\" don't tell a story.",
@@ -10194,16 +11539,33 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a clear commit message as a string and log it"
+    ],
     "outputExamples": [
       {
         "medium": "terminal",
         "body": "$ git log --oneline\na1b2c3d Add greeting function\n9f8e7d6 Initial commit"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "log-msg",
+        "label": "Logs a commit message string",
+        "kind": "sourceIncludes",
+        "pattern": "console\\.log\\s*\\(",
+        "flags": "i"
+      },
+      {
+        "id": "specific",
+        "label": "Message mentions what changed",
+        "kind": "sourceIncludes",
+        "pattern": "fix|add|update|function|bug",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-08",
@@ -10212,7 +11574,7 @@ export const exerciseDays = [
     "title": "Test with unusual data",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Test with unusual data Add one deliberately unusual record to your sample data (e.g. price of 0, an empty name) and see how your functions handle it. Report what happens.",
+    "prompt": "Add one deliberately unusual record to your sample data (e.g. price of 0, an empty name) and see how your functions handle it. Report what happens.",
     "hints": [
       {
         "text": "Focus on functions that do math (average, total) or comparisons.",
@@ -10227,16 +11589,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-09",
@@ -10245,7 +11617,7 @@ export const exerciseDays = [
     "title": "Refactor a checkpoint's function for reuse",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Refactor a checkpoint's function for reuse Find one function in your project that could be reused inside another (e.g., your average function reused inside a report function). Refactor to remove any duplicated logic.",
+    "prompt": "Find one function in your project that could be reused inside another (e.g., your average function reused inside a report function). Refactor to remove any duplicated logic.",
     "hints": [
       {
         "text": "Look for any place where you copy-pasted similar loop logic instead of calling an existing function.",
@@ -10260,16 +11632,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// calling for(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-mini-project-checkpoints-10",
@@ -10364,7 +11746,7 @@ export const exerciseDays = [
     "title": "Full checkpoint audit",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full checkpoint audit Go through every checkpoint (data, read functions, search/sort, demo, Git) for your ACTUAL project right now, and for each one, write: (1) is it done, partially done, or not started, (2) one specific test you ran or will run to confirm it, and (3) the exact commit message tied to it.",
+    "prompt": "Go through every checkpoint (data, read functions, search/sort, demo, Git) for your ACTUAL project right now, and for each one, write: (1) is it done, partially done, or not started, (2) one specific test you ran or will run to confirm it, and (3) the exact commit message tied to it.",
     "hints": [
       {
         "text": "Be honest about \"partially done\" — this audit is more useful if accurate.",
@@ -10379,16 +11761,33 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a clear commit message as a string and log it"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example shape:\n\"fix off-by-one in binarySearch left bound\""
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "log-msg",
+        "label": "Logs a commit message string",
+        "kind": "sourceIncludes",
+        "pattern": "console\\.log\\s*\\(",
+        "flags": "i"
+      },
+      {
+        "id": "specific",
+        "label": "Message mentions what changed",
+        "kind": "sourceIncludes",
+        "pattern": "fix|add|update|function|bug",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-01",
@@ -10397,7 +11796,7 @@ export const exerciseDays = [
     "title": "Write one example per topic (basic)",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write one example per topic (basic) Write one line of code demonstrating: a variable declaration, a condition, and a loop (three separate lines).",
+    "prompt": "Write one line of code demonstrating: a variable declaration, a condition, and a loop (three separate lines).",
     "hints": [
       {
         "text": "Pick the simplest possible example for each.",
@@ -10412,16 +11811,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-02",
@@ -10430,7 +11839,7 @@ export const exerciseDays = [
     "title": "Name the four data shapes",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Name the four data shapes Name the four \"shapes\" of data covered in this SAS training (primitives, strings, arrays, objects) with one example value for each.",
+    "prompt": "Name the four \"shapes\" of data covered in this SAS training (primitives, strings, arrays, objects) with one example value for each.",
     "hints": [
       {
         "text": "Think about what you learned week by week.",
@@ -10445,16 +11854,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example format: short bullet list or numbered steps."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-03",
@@ -10463,7 +11882,7 @@ export const exerciseDays = [
     "title": "Identify the odd one out",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Identify the odd one out Given let, const, function, if — which one is NOT used to declare a variable?",
+    "prompt": "Given let, const, function, if — which one is NOT used to declare a variable?",
     "hints": [
       {
         "text": "Two of these declare variables.",
@@ -10478,16 +11897,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-04",
@@ -10496,7 +11925,7 @@ export const exerciseDays = [
     "title": "Recall the two sorts",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Recall the two sorts Name the two sorting algorithms taught in this SAS training.",
+    "prompt": "Name the two sorting algorithms taught in this SAS training.",
     "hints": [
       {
         "text": "Both use nested loops.",
@@ -10511,16 +11940,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example format: short bullet list or numbered steps."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-05",
@@ -10529,7 +11968,7 @@ export const exerciseDays = [
     "title": "Rewrite from memory",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Rewrite from memory Without looking at notes, write a function that returns the sum of an array of numbers.",
+    "prompt": "Without looking at notes, write a function that returns the sum of an array of numbers.",
     "hints": [
       {
         "text": "You'll need an accumulator and a loop.",
@@ -10544,16 +11983,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Defines a function"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// calling that(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-fn",
+        "label": "Defines a function",
+        "kind": "sourceIncludes",
+        "pattern": "function\\s+\\w+",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-06",
@@ -10562,7 +12011,7 @@ export const exerciseDays = [
     "title": "Combine 3 topics in one snippet",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Combine 3 topics in one snippet Write a snippet combining an array of objects, a loop, and a condition — printing only the names of objects meeting some criteria.",
+    "prompt": "Write a snippet combining an array of objects, a loop, and a condition — printing only the names of objects meeting some criteria.",
     "hints": [
       {
         "text": "Think of this as a simplified filter, but just printing instead of collecting into a new array.",
@@ -10577,16 +12026,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-07",
@@ -10595,7 +12054,7 @@ export const exerciseDays = [
     "title": "Spot which topic a bug belongs to",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Spot which topic a bug belongs to Given a snippet that throws \"x is not defined\", is this a scope issue, a type issue, or a syntax issue? Explain briefly.",
+    "prompt": "Given a snippet that throws \"x is not defined\", is this a scope issue, a type issue, or a syntax issue? Explain briefly.",
     "hints": [
       {
         "text": "Think about what that specific error message usually means.",
@@ -10610,25 +12069,34 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-core-review-08",
     "day": 10,
     "lessonSlug": "core-review",
-    "title": "Explain linear search vs binary search from memory",
+    "title": "Compare search algorithms in code",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Explain linear search vs binary search from memory Without notes, write 2-3 sentences comparing linear and binary search.",
+    "prompt": "Explain linear search vs binary search from memory from code, write 2-3 sentences comparing linear and binary search.",
     "hints": [
       {
         "text": "Mention what each requires about the data's order.",
@@ -10643,16 +12111,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-09",
@@ -10661,7 +12139,7 @@ export const exerciseDays = [
     "title": "Build a tiny multi-concept program from scratch",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Build a tiny multi-concept program from scratch Without any starter code, write a program that: creates an array of 3 number objects (each with a value field), finds their sum using a function, and prints a message saying whether the sum is even or odd.",
+    "prompt": "Without any starter code, write a program that: creates an array of 3 number objects (each with a value field), finds their sum using a function, and prints a message saying whether the sum is even or odd.",
     "hints": [
       {
         "text": "Break it into three steps: data, sum function, and even/odd check.",
@@ -10676,16 +12154,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-10",
@@ -10694,7 +12182,7 @@ export const exerciseDays = [
     "title": "Debug a multi-bug snippet",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Debug a multi-bug snippet Given a snippet with 3 intentional bugs (a const reassignment, a missing break in a switch, and an off-by-one loop), find and describe all three without being told where they are.",
+    "prompt": "Given a snippet with 3 intentional bugs (a const reassignment, a missing break in a switch, and an off-by-one loop), find and describe all three without being told where they are.",
     "hints": [
       {
         "text": "Check variable declarations, switch statements, and loop boundaries separately — one bug type each.",
@@ -10709,25 +12197,35 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-core-review-11",
     "day": 10,
     "lessonSlug": "core-review",
-    "title": "Explain a full program's behavior out loud (in writing)",
+    "title": "Practice a full program's behavior out loud (in writing)",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Explain a full program's behavior out loud (in writing) Given a 10-15 line program combining a loop, a function, and an array of objects, write a paragraph explaining exactly what it does and what it will print, without running it first.",
+    "prompt": "Explain a full program's behavior in the editor (in writing) Given a 10-15 line program combining a loop, a function, and an array of objects, write a paragraph explaining exactly what it does and what it will print, without running it first.",
     "hints": [
       {
         "text": "Trace the code top to bottom, tracking variable values as they change.",
@@ -10745,7 +12243,7 @@ export const exerciseDays = [
     "kind": "code",
     "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
     "visibleTests": [
-      "Uses console.log(...)"
+      "Includes working JavaScript"
     ],
     "outputExamples": [
       {
@@ -10755,10 +12253,10 @@ export const exerciseDays = [
     ],
     "checks": [
       {
-        "id": "log",
-        "label": "Uses console.log(...)",
+        "id": "has-code",
+        "label": "Includes working JavaScript",
         "kind": "sourceIncludes",
-        "pattern": "console\\.log\\s*\\(",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
         "flags": "i"
       }
     ]
@@ -10770,7 +12268,7 @@ export const exerciseDays = [
     "title": "Full concept map from memory",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full concept map from memory Without any notes, write a short program (15+ lines) that uses AT LEAST 6 different Core JS concepts from this SAS training (e.g. variables, a condition, a loop, a function, an array, an object, a search or sort) working together toward one small, coherent goal of your choosing.",
+    "prompt": "Without any notes, write a short program (15+ lines) that uses AT LEAST 6 different Core JS concepts from this SAS training (e.g. variables, a condition, a loop, a function, an array, an object, a search or sort) working together toward one small, coherent goal of your choosing.",
     "hints": [
       {
         "text": "Pick a simple goal first (e.g. \"manage a small todo list\" or \"grade a few students\"), then figure out which concepts naturally fit.",
@@ -10785,16 +12283,26 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-01",
@@ -10803,7 +12311,7 @@ export const exerciseDays = [
     "title": "Write your one-sentence pitch",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write your one-sentence pitch Write a single sentence describing what your mini-project does, suitable as the opening line of your defense.",
+    "prompt": "Write a single sentence describing what your mini-project does, suitable as the opening line of your defense.",
     "hints": [
       {
         "text": "Keep it under 20 words.",
@@ -10818,16 +12326,25 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-02",
@@ -10836,7 +12353,7 @@ export const exerciseDays = [
     "title": "List your project's 3 main functions",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "List your project's 3 main functions Name the three functions in your project you consider most important to explain during your defense.",
+    "prompt": "Name the three functions in your project you consider most important to explain during your defense.",
     "hints": [
       {
         "text": "Pick functions that show different skills (e.g. one search, one calculation, one sort).",
@@ -10851,16 +12368,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-03",
@@ -10869,7 +12396,7 @@ export const exerciseDays = [
     "title": "Write your README's \"How to run\" section",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Write your README's \"How to run\" section Write the exact section of your README explaining how to run your project.",
+    "prompt": "Write the exact section of your README explaining how to run your project.",
     "hints": [
       {
         "text": "Include the terminal command, not just a description.",
@@ -10884,16 +12411,25 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-04",
@@ -10902,7 +12438,7 @@ export const exerciseDays = [
     "title": "Prepare for the \"why this loop\" question",
     "difficulty": "easy",
     "maxPoints": 10,
-    "prompt": "Prepare for the \"why this loop\" question For one loop in your project, write a one-sentence explanation of why you chose a for loop (or while) instead of the other.",
+    "prompt": "For one loop in your project, write a one-sentence explanation of why you chose a for loop (or while) instead of the other.",
     "hints": [
       {
         "text": "Think about whether you knew the number of repetitions in advance.",
@@ -10917,16 +12453,26 @@ export const exerciseDays = [
         "cost": 5
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-05",
@@ -10935,7 +12481,7 @@ export const exerciseDays = [
     "title": "Anticipate an edge-case question",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Anticipate an edge-case question Write one likely question about what your project does with empty or missing data, and a short, honest answer.",
+    "prompt": "Write one likely question about what your project does with empty or missing data, and a short, honest answer.",
     "hints": [
       {
         "text": "Think about your statistic functions specifically — what happens with an empty array?",
@@ -10950,16 +12496,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-06",
@@ -10968,7 +12523,7 @@ export const exerciseDays = [
     "title": "Practice explaining one function line by line",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Practice explaining one function line by line Pick your most complex function and write out, line by line, what each line does in plain English (not just what the code says).",
+    "prompt": "Pick your most complex function and write out, line by line, what each line does in plain English (not just what the code says).",
     "hints": [
       {
         "text": "Avoid simply restating the code — explain the purpose of each line.",
@@ -10983,16 +12538,26 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example answer shape:\n2–4 sentences in your own words — what happens, then why."
+        "medium": "console",
+        "body": "// calling line(...) might print:\nresult: 42"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-07",
@@ -11001,7 +12566,7 @@ export const exerciseDays = [
     "title": "Prepare for a live demo failure",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Prepare for a live demo failure Write a short plan for what you'll say and do if your live demo crashes or shows an unexpected error during the defense.",
+    "prompt": "Write a short plan for what you'll say and do if your live demo crashes or shows an unexpected error during the defense.",
     "hints": [
       {
         "text": "Staying calm and diagnosing out loud is better than panicking silently.",
@@ -11016,16 +12581,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-08",
@@ -11034,7 +12608,7 @@ export const exerciseDays = [
     "title": "Time your demo",
     "difficulty": "medium",
     "maxPoints": 20,
-    "prompt": "Time your demo Do a full timed run of your live demo (just the code running, not the full presentation) and report how many seconds/minutes it takes.",
+    "prompt": "Do a full timed run of your live demo (just the code running, not the full presentation) and report how many seconds/minutes it takes.",
     "hints": [
       {
         "text": "Use a phone timer or stopwatch.",
@@ -11049,16 +12623,25 @@ export const exerciseDays = [
         "cost": 8
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-09",
@@ -11067,7 +12650,7 @@ export const exerciseDays = [
     "title": "Write 3 tough questions for yourself",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Write 3 tough questions for yourself Write three challenging questions an instructor might ask about your specific project's logic (not generic training questions), and short honest answers.",
+    "prompt": "Write three challenging questions an instructor might ask about your specific project's logic (not generic training questions), and short honest answers.",
     "hints": [
       {
         "text": "Look at your own trickiest function and ask \"why did I do it this way, and not another way?\"",
@@ -11082,16 +12665,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-10",
@@ -11100,7 +12692,7 @@ export const exerciseDays = [
     "title": "Simplify a complex explanation",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Simplify a complex explanation Take your most complicated function's explanation and rewrite it so a complete beginner (someone who just started Day 1) could understand it, without using any jargon from later days.",
+    "prompt": "Take your most complicated function's explanation and rewrite it so a complete beginner (someone who just started Day 1) could understand it, without using any jargon from later days.",
     "hints": [
       {
         "text": "Avoid words like \"iterate\", \"parameter\", or \"traversal\" — use plain language instead.",
@@ -11115,16 +12707,26 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write working JavaScript for this task"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(console\\.log|function\\s+|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-11",
@@ -11133,7 +12735,7 @@ export const exerciseDays = [
     "title": "Prepare a \"what I'd do differently\" reflection",
     "difficulty": "hard",
     "maxPoints": 35,
-    "prompt": "Prepare a \"what I'd do differently\" reflection Write 3-4 sentences honestly reflecting on what you would improve or do differently if you rebuilt this project from scratch.",
+    "prompt": "Write 3-4 sentences honestly reflecting on what you would improve or do differently if you rebuilt this project from scratch.",
     "hints": [
       {
         "text": "Think about scope — did you build too much, too little, or about right?",
@@ -11148,16 +12750,25 @@ export const exerciseDays = [
         "cost": 12
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Write a short code answer using console.log"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Write your answer in the draft editor or on paper, then mark complete."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "one-log",
+        "label": "At least 1 console.log(...) call",
+        "kind": "consoleLogMinCount",
+        "min": 1
+      }
+    ]
   },
   {
     "id": "ex-defense-prep-12",
@@ -11166,7 +12777,7 @@ export const exerciseDays = [
     "title": "Full mock defense",
     "difficulty": "extreme",
     "maxPoints": 60,
-    "prompt": "Full mock defense Do a complete timed mock defense out loud (recorded if possible): 1-sentence pitch, live demo, explanation of your 3 main functions, and answers to at least 2 of your own prepared tough questions — all without reading directly from a script.",
+    "prompt": "Do a complete timed mock defense in the editor (recorded if possible): 1-sentence pitch, live demo, explanation of your 3 main functions, and answers to at least 2 of your own prepared tough questions — all without reading directly from a script.",
     "hints": [
       {
         "text": "Practice this at least once in full before doing the \"real\" timed version.",
@@ -11181,15 +12792,25 @@ export const exerciseDays = [
         "cost": 20
       }
     ],
-    "kind": "reflect",
-    "starterCode": "// Notes or draft (optional)\n",
-    "visibleTests": [],
+    "kind": "code",
+    "starterCode": "// Write your solution below\n// Run → try it · Run tests → check · Submit when tests pass\n",
+    "visibleTests": [
+      "Includes working JavaScript"
+    ],
     "outputExamples": [
       {
-        "medium": "text",
-        "body": "Example structure: short sections with headings (Setup, Usage, What I learned)."
+        "medium": "console",
+        "body": "// run your code to see output here"
       }
     ],
-    "checks": []
+    "checks": [
+      {
+        "id": "has-code",
+        "label": "Includes working JavaScript",
+        "kind": "sourceIncludes",
+        "pattern": "(function\\s+|console\\.log|for\\s*\\(|while\\s*\\()",
+        "flags": "i"
+      }
+    ]
   }
 ] as const;

@@ -38,9 +38,10 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body suppressHydrationWarning className="flex min-h-full flex-col">
         <I18nProvider locale={locale} t={t}>
           <AppHeader />
           <main className="flex flex-1 flex-col">{children}</main>

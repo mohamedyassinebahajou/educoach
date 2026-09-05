@@ -76,6 +76,20 @@ export function gradeExercise(code: string, checks: ExerciseCheck[]): GradeResul
       };
     }
 
+    if (check.kind === "consoleIncludesLine") {
+      const passed = run.lines.some(
+        (line) => line === check.equals || line.includes(check.equals),
+      );
+      return {
+        id: check.id,
+        label: check.label,
+        passed,
+        detail: passed
+          ? undefined
+          : `Expected console output to include "${check.equals}"`,
+      };
+    }
+
     // sourceIncludes
     const re = new RegExp(check.pattern, check.flags);
     const passed = re.test(code);

@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useState } from "react";
+import { useI18n } from "@/components/i18n/I18nProvider";
 
 function LoginForm() {
   const router = useRouter();
   const search = useSearchParams();
+  const { t } = useI18n();
   const next = search.get("next") || "/learn";
-  const [username, setUsername] = useState("student1");
-  const [password, setPassword] = useState("student123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -21,27 +23,37 @@ function LoginForm() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({ username, password }),
       });
-      const data = await res.json();
+      const data = (await res.json()) as {
+        error?: string;
+        user?: { role: "learner" | "coach" };
+      };
       if (!res.ok) {
-        setError(data.error ?? "Login failed");
+        setError(data.error ?? t.login.failed);
         return;
       }
-      router.push(next);
+      const destination =
+        data.user?.role === "coach"
+          ? next.startsWith("/coach")
+            ? next
+            : "/coach"
+          : next;
+      router.push(destination);
       router.refresh();
     } catch {
-      setError("Network error");
+      setError(t.login.networkError);
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-8 space-y-4">
+    <form onSubmit={onSubmit} method="post" className="mt-8 space-y-4">
       <div>
         <label className="block text-sm font-medium text-[var(--ink)]" htmlFor="username">
-          Username
+          {t.login.username}
         </label>
         <input
           id="username"
@@ -53,7 +65,7 @@ function LoginForm() {
       </div>
       <div>
         <label className="block text-sm font-medium text-[var(--ink)]" htmlFor="password">
-          Password
+          {t.login.password}
         </label>
         <input
           id="password"
@@ -70,28 +82,27 @@ function LoginForm() {
         disabled={loading}
         className="w-full rounded-md bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
       >
-        {loading ? "Signing in…" : "Sign in"}
+        {loading ? t.login.signingIn : t.login.signIn}
       </button>
     </form>
   );
 }
 
 export default function LoginPage() {
+  const { t } = useI18n();
+
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-12 sm:px-6">
-      <h1 className="font-[family-name:var(--font-display)] text-3xl text-[var(--ink)]">Sign in</h1>
-      <p className="mt-2 text-sm text-[var(--muted)]">
-        Demo accounts — coach: <code className="font-mono">coach</code> /{" "}
-        <code className="font-mono">coach123</code> · learner:{" "}
-        <code className="font-mono">student1</code>…<code className="font-mono">student5</code> /{" "}
-        <code className="font-mono">student123</code>
-      </p>
-      <Suspense fallback={<p className="mt-8 text-sm text-[var(--muted)]">Loading…</p>}>
+      <h1 className="font-[family-name:var(--font-display)] text-3xl text-[var(--ink)]">
+        {t.login.title}
+      </h1>
+      <p className="mt-2 text-sm text-[var(--muted)]">{t.login.demo}</p>
+      <Suspense fallback={<p className="mt-8 text-sm text-[var(--muted)]">{t.login.loading}</p>}>
         <LoginForm />
       </Suspense>
       <p className="mt-6 text-sm text-[var(--muted)]">
         <Link href="/" className="text-[var(--accent)] hover:underline">
-          ← Home
+          {t.login.home}
         </Link>
       </p>
     </div>
